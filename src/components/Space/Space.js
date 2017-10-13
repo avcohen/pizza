@@ -64,11 +64,12 @@ class Space extends React.Component {
       1000,
     );
 
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = windowWidth / windowHeight
     camera.position.x = 0;
-    camera.position.y = 2;
+    camera.position.y = 3;
     camera.position.z = 4;
-    camera.lookAt(scene.position);
+    // let yCameraPosition = 0;
+    camera.lookAt(new THREE.Vector3(0, 0 ,0))
 
     var ambientLight = new THREE.AmbientLight(0x404040, 3.5);
     scene.add(ambientLight);
@@ -83,24 +84,59 @@ class Space extends React.Component {
     //		add an object and make it move					//
     // ////////////////////////////////////////////////////////////////////////////////
 
-    const starfieldMesh = THREEx.Planets.createStarfield();
-    scene.add(starfieldMesh);
+    var starsGeometry = new THREE.Geometry();
+
+    for ( var i = 0; i < 10000; i ++ ) {
+    	var star = new THREE.Vector3();
+    	star.x = THREE.Math.randFloatSpread( 1000 );
+    	star.y = THREE.Math.randFloatSpread( 1000 );
+    	star.z = THREE.Math.randFloatSpread( 1000 );
+    	starsGeometry.vertices.push( star );
+    }
+    var starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
+    var starField = new THREE.Points( starsGeometry, starsMaterial );
+
+    scene.add( starField );
 
     // earth
     const earthMesh = THREEx.Planets.createEarth();
     scene.add(earthMesh);
 
-    var cubeGeometry = new THREE.BoxGeometry(6, 6, 6);
-    var cubeMaterial = new THREE.MeshLambertMaterial();
-    cubeMaterial.color = new THREE.Color('red');
-    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.name = 'cube';
-    scene.add(cube);
+    const coords = [
+      {lat: 38.548165, lng: -76.289062},
+      {lat: 3.513421, lng: -58.007812},
+      {lat: 46.55886, lng: 3.515625},
+      {lat: 52.908902, lng: -1.40625},
+      {lat: 24.20689, lng: 80.507813},
+      {lat: 25.482951, lng: 51.679688},
+      {lat: 39.095963, lng: 139.570313},
+    ]
+
+    // point
+    coords.forEach((p, i) => {
+      console.log(p.lat, p.lng)
+
+      let phi   = (90-p.lat)*(Math.PI/180)
+      let theta = (p.lng+180)*(Math.PI/180)
+      let x = -((0.6) * Math.sin(phi)*Math.cos(theta))
+      let z = ((0.6) * Math.sin(phi)*Math.sin(theta))
+      let y = ((0.6) * Math.cos(phi))
+
+      const dotGeometry = new THREE.Geometry();
+      dotGeometry.vertices.push(new THREE.Vector3(x, y, z));
+      const dotMaterial = new THREE.PointsMaterial({
+
+        size : .25,
+        color: 0xFF0000
+      });
+      const dot = new THREE.Points(dotGeometry, dotMaterial);
+      earthMesh.add(dot);
+    })
 
     updateFcts.push((delta, now) => {
       earthMesh.rotation.y += 1 / 4 * delta;
-      starfieldMesh.rotation.x += 1 / 600 * delta;
-      starfieldMesh.rotation.y += 1 / 400 * delta;
+      // starField.rotation.x += 1 / 600 * delta;
+      // starField.rotation.y += 1 / 400 * delta;
     });
 
 
