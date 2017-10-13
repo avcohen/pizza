@@ -1,0 +1,71 @@
+/**
+ * React Starter Kit (https://www.reactstarterkit.com/)
+ *
+ * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  margin: 0 15px;
+}
+
+.link {
+  text-decoration: none;
+  font-family: var(--font-family-base);
+  position: relative;
+  margin: 10px;
+  display: inline-block;
+  color: #fff;
+}
+
+.link,
+.link:active,
+.link:visited {
+  color: rgba(255, 255, 255, 1);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.highlight {
+  margin-right: 8px;
+  margin-left: 8px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.highlight:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.sliceMenu {
+  display: flex;
+  flex-direction: column;
+  margin: 13px 0 0 10px;
+}
+
+img.sliceLayer {
+  position: relative;
+  width: 36px;
+  height: auto;
+}
+
+.sliceLayerTop {
+  z-index: 11;
+  margin-bottom: -22px;
+}
+
+.sliceLayerBottom {
+  z-index: 10;
+}
+
+.spacer {
+  color: rgba(255, 255, 255, 0.3);
+}
