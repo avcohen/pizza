@@ -12,7 +12,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
+import Consulting from '../../components/Consulting';
 import Space from '../../components/Space';
+import Illustration from '../../components/Illustration';
 
 class Home extends React.Component {
   render() {
@@ -20,6 +22,8 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <Space />
+          <Consulting />
+          <Illustration />
         </div>
       </div>
     );

@@ -10,14 +10,45 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Feedback.css';
+import s from './Illustration.css';
+
+import img1 from './1.jpg';
+import img2 from './2.jpg';
+import img3 from './3.jpg';
+
 
 class Feedback extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      illustrationData : null,
+      activeCategory : null
+    }
+  }
   render() {
     return (
       <div className={s.root}>
+        <svg className={s.top} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <polygon fill="#272635" points="0,100 100,0 100,100"/>
+        </svg>
         <div className={s.container}>
-          <h3>illustration</h3>
+          <h3 className={s.sectionHeader}>illustration</h3>
+          <ul className={s.category}>
+            <li className={s.categoryItem}>flyers & posters</li>
+            <li className={s.categoryItem}>t-shirts</li>
+            <li className={s.categoryItem}>prints</li>
+          </ul>
+          <div className={s.imageContainer}>
+            <img className={s.image} src={img1} alt=""/>
+            <img className={s.image} src={img2} alt=""/>
+            <img className={s.image} src={img3} alt=""/>
+            <img className={s.image} src={img1} alt=""/>
+            <img className={s.image} src={img2} alt=""/>
+            <img className={s.image} src={img3} alt=""/>
+            <img className={s.image} src={img1} alt=""/>
+            <img className={s.image} src={img2} alt=""/>
+            <img className={s.image} src={img3} alt=""/>
+          </div>
         </div>
       </div>
     );

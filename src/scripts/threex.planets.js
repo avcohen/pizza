@@ -106,20 +106,20 @@ THREEx.Planets.createEarthCloud = function() {
   return mesh;
 };
 
-THREEx.Planets.createMoon = function() {
-  const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-  const material = new THREE.MeshPhongMaterial({
-    map: THREE.ImageUtils.loadTexture(
-      `${THREEx.Planets.baseURL}images/moonmap1k.jpg`,
-    ),
-    bumpMap: THREE.ImageUtils.loadTexture(
-      `${THREEx.Planets.baseURL}images/moonbump1k.jpg`,
-    ),
-    bumpScale: 0.002,
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  return mesh;
-};
+// THREEx.Planets.createMoon = function() {
+//   const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+//   const material = new THREE.MeshPhongMaterial({
+//     map: THREE.ImageUtils.loadTexture(
+//       `${THREEx.Planets.baseURL}images/moonmap1k.jpg`,
+//     ),
+//     bumpMap: THREE.ImageUtils.loadTexture(
+//       `${THREEx.Planets.baseURL}images/moonbump1k.jpg`,
+//     ),
+//     bumpScale: 0.002,
+//   });
+//   const mesh = new THREE.Mesh(geometry, material);
+//   return mesh;
+// };
 
 THREEx.Planets.createMars = function() {
   const geometry = new THREE.SphereGeometry(0.5, 32, 32);
