@@ -58,5 +58,6 @@ module.exports = () => ({
     // Add vendor prefixes to CSS rules using values from caniuse.com
     // https://github.com/postcss/autoprefixer
     require('autoprefixer')(/* package.json/browserslist */),
+    require('postcss-font-magician')(),
   ],
 });

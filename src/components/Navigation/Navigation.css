@@ -9,7 +9,6 @@
 
 .root {
   display: flex;
-  flex-direction: column-reverse;
   text-align: right;
   float: right;
   margin: 15px;
@@ -52,15 +51,38 @@
   margin: 13px 0 0 10px;
 }
 
+@media (max-width: 480px) {
+  .sliceMenu {
+    display: none;
+  }
+}
+
+nav {
+  text-align: left;
+}
+
+.menuPane {
+  background-color: white;
+}
+
+.navLink {
+  font-family: var(--font-family-base);
+  margin: 10px;
+  color: var(--color-1);
+}
+
 img.sliceLayer {
-  position: relative;
   width: 36px;
   height: auto;
 }
 
 .sliceLayerTop {
   z-index: 11;
-  margin-bottom: -22px;
+  position: absolute;
+}
+
+.sliceLayerTopOpen {
+  top: 15px;
 }
 
 .sliceLayerBottom {

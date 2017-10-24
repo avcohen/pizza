@@ -15,21 +15,7 @@ class Space extends React.Component {
       width: null,
       height: null,
     };
-    this.resizeTheVoid = this.resizeTheVoid.bind(this);
   }
-
-  resizeTheVoid() {
-    console.error('lol')
-    const newWidth = window.innerWidth;
-    const newWiHeight = window.innerHeight;
-
-    this.setState({
-      width: newWidth,
-      height: newWiHeight,
-    });
-  }
-
-  componentWillMount() {}
 
   componentDidMount() {
     const ww = window.innerWidth;
@@ -49,7 +35,7 @@ class Space extends React.Component {
     let earthMesh, starfield, pizzaMoon;
     let camera, scene, raycaster, renderer;
     let mouse = new THREE.Vector2(), INTERSECTED;
-    // let radius = 100
+    let radius = 100
     let theta = 0;
     const coords = [
       {lat: 38.548165, lng: -76.289062},
@@ -62,7 +48,7 @@ class Space extends React.Component {
     ]
 
     init();
-    // animate();
+    animate();
 
     function createPoint(lat, lng){
       let phi   = (90-lat)*(Math.PI/180)
@@ -114,22 +100,22 @@ class Space extends React.Component {
       camera.position.x = windowWidth / windowWidth;
       camera.position.y = 2;
       camera.position.z = 3.25;
-      camera.lookAt(new THREE.Vector3(0, 0 ,0))
+      // camera.lookAt(new THREE.Vector3(0, 0 ,0))
 
       scene = new THREE.Scene();
 
       // add background
       starfield = createStarfield();
-      scene.add(starfield);
+      // scene.add(starfield);
 
       // add planets
       earthMesh = THREEx.Planets.createEarth();
       scene.add(earthMesh);
 
-      pizzaMoon = createMoon();
-      pizzaMoon.position.x = 1;
-      pizzaMoon.position.y = .5;
-      pizzaMoon.position.z = .5;
+      // pizzaMoon = createMoon();
+      // pizzaMoon.position.x = 1;
+      // pizzaMoon.position.y = .5;
+      // pizzaMoon.position.z = .5;
       // scene.add(pizzaMoon);
 
       // add lat lng points to planet
@@ -187,9 +173,8 @@ class Space extends React.Component {
       theta += 0.1;
       earthMesh.rotation.y += 1 / 200;
       // pizzaMoon.rotation.y += 1 / 400;
-
-      // starfield.rotation.x += 1 / 600;
-      // starfield.rotation.y += 1 / 400;
+      starfield.rotation.x += 1 / 8000;
+      starfield.rotation.y += 1 / 10000;
 
       camera.lookAt(scene.position);
       camera.updateMatrixWorld();

@@ -18,30 +18,54 @@ import sliceTop from './slice-top.png';
 import sliceBottom from './slice-bottom.png';
 
 class Navigation extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      menuOpen : false
+    }
+    this.openMenu = this.openMenu.bind(this);
+  }
+
+  componentDidMount(){
+
+  }
+
+  openMenu(){
+    console.log('menu toggled');
+    this.setState({
+      menuOpen : !this.state.menuOpen
+    })
+  }
+
   render() {
+
     return (
       <div className={s.root} role="navigation">
-        <Link className={s.link} to="/about">
-          consulting
-        </Link>
-        <Link className={s.link} to="/contact">
-          illustration
-        </Link>
-        <Link className={s.link} to="/about">
-          about
-        </Link>
-        <div className={s.sliceMenu}>
+
+        <div className={s.sliceMenu} onClick={this.openMenu}>
           <img
-            className={[s.sliceLayer, s.sliceLayerTop].join(' ')}
+            className={cx(s.sliceLayer, s.sliceLayerTop)}
             src={sliceTop}
             alt=""
           />
           <img
-            className={[s.sliceLayer, s.sliceLayerBottom].join(' ')}
+            className={cx(s.sliceLayer, s.sliceLayerBottom)}
             src={sliceBottom}
             alt=""
           />
         </div>
+
+        {/* <div className={s.menuPane}>
+          <nav className={s.nav}>
+            <Link className={s.navLink} to="/about">consulting</Link>
+            <Link className={s.navLink} to="/contact">illustration</Link>
+            <Link className={s.navLink} to="/about">about</Link>
+          </nav>
+        </div> */}
+
+
+
+
 
         {/* <span className={s.spacer}> | </span>
         <Link className={s.link} to="/login">

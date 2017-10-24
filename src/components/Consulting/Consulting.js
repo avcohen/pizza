@@ -10,10 +10,12 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import cx from 'classnames';
 import s from './Consulting.css';
 import Link from '../Link';
 import consultingImg from './consultingImg.jpg';
 import cafe from './cafe.png';
+import SliderComponent from '../Slider/Slider';
 
 
 class Footer extends React.Component {
@@ -22,23 +24,20 @@ class Footer extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
 
-          <div className={s.row}>
-            <h2 className={s.sectionHeader}>consulting</h2>
-          </div>
+          <h2 className={s.sectionHeader}>consulting</h2>
+          <div className={s.underLine}></div>
 
           <div className={s.row}>
-            <div className={s.left}>
               <img className={s.consultingImg} src={consultingImg} />
-            </div>
-
-            <div className={s.right}>
-              <p className={s.text}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac viverra arcu. Quisque leo dolor, tristique eget libero eget, sollicitudin egestas ante.</p>
-              <p className={s.text}>Donec eget lacinia tellus, in fermentum augue. Donec id dui at arcu tristique bibendum et quis magna. In eget nunc aliquet, feugiat sapien sed, eleifend augue. </p>
-            </div>
+              <div className={s.textContainer}>
+                <p className={s.text}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac viverra arcu. Quisque leo dolor, tristique eget libero eget, sollicitudin egestas ante.</p>
+                <p className={s.text}>Donec eget lacinia tellus, in fermentum augue. Donec id dui at arcu tristique bibendum et quis magna. In eget nunc aliquet, feugiat sapien sed, eleifend augue. </p>
+              </div>
           </div>
 
-          <div className={s.row}>
-            <div className={s.consultingSlider}>
+
+          <SliderComponent />
+            {/* <div className={s.consultingSlider}>
 
               <div className={[s.row, s.sliderImg]}>
                 <span className={s.sliderImgArrowLeft}>x</span>
@@ -53,8 +52,7 @@ class Footer extends React.Component {
                 </div>
               </div>
 
-            </div>
-          </div>
+            </div> */}
 
         </div>
       </div>
