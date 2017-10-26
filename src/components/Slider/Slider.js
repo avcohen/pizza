@@ -1,12 +1,32 @@
 import React from 'react';
-
+import Slider from 'react-slick';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import cx from 'classnames';
 import s from './Slider.css';
+import cafe from '../Consulting/cafe.png';
 
-class SliderComponent extends React.Component {
+class SimpleSlider extends React.Component {
   render() {
-    return <div className={s.root}>slider</div>;
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div className={cx(s.root,s["edge--top"], s["edge--bottom--reverse"], s["-dark"])} >
+        <div className={s.sliderContainer}>
+          <img className={s.sliderImg} src={cafe} alt=""/>
+
+          <h3>Cafe Monstruo</h3>
+          <p className={s.sliderText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus unde voluptatum, at nam modi sit?</p>
+          <p className={s.sliderLink}>link</p>
+
+        </div>
+      </div>
+    );
   }
 }
 
-export default withStyles(s)(SliderComponent);
+export default withStyles(s)(SimpleSlider);
