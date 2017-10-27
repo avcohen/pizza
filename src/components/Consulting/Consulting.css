@@ -16,10 +16,6 @@
   width: 100%;
 }
 
-.loading {
-  height: 100vh;
-  width: 100%;  
-}
 /* .container {
   text-align: center;
 } */
@@ -68,9 +64,9 @@
   margin: 10px;
 }
 
-
 .text {
   text-align: left;
+
   /* margin: 1em 0; */
   font-size: 1em;
   color: var(--color-6);
@@ -81,7 +77,7 @@
 }
 
 .link {
-  margin: 10px 0 0 0;
+  margin-top: 10px;
   align-self: flex-end;
   text-align: right;
   font-weight: 500;
@@ -95,7 +91,7 @@
 }
 
 .tick::after {
-  content: "—"
+  content: '—';
 }
 
 .consultingImg {
@@ -105,7 +101,7 @@
 
 @media screen and (max-width: 768px) {
   .text {
-    font-size: .8em;
+    font-size: 0.8em;
   }
 
   .row {
@@ -134,13 +130,11 @@
   .underLine {
     width: 80%;
   }
-
 }
 
 .sliderCopy {
   align-self: center;
 }
-
 
 .textContainer {
   align-self: auto;
