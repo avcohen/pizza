@@ -18,7 +18,7 @@
   z-index: 1;
 }
 
-.edge--bottom:after {
+.edge--bottom::after {
   background: inherit;
   content: '';
   display: block;
@@ -30,7 +30,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--bottom:after {
+.edge--bottom::after {
   bottom: 0;
   -webkit-transform: skewY(-1.5deg);
   transform: skewY(-1.5deg);
@@ -43,7 +43,7 @@
   z-index: 1;
 }
 
-.edge--bottom--reverse:after {
+.edge--bottom--reverse::after {
   background: inherit;
   content: '';
   display: block;
@@ -55,7 +55,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--bottom--reverse:after {
+.edge--bottom--reverse::after {
   bottom: 0;
   -webkit-transform: skewY(1.5deg);
   transform: skewY(1.5deg);
@@ -68,7 +68,7 @@
   z-index: 1;
 }
 
-.edge--top:before {
+.edge--top::before {
   background: inherit;
   content: '';
   display: block;
@@ -80,7 +80,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--top:before {
+.edge--top::before {
   top: 0;
   -webkit-transform: skewY(1.5deg);
   transform: skewY(1.5deg);
@@ -93,7 +93,7 @@
   z-index: 1;
 }
 
-.edge--top--reverse:before {
+.edge--top--reverse::before {
   background: inherit;
   content: '';
   display: block;
@@ -105,7 +105,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--top--reverse:before {
+.edge--top--reverse::before {
   top: 0;
   -webkit-transform: skewY(-1.5deg);
   transform: skewY(-1.5deg);
@@ -118,7 +118,8 @@
   z-index: 1;
 }
 
-.edge--both:before, .edge--both:after {
+.edge--both::before,
+.edge--both::after {
   background: inherit;
   content: '';
   display: block;
@@ -130,7 +131,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--both:before {
+.edge--both::before {
   top: 0;
   -webkit-transform: skewY(1.5deg);
   transform: skewY(1.5deg);
@@ -138,7 +139,7 @@
   transform-origin: 100% 0;
 }
 
-.edge--both:after {
+.edge--both::after {
   bottom: 0;
   -webkit-transform: skewY(-1.5deg);
   transform: skewY(-1.5deg);
@@ -151,7 +152,8 @@
   z-index: 1;
 }
 
-.edge--both--reverse:before, .edge--both--reverse:after {
+.edge--both--reverse::before,
+.edge--both--reverse::after {
   background: inherit;
   content: '';
   display: block;
@@ -163,7 +165,7 @@
   -webkit-backface-visibility: hidden;
 }
 
-.edge--both--reverse:before {
+.edge--both--reverse::before {
   top: 0;
   -webkit-transform: skewY(-1.5deg);
   transform: skewY(-1.5deg);
@@ -171,7 +173,7 @@
   transform-origin: 0 0;
 }
 
-.edge--both--reverse:after {
+.edge--both--reverse::after {
   bottom: 0;
   -webkit-transform: skewY(1.5deg);
   transform: skewY(1.5deg);

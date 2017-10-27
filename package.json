@@ -45,6 +45,7 @@
     "sqlite3": "^3.1.8",
     "style-loader": "^0.19.0",
     "three": "^0.87.1",
+    "three-effectcomposer-es6": "0.0.4",
     "universal-router": "^4.2.0",
     "whatwg-fetch": "^2.0.3"
   },

@@ -14,7 +14,7 @@ THREEx.Planets.createEarth = function() {
 
   const material = new THREE.MeshToonMaterial({
     map: THREE.ImageUtils.loadTexture(
-      `${THREEx.Planets.baseURL}images/toonworld.png`,
+      `${THREEx.Planets.baseURL}images/toonworld2.png`,
     ),
     // bumpMap: THREE.ImageUtils.loadTexture(
     //   `${THREEx.Planets.baseURL}images/toonworld-bump.png`,

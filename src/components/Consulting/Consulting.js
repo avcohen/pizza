@@ -33,7 +33,11 @@ class Footer extends React.Component {
               <img className={s.consultingImg} src={consultingImg} />
               <div className={s.textContainer}>
                 <p className={s.text}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac viverra arcu. Quisque leo dolor.</p>
+                <p className={s.tick}></p>
+                <p className={cx(s.text,s.text2)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
+                <p className={s.tick}></p>
                 <p className={s.text}>Donec eget lacinia tellus, in fermentum augue. Donec id dui at arcu tristique bibendum et quis magna.</p>
+                <p className={cx(s.text,s.link)}>Lorem ipsum dolor sit amet.</p>
               </div>
           </div>
 
