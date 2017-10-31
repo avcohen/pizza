@@ -21,6 +21,8 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "graphql": "^0.11.6",
     "history": "^4.7.2",
+    "instagram-node": "^0.5.8",
+    "instagram-screen-scrape": "^2.0.0",
     "isomorphic-style-loader": "^4.0.0",
     "jsonwebtoken": "^8.0.1",
     "node-fetch": "^1.7.3",

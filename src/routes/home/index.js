@@ -24,7 +24,7 @@ async function action({ fetch }) {
     title: 'Anthony Falco - Pizza Czar',
     component: (
       <Layout>
-        <Home news={data.news} />
+        <Home />
       </Layout>
     ),
   };

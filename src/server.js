@@ -30,6 +30,7 @@ import schema from './data/schema';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 
+const ig = require('instagram-node').instagram();
 const app = express();
 
 //
@@ -73,6 +74,7 @@ app.use(passport.initialize());
 if (__DEV__) {
   app.enable('trust proxy');
 }
+
 app.get(
   '/login/facebook',
   passport.authenticate('facebook', {
@@ -80,6 +82,7 @@ app.get(
     session: false,
   }),
 );
+
 app.get(
   '/login/facebook/return',
   passport.authenticate('facebook', {
@@ -94,7 +97,6 @@ app.get(
   },
 );
 
-//
 // Register API middleware
 // -----------------------------------------------------------------------------
 app.use(
@@ -163,7 +165,6 @@ app.get('*', async (req, res, next) => {
   }
 });
 
-//
 // Error handling
 // -----------------------------------------------------------------------------
 const pe = new PrettyError();
@@ -186,7 +187,6 @@ app.use((err, req, res, next) => {
   res.send(`<!doctype html>${html}`);
 });
 
-//
 // Launch the server
 // -----------------------------------------------------------------------------
 const promise = models.sync().catch(err => console.error(err.stack));

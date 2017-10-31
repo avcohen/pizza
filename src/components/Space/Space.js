@@ -11,6 +11,8 @@ import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effect
 
 import Link from '../Link';
 
+
+
 class Space extends React.Component {
   constructor() {
     super();
@@ -21,6 +23,7 @@ class Space extends React.Component {
       clickY : null,
     };
   }
+
 
 
   componentDidMount() {
@@ -60,7 +63,7 @@ class Space extends React.Component {
       {lat: 24.20689, lng: 80.507813},
       {lat: 25.482951, lng: 51.679688},
       {lat: 39.095963, lng: 139.570313},
-    ]
+    ];
 
     init();
     animate();

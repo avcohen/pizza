@@ -11,13 +11,14 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Illustration.css';
+import cx from 'classnames';
 
 import img1 from './1.jpg';
 import img2 from './2.jpg';
 import img3 from './3.jpg';
 
 
-class Feedback extends React.Component {
+class Illustration extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -27,12 +28,20 @@ class Feedback extends React.Component {
   }
   render() {
     return (
-      <div className={s.root}>
-        <svg className={s.top} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <polygon fill="#272635" points="0,100 100,0 100,100"/>
-        </svg>
+      <div
+        className={cx(
+          s.root,
+          s['edge--top'],
+          s['edge--bottom--reverse'],
+          s['-dark'],
+        )}
+      >
         <div className={s.container}>
-          <h3 className={s.sectionHeader}>illustration</h3>
+          <div className={s.row}>
+            <h2 className={s.sectionHeader}>illustration</h2>
+            <div className={s.underLine}></div>
+          </div>
+
           <ul className={s.category}>
             <li className={s.categoryItem}>flyers & posters</li>
             <li className={s.categoryItem}>t-shirts</li>
@@ -55,4 +64,4 @@ class Feedback extends React.Component {
   }
 }
 
-export default withStyles(s)(Feedback);
+export default withStyles(s)(Illustration);
