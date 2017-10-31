@@ -30,7 +30,6 @@ import schema from './data/schema';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 
-const ig = require('instagram-node').instagram();
 const app = express();
 
 //
