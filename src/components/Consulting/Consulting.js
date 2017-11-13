@@ -14,9 +14,7 @@ import cx from 'classnames';
 import s from './Consulting.css';
 import Link from '../Link';
 import consultingImg from './consultingImg.jpg';
-
-import SimpleSlider from '../Slider/Slider';
-
+import cafe from './cafe.png'
 
 class Footer extends React.Component {
   render() {
@@ -41,7 +39,7 @@ class Footer extends React.Component {
               </div>
           </div>
 
-            {/* <div className={s.consultingSlider}>
+            <div className={s.consultingSlider}>
               <div className={[s.row, s.sliderImg]}>
                 <span className={s.sliderImgArrowLeft}>x</span>
                 <img className={s.companyImg} src={cafe} alt=""/>
@@ -54,8 +52,7 @@ class Footer extends React.Component {
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores totam optio aspernatur sapiente. Doloribus, iste.</p>
                 </div>
               </div>
-            </div> */}
-        <SimpleSlider />
+            </div>
         </div>
 
       </div>

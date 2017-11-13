@@ -60,7 +60,6 @@ class Press extends React.Component {
           <div className={s.videos}>
             <h4 className={s.subsectionHeader}>videos</h4>
             <div className={s.videoLinks}>{videos.map((v) => {
-              console.log(s.video)
               return (
                 <div className={s.video} key={v.title} >
                     <a className={s.articleLink} href={v.url}>

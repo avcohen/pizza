@@ -10,8 +10,11 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import cx from 'classnames';
 import s from './MobileMenu.css';
 import Link from '../Link';
+
+import FontAwesome from 'react-fontawesome';
 
 class MobileMenu extends React.Component {
   constructor(){
@@ -19,22 +22,43 @@ class MobileMenu extends React.Component {
   }
 
   render() {
+    let mobileMenu = null;
     if (this.props.visibility === false ) {
-      return '';
+      mobileMenu = '';
     }
-    else return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <nav>
-            <a href="" >consulting</a>
-            <a href="" >press</a>
-            <a href="" >illustration</a>
-            <a href="" >about</a>
-            <a href="" >contact</a>
-            <a href="" className={s.socialLinks}><span>lol</span>  <span>tel</span></a>
-          </nav>
+    else {
+      this.props.hideMobileTitle();
+      mobileMenu = (
+          <div className={s.container}>
+            <nav>
+              <div className={s.row}>
+                <a href="" >consulting</a>
+                <a href="" >press</a>
+                <a href="" >illustration</a>
+                <a href="" >about</a>
+                <a href="" >contact</a>
+              </div>
 
-        </div>
+              <div className={cx(s.row, s.socialRow)}>
+                <a href="" className={s.socialLinks}><FontAwesome name='instagram' /></a>
+                <a href="" className={s.socialLinks}><FontAwesome name='whatsapp' /></a>
+              </div>
+
+              <div className={cx(s.rowCentered, s.row)}>
+                <span className={s.closeButton} onClick={this.props.closeMenu}>
+                  <FontAwesome name='times' size='2x'/>
+                </span>
+              </div>
+
+            </nav>
+
+          </div>
+      );
+    }
+
+    return (
+      <div id="scrollContainer" className={s.root}>
+        {mobileMenu}
       </div>
     );
   }

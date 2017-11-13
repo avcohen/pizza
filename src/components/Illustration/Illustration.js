@@ -26,7 +26,9 @@ class Illustration extends React.Component {
       activeCategory : null
     }
   }
+
   render() {
+
     return (
       <div
         className={cx(

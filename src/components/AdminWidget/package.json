@@ -1,0 +1,6 @@
+{
+  "name": "AdminWidget",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AdminWidget.js"
+}

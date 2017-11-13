@@ -21,6 +21,7 @@ function isModifiedEvent(event) {
 
 class Link extends React.Component {
   static propTypes = {
+    currentUrl : PropTypes.string,
     to: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
@@ -48,7 +49,9 @@ class Link extends React.Component {
   };
 
   render() {
-    const { to, children, ...props } = this.props;
+    const { to, children, currentUrl, activeClass, ...props } = this.props;
+    const isActive = to === currentUrl;
+    // const className = isActive ? activeClass : '';
     return (
       <a href={to} {...props} onClick={this.handleClick}>
         {children}

@@ -25,6 +25,7 @@ class Navigation extends React.Component {
       menuOpen : false
     }
     this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   componentDidMount(){
@@ -41,23 +42,47 @@ class Navigation extends React.Component {
     })
   }
 
+  closeMenu(){
+    this.setState({
+      menuOpen : false
+    })
+  }
+
+  hideMobileTitle(){
+    let mobileHeader = document.querySelector('#mobileHeader');
+    mobileHeader.innerHTML = ''
+  }
+
+  unHideMobileTitle(){
+    let mobileHeader = document.querySelector('#mobileHeader');
+    mobileHeader.innerHTML = ''
+    mobileHeader.innerHTML = 'anthony falco'
+  }
+
   toggleNavVisibilityOnScroll(e){
     let scrollTop = window.scrollY
     let voidHeight = document.querySelector('#theVoid').offsetHeight;
 
-    if (scrollTop > 0 || scrollTop < voidHeight){
+    let mobileNavContainer = document.querySelector('#mobileNavContainer')
+    let mobileHeader = document.querySelector('#mobileHeader');
+    let sliceStack = document.querySelector('#sliceStack');
+
+    if (scrollTop > 0 && scrollTop <= voidHeight){
       // in the void
-      document.querySelector('#navBar').classList.remove(s.unhidden)
-      document.querySelector('#navBar').classList.add(s.hidden)
+      sliceStack.classList.remove(s.hidden)
+      sliceStack.classList.add(s.unhidden)
+      mobileHeader.classList.remove(s.unhidden)
+      mobileHeader.classList.add(s.hidden)
+      mobileNavContainer.classList.add(s.backgroundInvisible)
     }
-    if (scrollTop >= voidHeight) {
-      document.querySelector('#navBar').classList.remove(s.hidden)
-      document.querySelector('#navBar').classList.add(s.unhidden)
+
+    if (scrollTop > voidHeight) {
+      // past the void
+      mobileHeader.classList.add(s.unhidden)
+      mobileNavContainer.classList.remove(s.backgroundInvisible)
+      mobileNavContainer.classList.add(s.backgroundVisible)
     }
-    if (scrollTop === 0) {
-      document.querySelector('#navBar').classList.remove(s.hidden)
-      document.querySelector('#navBar').classList.add(s.unhidden)
-    }
+
   }
 
   render() {
@@ -65,47 +90,27 @@ class Navigation extends React.Component {
     if (this.state.menuOpen === true) {
       sliceTopClass.push(s.sliceLayerTopOpen);
     }
-
     return (
-      <div className={cx(s.root,s.visible)} role="navigation">
-        <div className={s.navContainer}>
-          <div id="navBar"className={s.sliceMenu} onClick={this.openMenu}>
-            <img
-              className={cx(sliceTopClass)}
-              src={sliceTop}
-              alt=""
-            />
+      <div className={s.root} role="navigation">
+        <MobileMenu closeMenu={this.closeMenu}
+          visibility={this.state.menuOpen}
+          hideMobileTitle={this.hideMobileTitle}
+        />
 
-            <img
-              className={cx(s.sliceLayer, s.sliceLayerBottom)}
-              src={sliceBottom}
-              alt=""
-            />
-          </div>
+        <div id="mobileNavContainer" className={s.navContainer}></div>
+        <div id="sliceStack" className={s.sliceMenu} onClick={this.openMenu}>
+          <img
+            className={cx(sliceTopClass)}
+            src={sliceTop}
+            alt=""
+          />
+          <img
+            className={cx(s.sliceLayer, s.sliceLayerBottom)}
+            src={sliceBottom}
+            alt=""
+          />
         </div>
-
-        <MobileMenu visibility={this.state.menuOpen}/>
-
-        {/* <div className={s.menuPane}>
-          <nav className={s.nav}>
-            <Link className={s.navLink} to="/about">consulting</Link>
-            <Link className={s.navLink} to="/contact">illustration</Link>
-            <Link className={s.navLink} to="/about">about</Link>
-          </nav>
-        </div> */}
-
-
-
-
-
-        {/* <span className={s.spacer}> | </span>
-        <Link className={s.link} to="/login">
-          Log in
-        </Link>
-        <span className={s.spacer}>or</span>
-        <Link className={cx(s.link, s.highlight)} to="/register">
-          Sign up
-        </Link> */}
+        <h1 id="mobileHeader" className={cx(s.menuHeader,s.hidden)}>anthony falco</h1>
       </div>
     );
   }

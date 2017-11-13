@@ -14,18 +14,23 @@ import Admin from './Admin';
 const title = 'Admin Page';
 const isAdmin = false;
 
-function action() {
-  if (!isAdmin) {
-    return { redirect: '/login' };
-  }
+
+
+function action(context, params) {
+
+  // if (!isAdmin) {
+  //   return { redirect: '/login' };
+  // }
 
   return {
     chunks: ['admin'],
     title,
     component: (
-      <Layout>
-        <Admin title={title} />
-      </Layout>
+        <Admin
+          title={title}
+          params={params}
+          context={context}
+         />
     ),
   };
 }

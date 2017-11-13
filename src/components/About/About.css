@@ -94,7 +94,7 @@
   content: '—';
 }
 
-.consultingImg {
+.aboutImg {
   width: 60%;
   max-width: 720px;
 }
@@ -106,10 +106,6 @@
 
   .row {
     flex-direction: column;
-  }
-
-  .consultingImg {
-    width: 100%;
   }
 
   .sectionHeader {
@@ -125,7 +121,7 @@
 
   .textContainer {
     width: 100%;
-    margin: 20px 0;
+    margin: 20px 0px;
   }
 }
 

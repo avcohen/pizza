@@ -8,10 +8,9 @@ import * as THREE from 'THREE';
 import THREEx from '../../scripts/threex.planets.js';
 // import ShaderExtras from '../../scripts/ShaderExtras.js';
 import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
+import FontAwesome from 'react-fontawesome';
 
 import Link from '../Link';
-
-
 
 class Space extends React.Component {
   constructor() {
@@ -23,8 +22,6 @@ class Space extends React.Component {
       clickY : null,
     };
   }
-
-
 
   componentDidMount() {
     const ww = window.innerWidth;
@@ -238,9 +235,24 @@ class Space extends React.Component {
   }
 
   render() {
+    let { spacePizzaMode } = this.props;
+    let closeButton = ''
+    if (spacePizzaMode === true){
+      closeButton =
+        <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
+          <FontAwesome name='times' size='3x'/>
+        </span>
+    }
+    else {
+      closeButton = ''
+    }
+
     return (
-      <div className="space">
+      <div className={s.space}>
         <div id="theVoid" />
+        <div>
+          {closeButton}
+        </div>
       </div>
     )
   }

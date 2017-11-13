@@ -1,0 +1,29 @@
+@import '../../components/variables.css';
+
+
+.root {
+  margin: 15px 0px;
+}
+
+.container {
+  background-color: var(--color-2);
+    padding: 10px 10px;
+}
+
+.row {
+    margin: 0px 10px;
+
+}
+
+.editorButton {
+    padding: 5px 10px;
+}
+
+a {
+    text-decoration: none;
+    color : var(--color-4)
+}
+
+a:hover {
+    color : var(--color-1)
+}

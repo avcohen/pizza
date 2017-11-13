@@ -10,33 +10,77 @@
 @import '../variables.css';
 
 .root {
-  z-index: 19;
+
+}
+
+.container {
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
   position: absolute;
+  display: flex;
   background: var(--color-4);
   color: var(--color-2);
+  overflow: hidden;
+
 }
 
 nav {
-  margin: 70px 0 0 25px;
+  margin: 40px 0 0 25px;
   text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: hidden;
 
   a {
-    font-size: 4em;
+    font-size: 3em;
     font-weight: 500;
     display: block;
     text-decoration: none;
     color: var(--color-2);
   }
+}
 
   a:hover {
     text-decoration: underline;
   }
+
+.row {
+  flex-direction: row;
+}
+
+.socialRow {
+  margin-top: 30px;
 }
 
 .socialLinks {
-  margin-top: 40px;
+  text-shadow: -1px -2px var(--color-3);
+}
+
+.rowCentered {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  font-size: 2em;
+  text-align: center;
+  cursor: pointer;
+  text-shadow: -1px -2px var(--color-3);
+}
+
+.closeButton:hover {
+
+  text-shadow:
+}
+
+
+
+.socialLinks {
+  display: inline;
+  margin: 80px 20px 0 0;
 }
