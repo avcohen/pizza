@@ -1,9 +1,3 @@
-
-
-function action(context, params) {
-  
-
-}
-
+function action(context, params) {}
 
 export default action;

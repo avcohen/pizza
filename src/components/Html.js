@@ -48,7 +48,10 @@ class Html extends React.Component {
             <link key={script} rel="preload" href={script} as="script" />
           ))}
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+          <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          />
           {styles.map(style => (
             <style
               key={style.id}

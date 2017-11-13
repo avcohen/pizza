@@ -1,6 +1,8 @@
 import express from 'express';
+
 const router = express.Router();
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
+
 require('dotenv').config();
 
 const fbConfig = {
@@ -15,16 +17,14 @@ firebase.initializeApp(fbConfig);
 const rootRef = firebase.database().ref();
 const clientsRef = rootRef.child('clients');
 
-router.get('/', (req,res) => {
-  res.send(":)")
+router.get('/', (req, res) => {
+  res.send(':)');
 });
 
-router.get('/clients', (req,res) => {
-  clientsRef.once('value')
-    .then((snap) => {
-      res.send(snap)
-    })
+router.get('/clients', (req, res) => {
+  clientsRef.once('value').then(snap => {
+    res.send(snap);
+  });
 });
-
 
 export default router;

@@ -3,6 +3,7 @@
 @import "~slick-carousel/slick/slick-theme.css"; */
 @import '../variables.css';
 @import '../../../node_modules/slick-carousel/slick/slick.css';
+
 /* @import '../../../node_modules/slick-carousel/slick/slick-theme.css'; */
 
 .root {
@@ -34,7 +35,7 @@
 }
 
 .slider {
- width: 100vw;
+  width: 100vw;
 }
 
 @media screen and (max-width: 768px) {

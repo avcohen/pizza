@@ -44,9 +44,9 @@ nav {
   }
 }
 
-  a:hover {
-    text-decoration: underline;
-  }
+a:hover {
+  text-decoration: underline;
+}
 
 .row {
   flex-direction: row;
@@ -74,8 +74,7 @@ nav {
 }
 
 .closeButton:hover {
-
-  text-shadow:
+  text-shadow:;
 }
 
 
