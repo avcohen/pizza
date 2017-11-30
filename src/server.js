@@ -1,11 +1,37 @@
 import path from 'path';
+//
+// Enviornment Config
+// -----------------------------------------------------------------------------
+// require('dotenv').config({path: '../.env'});
+
 import express from 'express';
+
+
+//
+// Initialize DB Connection
+// -----------------------------------------------------------------------------
+import mongoose from 'mongoose';
+require('./models/Client');
+
+
+mongoose.connect('mongodb://anthony:pizza666@ds155325.mlab.com:55325/pizza', { useMongoClient: true });
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error',(err) => {
+    console.error(`XXX ${err.message}`)
+})
+mongoose.connection.once('open', () => {
+    console.log('DB Connection __OPEN__')
+})
+
+
+
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
+
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
@@ -13,9 +39,12 @@ import PrettyError from 'pretty-error';
 import App from './components/App';
 import Html from './components/Html';
 
+
+// api routes
+import apiRoutes from './routes/apiRoutes.js';
+
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
 import errorPageStyle from './routes/error/ErrorPage.css';
-import apiRoutes from './routes/apiRoutes.js';
 import createFetch from './createFetch';
 
 import passport from './passport';

@@ -74,7 +74,7 @@ async function start() {
   clientConfig.entry.client = [
     'react-error-overlay',
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client?name=client&reload=true',
+    'webpack-hot-middleware/client?name=client&reload=true&quiet=true',
   ]
     .concat(clientConfig.entry.client)
     .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));

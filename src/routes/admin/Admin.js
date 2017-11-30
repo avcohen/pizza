@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Link from '../../components/Link';
-import AdminWidget from '../../components/AdminWidget';
+import ClientPanel from '../../components/ClientPanel';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Admin.css';
@@ -26,19 +26,29 @@ class Admin extends React.Component {
       clientData: null,
       illustrationData: null,
       instagramData: null,
+      moduloOpen : false,
     };
 
     this.editItem = this.editItem.bind(this);
+    this.createItem = this.createItem.bind(this);
+    this.closeModulo = this.closeModulo.bind(this);
   }
 
   componentWillMount() {
-    this.fetchClients();
+    // this.fetchClients();
     // this.fetchIllustrations();
+  }
+
+  closeModulo(){
+      this.setState({
+          editingItem : false,
+          moduloOpen : false
+      })
   }
 
   async fetchClients() {
     this.setState({ fetchingData: true });
-    const clientData = await fetch('/api/clients')
+    const clientData = await fetch('http://localhost:3000/api/clients')
       .then(r => {
         this.setState({ fetchingData: false });
         if (r.ok === true) {
@@ -75,6 +85,8 @@ class Admin extends React.Component {
   }
 
   async createItem({ ...itemDetails }) {
+    this.setState({ moduloOpen : true });
+    console.log('CREATING ITEM')
     // set state to editingItem : true
     // create new item in fb
     // write db entry
@@ -99,11 +111,15 @@ class Admin extends React.Component {
       title: 'Clients',
       data: this.state.clientData,
       editItem: this.editItem,
+      createItem : this.createItem,
+      moduloOpen : this.state.moduloOpen,
+      closeModulo : this.closeModulo,
     };
-    return <AdminWidget {...props} />;
+    return <ClientPanel {...props} />;
   }
 
   render() {
+
     return (
       <div className={s.root}>
         <div className={s.container}>

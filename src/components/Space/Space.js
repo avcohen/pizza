@@ -235,13 +235,14 @@ class Space extends React.Component {
   }
 
   render() {
+
     let { spacePizzaMode } = this.props;
     let closeButton = ''
     if (spacePizzaMode === true){
-      closeButton =
-        <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
-          <FontAwesome name='times' size='3x'/>
-        </span>
+        closeButton =
+            <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
+              <FontAwesome name='times' size='3x'/>
+            </span>
     }
     else {
       closeButton = ''
@@ -251,7 +252,7 @@ class Space extends React.Component {
       <div className={s.space}>
         <div id="theVoid" />
         <div>
-          {closeButton}
+            {closeButton}
         </div>
       </div>
     )

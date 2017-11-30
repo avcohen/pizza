@@ -10,24 +10,29 @@
 @import '../variables.css';
 
 .space{
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #theVoid {
-  z-index: 4;
-  width: 100%;
-  max-width: var(--max-content-width);
-  height: auto;
-  margin: 0;
-  padding: 0;
-  position: static;
-  top: 0;
-  left: 0;
+    z-index: 4;
+    width: 100%;
+    max-width: var(--max-content-width);
+    height: auto;
+    margin: 0;
+    padding: 0;
+    position: static;
+    top: 0;
+    left: 0;
 }
 
 .exitTheVoid {
-  z-index: 5;
-  color: var(--color-2);
-  justify-content: center;
+    display: flex;
+    color: var(--color-2);
+    justify-content: center;
+
+    > span {
+        z-index: 10;
+        margin-top: -80px;
+    }
 }

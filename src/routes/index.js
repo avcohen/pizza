@@ -22,11 +22,13 @@ const routes = {
     {
       path: '/admin',
       load: () => import(/* webpackChunkName: 'admin' */ './admin'),
+      children : [
+          {
+              path : '/:subpanel',
+              load : () => import('./admin'),
+          }
+      ]
     },
-    // {
-    //   path: '/admin/:adminSubPage',
-    //   load: () => import(/* webpackChunkName: 'admin' */ './admin'),
-    // },
     {
       path: '/login',
       load: () => import(/* webpackChunkName: 'login' */ './login'),

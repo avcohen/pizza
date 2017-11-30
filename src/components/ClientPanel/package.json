@@ -1,0 +1,6 @@
+{
+  "name": "ClientPanel",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ClientPanel.js"
+}

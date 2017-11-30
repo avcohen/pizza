@@ -15,14 +15,14 @@ import AdminModulo from '../AdminModulo/'
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import cx from 'classnames';
-import s from './AdminWidget.css';
+import s from './ClientPanel.css';
 import Link from '../Link';
 import FontAwesome from 'react-fontawesome';
 
 import * as h from '../../scripts/helpers';
 
 
-class AdminWidget extends React.Component {
+class ClientPanel extends React.Component {
     constructor(){
         super();
         this.renderListItems = this.renderListItems.bind(this);
@@ -34,7 +34,6 @@ class AdminWidget extends React.Component {
     }
 
     renderListItems = (key) => {
-        console.log(key)
         const entry = this.props.data[key];
         return (
             <div className={s.row}>
@@ -47,43 +46,51 @@ class AdminWidget extends React.Component {
                         <FontAwesome name="edit" size="1x" /> Edit
                     </Link>
                 </span>
-
                 <span className={s.editorButton}>
                     <Link to={"/api/"+ entry.name }>
                         <FontAwesome name="trash" size="1x" /> Edit
                     </Link>
                 </span>
-
-
             </div>
         )
     }
 
     render() {
-    if (this.props.data === null) {
-      return (
-          <div>Loading...</div>
-      )
-    }
-    else {
+
+        let widgetData = '';
+        let modulo = '';
+
+        if (this.props.data === null || undefined ) {
+          widgetData = <div>No data.</div>
+        } else {
+            widgetData = Object.keys(this.props.data).map(this.renderListItems);
+        }
+
+        if (this.props.moduloOpen === true ) {
+            modulo = <AdminModulo {...this.props} />
+        } else {
+            modulo = '';
+        }
+
         return (
           <div className={s.root} >
             <div className={s.container}>
                 <div className={s.row}>
                     <h3>{this.props.title}</h3>
-                    <Link to={"/api/" + this.props.title }>
-                        Add {this.props.title} <FontAwesome name="plus" size="1x" />
-                    </Link>
+                    <button onClick={this.props.createItem} >
+                        Add Clients <FontAwesome name="plus" size="1x" />
+                    </button>
                 </div>
                 <div className={s.row}>
-                    {Object.keys(this.props.data)
-                        .map(this.renderListItems)
-                    }
+                    {widgetData}
+                </div>
+                <div className={s.modulo}>
+                    {modulo}
                 </div>
             </div>
           </div>
-        );
-    }
+        )
+
     }
 
   static propTypes = {
@@ -92,4 +99,4 @@ class AdminWidget extends React.Component {
 
 };
 
-export default withStyles(s)(AdminWidget);
+export default withStyles(s)(ClientPanel);

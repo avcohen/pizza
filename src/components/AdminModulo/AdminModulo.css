@@ -1,0 +1,27 @@
+@import '../../components/variables.css';
+
+.root {
+    background: var(--color-4);
+    color: white;
+    border-radius: 3px;
+}
+
+.container {
+    padding: 20px;
+}
+
+.clientForm {
+    display: flex;
+    flex-direction: column;
+
+}
+
+input::after {
+
+}
+
+
+.submitButton{
+    border-radius: 2px;
+    width: 75px;
+}
