@@ -6,24 +6,23 @@ import path from 'path';
 
 import express from 'express';
 
-
 //
 // Initialize DB Connection
 // -----------------------------------------------------------------------------
 import mongoose from 'mongoose';
+
 require('./models/Client');
 
-
-mongoose.connect('mongodb://anthony:pizza666@ds155325.mlab.com:55325/pizza', { useMongoClient: true });
+mongoose.connect('mongodb://anthony:pizza666@ds155325.mlab.com:55325/pizza', {
+  useMongoClient: true,
+});
 mongoose.Promise = global.Promise;
-mongoose.connection.on('error',(err) => {
-    console.error(`XXX ${err.message}`)
-})
+mongoose.connection.on('error', err => {
+  console.error(`XXX ${err.message}`);
+});
 mongoose.connection.once('open', () => {
-    console.log('DB Connection __OPEN__')
-})
-
-
+  console.log('DB Connection __OPEN__');
+});
 
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -38,7 +37,6 @@ import PrettyError from 'pretty-error';
 
 import App from './components/App';
 import Html from './components/Html';
-
 
 // api routes
 import apiRoutes from './routes/apiRoutes.js';

@@ -26,7 +26,7 @@ class Admin extends React.Component {
       clientData: null,
       illustrationData: null,
       instagramData: null,
-      moduloOpen : false,
+      moduloOpen: false,
     };
 
     this.editItem = this.editItem.bind(this);
@@ -39,11 +39,11 @@ class Admin extends React.Component {
     // this.fetchIllustrations();
   }
 
-  closeModulo(){
-      this.setState({
-          editingItem : false,
-          moduloOpen : false
-      })
+  closeModulo() {
+    this.setState({
+      editingItem: false,
+      moduloOpen: false,
+    });
   }
 
   async fetchClients() {
@@ -85,8 +85,8 @@ class Admin extends React.Component {
   }
 
   async createItem({ ...itemDetails }) {
-    this.setState({ moduloOpen : true });
-    console.log('CREATING ITEM')
+    this.setState({ moduloOpen: true });
+    console.log('CREATING ITEM');
     // set state to editingItem : true
     // create new item in fb
     // write db entry
@@ -111,15 +111,14 @@ class Admin extends React.Component {
       title: 'Clients',
       data: this.state.clientData,
       editItem: this.editItem,
-      createItem : this.createItem,
-      moduloOpen : this.state.moduloOpen,
-      closeModulo : this.closeModulo,
+      createItem: this.createItem,
+      moduloOpen: this.state.moduloOpen,
+      closeModulo: this.closeModulo,
     };
     return <ClientPanel {...props} />;
   }
 
   render() {
-
     return (
       <div className={s.root}>
         <div className={s.container}>
