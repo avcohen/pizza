@@ -12,11 +12,13 @@ class AdminModulo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        "name" : this.props.activeItemToEdit.name,
-        "description" : this.props.activeItemToEdit.description,
-        "file" : '',
-        "url" : this.props.activeItemToEdit.url,
+        _id : this.props.itemToEdit._id,
+        name : this.props.itemToEdit.name,
+        description : this.props.itemToEdit.description,
+        url : this.props.itemToEdit.url,
+        photo : this.props.itemToEdit.photo,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.uploadFormData = this.uploadFormData.bind(this);
@@ -26,35 +28,26 @@ class AdminModulo extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    this.uploadFormData(this.state);
-    this.props.fetchClients();
+    await this.uploadFormData(this.state);
     this.props.closeModulo();
   }
 
   uploadFormData(data) {
-    let url = 'http://localhost:3000/api/clients';
-    const formData = new FormData();
-    for (const k in data) {
-      if (k === 'photo') {
-        formData.append(
-          k,
-          document.querySelector('input[type="file"]').files[0],
-        );
-      }
-      formData.append(k, data[k]);
-    }
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    if (this.props.activeItemToEdit){
-        url = `http://localhost:3000/api/client/${this.props.activeItemToEdit._id}`;
-        return put(url, formData, config)
-    }
-    return post(url, formData, config);
+
+        // const config = { headers: { 'content-type': 'multipart/form-data'} };
+        let formData = new FormData();
+        for (const k in data) {
+            if (k === 'photo') {
+              formData.append(k, document.querySelector('input[type="file"]').files[0]);
+            }
+            formData.append(k, data[k]);
+        }
+        if (this.props.itemToEdit){
+            this.props.editItem(formData, 'client')
+        }
+        this.props.fetchItems('client');
   }
 
   render() {

@@ -15,10 +15,10 @@ router.get('/', (req, res) => {
 
 // get all clients
 router.get('/clients',
-    catchErrors(clientController.getClients)
+    catchErrors(clientController.getAllClients)
 );
-// get all clients
-router.get('/client/:id',
+// get single clients
+router.get('/clients/:id',
     catchErrors(clientController.getClient)
 );
 
@@ -34,7 +34,9 @@ router.delete('/clients/:id',
     catchErrors(clientController.deleteClient)
 )
 // edit a client by id
-router.put('/client/:id',
+router.post('/clients/:id',
+    clientController.upload,
+    catchErrors(clientController.resize),
     catchErrors(clientController.editClient)
 )
 

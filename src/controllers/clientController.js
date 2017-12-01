@@ -37,11 +37,20 @@ exports.resize = async (req, res, next) => {
 
 exports.createClient = async (req, res) => {
     console.log('creating client');
-    const client = await new Client(req.body).save();
-    res.json(client);
+    const client = await new Client(req.body).save((err, newClient) => {
+        if (err){
+            res.status(500).send(err)
+        }
+        if (newClient){
+            res.status(200).json(newClient)
+        } else {
+            res.status(404).send('404 : Error Reaching DB')
+        }
+    });
+
 };
 
-exports.getClients = async (req, res) => {
+exports.getAllClients = async (req, res) => {
     const clients = await Client.find().sort({created : 'desc' });
     res.json(clients);
 }
@@ -74,5 +83,6 @@ exports.deleteClient = async (req, res) => {
 }
 
 exports.editClient = async (req, res) => {
+    console.log(req.body, req.params.id)
     const client = await Client.findByIdAndUpdate(req.params.id, req.body).exec();
 }

@@ -22,111 +22,94 @@ class Admin extends React.Component {
     this.state = {
       editingItem: false,
       fetchingData: false,
-      clientData: null,
-      illustrationData: null,
-      instagramData: null,
-      moduloOpen: false,
+      clientData : {},
     };
 
+    this.fetchItems = this.fetchItems.bind(this);
+    this.fetchSingleItem = this.fetchSingleItem.bind(this);
+    this.createItem = this.createItem.bind(this);
     this.editItem = this.editItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
-    this.createItem = this.createItem.bind(this);
-    this.closeModulo = this.closeModulo.bind(this);
-    this.fetchClients = this.fetchClients.bind(this);
   }
 
-
-  closeModulo() {
-    this.setState({
-      editingItem: false,
-      moduloOpen: false,
-    });
-  }
-
-  async fetchClients() {
+  async fetchItems(type) {
     this.setState({ fetchingData: true });
-    const clientData = await fetch('http://localhost:3000/api/clients')
+    const fetchedItems = await fetch(`http://localhost:3000/api/${type}s`)
       .then(r => {
-        this.setState({ fetchingData: false });
+        if (r.ok === true) {
+          return r.json();
+        }
+      })
+      .then(d => d)
+      .catch(e => console.error(e));
+    this.setState({ fetchingData: false });
+    this.setState({ [`${type}Data`] : fetchedItems })
+  }
+
+  async fetchSingleItem(entry, type) {
+    this.setState({ fetchingData: true });
+    const data = await fetch(`http://localhost:3000/api/${type}s/${entry._id}`)
+      .then(r => {
         if (r.ok === true) {
           return r.json();
         }
       })
       .then(data => data)
       .catch(e => console.error(e));
-
-    if (!clientData === null) {
-      this.setState({ clientData: 'ERROR' });
-      return;
-    }
-    this.setState({ clientData });
+    this.setState({ fetchingData: false });
+    return data;
   }
 
-  async fetchIllustrations() {
-    this.setState({ fetchingData: true });
-    const illustrationData = await fetch('/api/illustrations')
-      .then(r => {
-        this.setState({ fetchingData: false });
-        if (r.ok === true) {
-          return r.json();
-        }
-      })
-      .then(data => data)
-      .catch(e => console.error(e));
+  async createItem(item = {}) {}
 
-    if (!illustrationData === null) {
-      this.setState({ clientData: 'ERROR' });
-      return;
-    }
-    this.setState({ illustrationData });
-  }
-
-  async createItem({ ...itemDetails }) {
-    this.setState({ moduloOpen: true });
-  }
-
-  async editItem(entry) {
+  async editItem(entry, type) {
     this.setState({ editingItem: true });
-    const itemToEdit = await fetch(`http://localhost:3000/api/client/${entry._id}`)
+    const id = entry.get('_id');
+
+    const itemToEdit = await fetch(`http://localhost:3000/api/${type}s/${id}`, {
+        method : 'POST',
+        body : entry
+        })
         .then(r => {
-            this.setState({fetchingData : false })
             if (r.ok === true){
                 return r.json();
             }
         })
         .then(data => data)
         .catch(err => console.err(err));
-    this.setState({ itemToEdit })
-    this.setState({ moduloOpen: true });
+
+    this.setState({fetchingData : false });
   }
 
-  async deleteItem(entry) {
+  async deleteItem(entry, type) {
     this.setState({ editingItem: true });
-    await confirm(`Delete entry '${entry.name}' ?`);
-    await fetch(`http://localhost:3000/api/clients/${entry._id}`, {
-        method : 'DELETE'
-    }).catch(err => console.error(err));
+    const confirmDelete = await confirm(`Delete entry '${entry.name}' ?`);
+
+    if (confirmDelete === true ){
+        await fetch(`http://localhost:3000/api/${type}s/${entry._id}`, {
+            method : 'DELETE'
+        }).catch(err => console.error(err));
+    }
+
     this.setState({ editingItem: false });
-    this.fetchClients();
+    this.fetchItems(type);
   }
 
-  createWidgets() {
+  createAdminPanels() {
     const props = {
-      title: 'Clients',
-      data: this.state.clientData,
       editItem: this.editItem,
       deleteItem: this.deleteItem,
+      fetchSingleItem: this.fetchSingleItem,
       createItem: this.createItem,
       moduloOpen: this.state.moduloOpen,
-      closeModulo: this.closeModulo,
-      fetchClients: this.fetchClients,
-      itemToEdit : this.state.itemToEdit,
+      fetchItems: this.fetchItems,
     };
-    return <ClientPanel {...props} />;
+    return <ClientPanel title="Clients" clientData={this.state.clientData} {...props} />;
+
   }
 
   componentDidMount(){
-      this.fetchClients();
+      this.fetchItems('client');
   }
 
   render() {
@@ -155,7 +138,7 @@ class Admin extends React.Component {
             </nav>
           </div>
           <hr />
-          <div className={s.row}>{this.createWidgets()}</div>
+          <div className={s.row}>{this.createAdminPanels()}</div>
         </div>
       </div>
     );
