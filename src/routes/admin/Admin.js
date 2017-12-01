@@ -21,7 +21,6 @@ class Admin extends React.Component {
     super(props);
     this.state = {
       editingItem: false,
-      panelLoaded: false,
       fetchingData: false,
       clientData: null,
       illustrationData: null,
@@ -30,14 +29,12 @@ class Admin extends React.Component {
     };
 
     this.editItem = this.editItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
     this.createItem = this.createItem.bind(this);
     this.closeModulo = this.closeModulo.bind(this);
+    this.fetchClients = this.fetchClients.bind(this);
   }
 
-  componentWillMount() {
-    // this.fetchClients();
-    // this.fetchIllustrations();
-  }
 
   closeModulo() {
     this.setState({
@@ -86,24 +83,31 @@ class Admin extends React.Component {
 
   async createItem({ ...itemDetails }) {
     this.setState({ moduloOpen: true });
-    console.log('CREATING ITEM');
-    // set state to editingItem : true
-    // create new item in fb
-    // write db entry
-    // upload image data to storage
-    // return result
-    // set state to editingItem : false
   }
 
-  async editItem(key, category) {
-    console.log('lol');
+  async editItem(entry) {
     this.setState({ editingItem: true });
+    const itemToEdit = await fetch(`http://localhost:3000/api/client/${entry._id}`)
+        .then(r => {
+            this.setState({fetchingData : false })
+            if (r.ok === true){
+                return r.json();
+            }
+        })
+        .then(data => data)
+        .catch(err => console.err(err));
+    this.setState({ itemToEdit })
+    this.setState({ moduloOpen: true });
   }
-  async deleteItem(id) {
-    // set state to editingItem : true
-    // find entry in firebase
-    // remove entry from firebase
-    // set state to editingItem : false
+
+  async deleteItem(entry) {
+    this.setState({ editingItem: true });
+    await confirm(`Delete entry '${entry.name}' ?`);
+    await fetch(`http://localhost:3000/api/clients/${entry._id}`, {
+        method : 'DELETE'
+    }).catch(err => console.error(err));
+    this.setState({ editingItem: false });
+    this.fetchClients();
   }
 
   createWidgets() {
@@ -111,11 +115,18 @@ class Admin extends React.Component {
       title: 'Clients',
       data: this.state.clientData,
       editItem: this.editItem,
+      deleteItem: this.deleteItem,
       createItem: this.createItem,
       moduloOpen: this.state.moduloOpen,
       closeModulo: this.closeModulo,
+      fetchClients: this.fetchClients,
+      itemToEdit : this.state.itemToEdit,
     };
     return <ClientPanel {...props} />;
+  }
+
+  componentDidMount(){
+      this.fetchClients();
   }
 
   render() {

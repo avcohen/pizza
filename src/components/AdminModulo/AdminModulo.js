@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios, { post } from 'axios';
+import axios, { post, put } from 'axios';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import cx from 'classnames';
 import s from './AdminModulo.css';
@@ -11,7 +11,12 @@ import * as h from '../../scripts/helpers';
 class AdminModulo extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        "name" : this.props.activeItemToEdit.name,
+        "description" : this.props.activeItemToEdit.description,
+        "file" : '',
+        "url" : this.props.activeItemToEdit.url,
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.uploadFormData = this.uploadFormData.bind(this);
@@ -24,11 +29,12 @@ class AdminModulo extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.uploadFormData(this.state);
+    this.props.fetchClients();
     this.props.closeModulo();
   }
 
   uploadFormData(data) {
-    const url = 'http://localhost:3000/api/clients';
+    let url = 'http://localhost:3000/api/clients';
     const formData = new FormData();
     for (const k in data) {
       if (k === 'photo') {
@@ -44,6 +50,10 @@ class AdminModulo extends React.Component {
         'content-type': 'multipart/form-data',
       },
     };
+    if (this.props.activeItemToEdit){
+        url = `http://localhost:3000/api/client/${this.props.activeItemToEdit._id}`;
+        return put(url, formData, config)
+    }
     return post(url, formData, config);
   }
 
@@ -74,6 +84,7 @@ class AdminModulo extends React.Component {
               />
             </label>
             <label htmlFor="image">Image</label>
+            {/* <img src={`http://localhost:3000/public/uploads/${this.props.activeItemToEdit.image}`} alt=""/> */}
             <input
               type="file"
               name="photo"

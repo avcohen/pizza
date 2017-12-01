@@ -26,14 +26,11 @@ class ClientPanel extends React.Component {
     constructor(){
         super();
         this.renderListItems = this.renderListItems.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.renderModulo = this.renderModulo.bind(this);
     }
 
-    handleChange(e,key){
-        this.props.editItem();
-    }
 
-    renderListItems = (key) => {
+    renderListItems(key){
         const entry = this.props.data[key];
         return (
             <div className={s.row}>
@@ -42,34 +39,37 @@ class ClientPanel extends React.Component {
                 <span>Description : </span><span>{entry.description}</span>
                 <p><a href={entry.url}>Link</a></p>
                 <span className={s.editorButton}>
-                    <Link to={"/api/"+ entry.name }>
+                    <Link onClick={() => this.props.editItem(entry)} >
                         <FontAwesome name="edit" size="1x" /> Edit
                     </Link>
                 </span>
                 <span className={s.editorButton}>
-                    <Link to={"/api/"+ entry.name }>
-                        <FontAwesome name="trash" size="1x" /> Edit
+                    <Link onClick={() => this.props.deleteItem(entry)} >
+                        <FontAwesome name="trash" size="1x" /> Delete
                     </Link>
                 </span>
             </div>
         )
     }
 
+    renderModulo(itemToEdit = {}){
+        if (this.props.moduloOpen === true){
+            return <AdminModulo {...this.props} activeItemToEdit={itemToEdit}/>
+        }
+        else {
+            return '';
+        }
+    }
+
     render() {
 
-        let widgetData = '';
-        let modulo = '';
+        let clientData = '';
+        let modulo = this.renderModulo(this.props.itemToEdit);
 
         if (this.props.data === null || undefined ) {
-          widgetData = <div>No data.</div>
+          clientData = <div>Loading data...</div>
         } else {
-            widgetData = Object.keys(this.props.data).map(this.renderListItems);
-        }
-
-        if (this.props.moduloOpen === true ) {
-            modulo = <AdminModulo {...this.props} />
-        } else {
-            modulo = '';
+            clientData = Object.keys(this.props.data).map(this.renderListItems);
         }
 
         return (
@@ -82,7 +82,7 @@ class ClientPanel extends React.Component {
                     </button>
                 </div>
                 <div className={s.row}>
-                    {widgetData}
+                    {clientData}
                 </div>
                 <div className={s.modulo}>
                     {modulo}
