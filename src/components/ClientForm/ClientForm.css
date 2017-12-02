@@ -1,7 +1,6 @@
 @import '../../components/variables.css';
 
 .root {
-  background: var(--color-4);
   color: white;
   border-radius: 3px;
 }

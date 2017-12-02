@@ -11,18 +11,22 @@ import PropTypes from 'prop-types';
 
 import Link from '../../components/Link';
 import ClientPanel from '../../components/ClientPanel';
+import ClientModal from '../../components/ClientModal';
+
+import { Container } from 'semantic-ui-react';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Admin.css';
 import FontAwesome from 'react-fontawesome';
 
 class Admin extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
       editingItem: false,
       fetchingData: false,
-      clientData : {},
+      clientData : [],
     };
 
     this.fetchItems = this.fetchItems.bind(this);
@@ -30,6 +34,10 @@ class Admin extends React.Component {
     this.createItem = this.createItem.bind(this);
     this.editItem = this.editItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+  }
+
+  componentDidMount(){
+    this.fetchItems('client');
   }
 
   async fetchItems(type) {
@@ -57,59 +65,18 @@ class Admin extends React.Component {
       .then(data => data)
       .catch(e => console.error(e));
     this.setState({ fetchingData: false });
-    return data;
   }
 
-  async createItem(item = {}) {}
-
-  async editItem(entry, type) {
-    this.setState({ editingItem: true });
-    const id = entry.get('_id');
-
-    const itemToEdit = await fetch(`http://localhost:3000/api/${type}s/${id}`, {
-        method : 'POST',
-        body : entry
-        })
-        .then(r => {
-            if (r.ok === true){
-                return r.json();
-            }
-        })
-        .then(data => data)
-        .catch(err => console.err(err));
-
-    this.setState({fetchingData : false });
+  createItem(item) {
+    console.log(item)
   }
 
-  async deleteItem(entry, type) {
-    this.setState({ editingItem: true });
-    const confirmDelete = await confirm(`Delete entry '${entry.name}' ?`);
-
-    if (confirmDelete === true ){
-        await fetch(`http://localhost:3000/api/${type}s/${entry._id}`, {
-            method : 'DELETE'
-        }).catch(err => console.error(err));
-    }
-
-    this.setState({ editingItem: false });
-    this.fetchItems(type);
+  editItem(item) {
+    console.log(item)
   }
 
-  createAdminPanels() {
-    const props = {
-      editItem: this.editItem,
-      deleteItem: this.deleteItem,
-      fetchSingleItem: this.fetchSingleItem,
-      createItem: this.createItem,
-      moduloOpen: this.state.moduloOpen,
-      fetchItems: this.fetchItems,
-    };
-    return <ClientPanel title="Clients" clientData={this.state.clientData} {...props} />;
-
-  }
-
-  componentDidMount(){
-      this.fetchItems('client');
+  deleteItem(item){
+    console.log(item)
   }
 
   render() {
@@ -138,7 +105,21 @@ class Admin extends React.Component {
             </nav>
           </div>
           <hr />
-          <div className={s.row}>{this.createAdminPanels()}</div>
+          <Container>
+          <ClientModal
+            headerTitle='Add Client'
+            buttonTriggerTitle='Add New'
+            buttonSubmitTitle='Add'
+            buttonColor='green'
+            onClientAdded={this.createItem}
+          />
+
+          <ClientPanel
+            onClientUpdated={this.editItem}
+            onClientDeleted={this.deleteItem}
+            clients={this.state.clientData}
+          />
+          </Container>
         </div>
       </div>
     );

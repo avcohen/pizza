@@ -29,17 +29,17 @@ router.post('/clients',
   catchErrors(clientController.createClient),
 );
 
-// delete a client by id
-router.delete('/clients/:id',
-    catchErrors(clientController.deleteClient)
-)
 // edit a client by id
-router.post('/clients/:id',
+router.put('/clients/:id',
     clientController.upload,
     catchErrors(clientController.resize),
     catchErrors(clientController.editClient)
 )
 
+// delete a client by id
+router.delete('/clients/:id',
+    catchErrors(clientController.deleteClient)
+)
 
 
 export default router;
