@@ -14,7 +14,6 @@ import Admin from './Admin';
 const title = 'Admin Page';
 
 function action(context, params) {
-
   if (context.admin === false) {
     return { redirect: '/login' };
   }

@@ -26,7 +26,7 @@ class Login extends React.Component {
             <a className={s.facebook} href="/login/instagram">
               <span>Log in with Instagram</span>
             </a>
-            </div>
+          </div>
         </div>
       </div>
     );

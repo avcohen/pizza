@@ -12,7 +12,6 @@ import Home from './Home';
 import Layout from '../../components/Layout';
 
 async function action({ fetch }) {
-
   return {
     chunks: ['home'],
     title: 'Anthony Falco - Pizza Czar',

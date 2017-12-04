@@ -29,16 +29,17 @@ passport.deserializeUser((obj, done) => {
 });
 
 passport.use(
-    new InstagramStrategy({
-        clientID : CLIENT_ID,
-        clientSecret : CLIENT_SECRET,
-        callbackURL : 'http://localhost:3000/login/instagram/return'
+  new InstagramStrategy(
+    {
+      clientID: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      callbackURL: 'http://localhost:3000/login/instagram/return',
     },
     (accessToken, refreshToken, profile, done) => {
-        console.log(accessToken)
-        return done(null, profile)
-     }
-    )
+      console.log(accessToken);
+      return done(null, profile);
+    },
+  ),
 );
 
 export default passport;

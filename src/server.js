@@ -90,13 +90,9 @@ if (__DEV__) {
   app.enable('trust proxy');
 }
 
-app.get(
-  '/login/instagram',
-  passport.authenticate('instagram'),
-  (req, res) => {
-    // IG Handles authentication
-  }
-);
+app.get('/login/instagram', passport.authenticate('instagram'), (req, res) => {
+  // IG Handles authentication
+});
 
 app.get(
   '/login/instagram/return',
@@ -143,7 +139,7 @@ app.get('*', async (req, res, next) => {
       ...context,
       pathname: req.path,
       query: req.query,
-      admin: req.isAuthenticated()
+      admin: req.isAuthenticated(),
     });
 
     if (route.redirect) {

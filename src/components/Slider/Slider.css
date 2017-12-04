@@ -1,11 +1,12 @@
 @import '../variables.css';
 @import "../../../node_modules/slick-carousel/slick/slick.css";
+
 /* @import "../../../node_modules/slick-carousel/slick/slick-theme.css"; */
 
 .container {
-    margin: 0 auto;
-    padding: 40px;
-    width: 80%;
+  margin: 0 auto;
+  padding: 40px;
+  width: 80%;
 }
 
 @media screen and (max-width: 768px) {
