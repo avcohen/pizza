@@ -46,7 +46,7 @@ class Space extends React.Component {
   }
 
   enterTheVoid(windowWidth, windowHeight) {
-    // let container;
+
     let earthMesh, starfield, pizzaMoon;
     let camera, scene, glowScene, raycaster, renderer, loadingManager;
     let mouse = new THREE.Vector2(), INTERSECTED;
@@ -154,6 +154,7 @@ class Space extends React.Component {
       // renderer.shadowMapEnabled = true;
       // renderer.shadowMapType = THREE.PCFSoftShadowMap;
       const container = document.getElementById('theVoid')
+      container.innerHTML = '';
       container.appendChild(renderer.domElement);
 
       window.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -249,12 +250,19 @@ class Space extends React.Component {
     }
 
     return (
-      <div className={s.space}>
-        <div id="theVoid" />
-        <div>
-            {closeButton}
+    <div className={s.container}>
+        <Link className={s.brand} to="/">
+            <span className={s.brandTxt}>anthony falco</span>
+        </Link>
+        <div className={s.space}>
+          <div id="theVoid" />
+
+          <div>
+              {closeButton}
+          </div>
         </div>
-      </div>
+    </div>
+
     )
   }
 }

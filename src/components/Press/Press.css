@@ -11,6 +11,7 @@
 
 .root {
   display: flex;
+  margin-top: 20px;
   background: var(--color-1);
   width: 100%;
 }

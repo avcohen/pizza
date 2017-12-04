@@ -47,6 +47,7 @@ class Press extends React.Component {
       <div
         className={cx(
           s.root,
+          s['edge--top'],
           s['edge--bottom--reverse'],
           s['-light'],
         )}

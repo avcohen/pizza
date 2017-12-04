@@ -19,20 +19,28 @@ import FontAwesome from 'react-fontawesome';
 class MobileMenu extends React.Component {
   constructor(){
     super();
+    this.handleScrollToElement = this.handleScrollToElement.bind(this);
+  }
+
+  handleScrollToElement(e){
+
   }
 
   render() {
+
+
     let mobileMenu = null;
     if (this.props.visibility === false ) {
       mobileMenu = '';
     }
+
     else {
       this.props.hideMobileTitle();
       mobileMenu = (
           <div className={s.container}>
             <nav>
               <div className={s.row}>
-                <a href="" >consulting</a>
+                <a onClick={this.handleScrollToElement}>consulting</a>
                 <a href="" >press</a>
                 <a href="" >illustration</a>
                 <a href="" >about</a>

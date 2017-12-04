@@ -44,10 +44,11 @@ class Home extends React.Component {
 
   render() {
     let html = ''
-    if (!this.state.spacePizzaMode === true) {
+    if (this.state.spacePizzaMode === false) {
     html =    <div>
                 <Consulting />
                 <Illustration />
+                <Press />
                 <About />
               </div>
     }

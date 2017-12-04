@@ -10,6 +10,7 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Slider from '../Slider';
 import cx from 'classnames';
 import s from './Consulting.css';
 import Link from '../Link';
@@ -19,7 +20,7 @@ import cafe from './cafe.png'
 class Footer extends React.Component {
   render() {
     return (
-      <div className={s.root} >
+      <div className={s.root} id='consulting' >
         <div className={s.container}>
 
           <div className={s.row}>
@@ -39,20 +40,8 @@ class Footer extends React.Component {
               </div>
           </div>
 
-            <div className={s.consultingSlider}>
-              <div className={[s.row, s.sliderImg]}>
-                <span className={s.sliderImgArrowLeft}>x</span>
-                <img className={s.companyImg} src={cafe} alt=""/>
-                <span className={s.sliderImgArrowRight}>x</span>
-              </div>
+        <Slider />
 
-              <div className={s.row}>
-                <div className={s.sliderCopy}>
-                  <h3 className={s.companyText}>Cafe Monstruo</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores totam optio aspernatur sapiente. Doloribus, iste.</p>
-                </div>
-              </div>
-            </div>
         </div>
 
       </div>

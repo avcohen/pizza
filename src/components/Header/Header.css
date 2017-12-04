@@ -20,34 +20,6 @@
 
 .container {
   margin: 0 auto;
-  max-width: var(--max-content-width);
-}
-
-.brand {
-  position: absolute;
-  z-index: 10;
-  transform: rotate(-90deg);
-  color: white;
-  text-decoration: none;
-  font-size: 1.75em;
-  top: 275px;
-  left: -225px;
-}
-
-.brandTxt {
-  font-size: 90px;
-  font-weight: bold;
-}
-
-@media screen and (max-width: 480px) {
-  .brandTxt {
-    font-size: 60px;
-  }
-
-  .brand {
-    top: 205px;
-    left: -145px;
-  }
 }
 
 .banner {

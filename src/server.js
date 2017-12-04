@@ -1,33 +1,27 @@
-import path from 'path';
-//
-// Enviornment Config
-// -----------------------------------------------------------------------------
-// require('dotenv').config({path: '../.env'});
-
 import express from 'express';
+import path from 'path';
 
 //
 // Initialize DB Connection
 // -----------------------------------------------------------------------------
 import mongoose from 'mongoose';
 
-require('./models/Client');
+// require('./models/Client');
 
-mongoose.connect('mongodb://anthony:pizza666@ds155325.mlab.com:55325/pizza', {
+mongoose.connect(process.env.DATABASE_URL, {
   useMongoClient: true,
 });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', err => {
-  console.error(`XXX ${err.message}`);
+  console.error(`DB Connection ERROR : ${err.message}`);
 });
 mongoose.connection.once('open', () => {
-  console.log('DB Connection __OPEN__');
+  console.log('DB Connection SUCCESS!');
 });
 
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
-import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 
@@ -47,8 +41,7 @@ import createFetch from './createFetch';
 
 import passport from './passport';
 import router from './router';
-import models from './data/models';
-import schema from './data/schema';
+
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 
@@ -91,22 +84,23 @@ app.use((err, req, res, next) => {
 });
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 if (__DEV__) {
   app.enable('trust proxy');
 }
 
 app.get(
-  '/login/facebook',
-  passport.authenticate('facebook', {
-    scope: ['email', 'user_location'],
-    session: false,
-  }),
+  '/login/instagram',
+  passport.authenticate('instagram'),
+  (req, res) => {
+    // IG Handles authentication
+  }
 );
 
 app.get(
-  '/login/facebook/return',
-  passport.authenticate('facebook', {
+  '/login/instagram/return',
+  passport.authenticate('instagram', {
     failureRedirect: '/login',
     session: false,
   }),
@@ -120,15 +114,6 @@ app.get(
 
 // Register API middleware
 // -----------------------------------------------------------------------------
-app.use(
-  '/graphql',
-  expressGraphQL(req => ({
-    schema,
-    graphiql: __DEV__,
-    rootValue: { request: req },
-    pretty: __DEV__,
-  })),
-);
 
 app.use('/api', apiRoutes);
 
@@ -138,7 +123,6 @@ app.use('/api', apiRoutes);
 app.get('*', async (req, res, next) => {
   try {
     const css = new Set();
-
     // Global (context) variables that can be easily accessed from any React component
     // https://facebook.github.io/react/docs/context.html
     const context = {
@@ -159,13 +143,13 @@ app.get('*', async (req, res, next) => {
       ...context,
       pathname: req.path,
       query: req.query,
+      admin: req.isAuthenticated()
     });
 
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
       return;
     }
-
     const data = { ...route };
     data.children = ReactDOM.renderToString(
       <App context={context}>{route.component}</App>,

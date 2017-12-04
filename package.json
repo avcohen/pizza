@@ -6,12 +6,7 @@
     "node": ">=6.5",
     "npm": ">=3.10"
   },
-  "browserslist": [
-    ">1%",
-    "last 4 versions",
-    "Firefox ESR",
-    "not ie < 9"
-  ],
+  "browserslist": [">1%", "last 4 versions", "Firefox ESR", "not ie < 9"],
   "dependencies": {
     "@google-cloud/storage": "^1.4.0",
     "axios": "^0.17.1",
@@ -22,6 +17,7 @@
     "classnames": "^2.2.5",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.5.1",
+    "create-react-class": "^15.6.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
     "express-graphql": "^0.6.11",
@@ -40,8 +36,10 @@
     "node-fetch": "^1.7.3",
     "normalize.css": "^7.0.0",
     "npm": "^5.5.1",
+    "nuka-carousel": "^3.0.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
+    "passport-instagram": "^1.0.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "pretty-error": "^2.1.1",
@@ -147,18 +145,9 @@
     "webpack-node-externals": "^1.6.0"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{json,graphql}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{css,less,styl,scss,sass,sss}": [
-      "stylelint --fix",
-      "git add"
-    ]
+    "*.{js,jsx}": ["eslint --fix", "git add"],
+    "*.{json,graphql}": ["prettier --write", "git add"],
+    "*.{css,less,styl,scss,sass,sss}": ["stylelint --fix", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",
