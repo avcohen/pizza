@@ -14,7 +14,12 @@ class Slider extends React.Component {
       slidesToScroll: 1,
     };
     return (
-      <div className={s.container}>
+      <div className={cx(
+          s.container,
+          s['edge--top'],
+          s['edge--bottom--reverse'],
+          s['-dark'],
+      )}>
         {/* <Carousel {...settings}>
                     <div><img src="http://via.placeholder.com/500x200" alt=""/></div>
                     <div><img src="http://via.placeholder.com/500x200" alt=""/></div>

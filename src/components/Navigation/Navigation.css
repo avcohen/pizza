@@ -134,3 +134,39 @@ img.sliceLayer {
 .spacer {
   color: rgba(255, 255, 255, 0.3);
 }
+
+.menu {
+    display: none;
+}
+
+.menuList {
+    display: inline;
+
+    li {
+        text-decoration: none;
+        display: inline;
+        font-size: 1.25em;
+    }
+}
+
+.menuItem {
+    text-decoration: none;
+    display: inline;
+    font-size: 1.25em;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    .mobileMenu {
+        display: none;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .root {
+        position: absolute;
+    }
+}

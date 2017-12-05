@@ -16,6 +16,7 @@ import Consulting from '../../components/Consulting';
 import Space from '../../components/Space';
 import Press from '../../components/Press';
 import Illustration from '../../components/Illustration';
+import Slider from '../../components/Slider';
 import About from '../../components/About';
 
 class Home extends React.Component {
@@ -47,8 +48,9 @@ class Home extends React.Component {
     if (this.state.spacePizzaMode === false) {
     html =    <div>
                 <Consulting />
-                <Illustration />
+                <Slider />
                 <Press />
+                <Illustration />
                 <About />
               </div>
     }

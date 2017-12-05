@@ -90,28 +90,39 @@ class Navigation extends React.Component {
     if (this.state.menuOpen === true) {
       sliceTopClass.push(s.sliceLayerTopOpen);
     }
-    return (
-      <div className={s.root} role="navigation">
-        <MobileMenu closeMenu={this.closeMenu}
-          visibility={this.state.menuOpen}
-          hideMobileTitle={this.hideMobileTitle}
-        />
 
-        <div id="mobileNavContainer" className={s.navContainer}></div>
-        <div id="sliceStack" className={s.sliceMenu} onClick={this.openMenu}>
-          <img
-            className={cx(sliceTopClass)}
-            src={sliceTop}
-            alt=""
-          />
-          <img
-            className={cx(s.sliceLayer, s.sliceLayerBottom)}
-            src={sliceBottom}
-            alt=""
-          />
+    return (
+        <div className={s.root} role="navigation">
+            <div className={s.mobileMenu}>
+                <MobileMenu closeMenu={this.closeMenu}
+                  visibility={this.state.menuOpen}
+                  hideMobileTitle={this.hideMobileTitle}
+                />
+
+                <div id="mobileNavContainer" className={s.navContainer}></div>
+                <div id="sliceStack" className={s.sliceMenu} onClick={this.openMenu}>
+                  <img
+                    className={cx(sliceTopClass)}
+                    src={sliceTop}
+                    alt=""
+                  />
+                  <img
+                    className={cx(s.sliceLayer, s.sliceLayerBottom)}
+                    src={sliceBottom}
+                    alt=""
+                  />
+                </div>
+                <h1 id="mobileHeader" className={cx(s.menuHeader,s.hidden)}>anthony falco</h1>
+              </div>
+              <div className={s.menu}>
+                    <ul className={s.menuList}>
+                        <li><a className={s.menuItem} href="" >press</a></li>
+                        <li><a className={s.menuItem} href="" >illustration</a></li>
+                        <li><a className={s.menuItem} href="" >about</a></li>
+                        <li><a className={s.menuItem} href="" >contact</a></li>
+                    </ul>
+              </div>
         </div>
-        <h1 id="mobileHeader" className={cx(s.menuHeader,s.hidden)}>anthony falco</h1>
-      </div>
     );
   }
 }

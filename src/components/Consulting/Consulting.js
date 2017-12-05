@@ -40,8 +40,6 @@ class Footer extends React.Component {
               </div>
           </div>
 
-        <Slider />
-
         </div>
 
       </div>

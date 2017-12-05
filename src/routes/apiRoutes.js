@@ -41,5 +41,14 @@ router.delete('/clients/:id',
     catchErrors(clientController.deleteClient)
 )
 
+//
+//    Illustration ENDPOINTS
+// ————————————————————————————————————————————————————————————————————————————————
+
+// get illustrations by category
+// router.get('/illustrations/:category',
+//     catchErrors(illustrationController.getAllByCategory)
+// );
+
 
 export default router;

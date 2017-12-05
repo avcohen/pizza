@@ -154,8 +154,11 @@ class Space extends React.Component {
       // renderer.shadowMapEnabled = true;
       // renderer.shadowMapType = THREE.PCFSoftShadowMap;
       const container = document.getElementById('theVoid')
-      container.innerHTML = '';
-      container.appendChild(renderer.domElement);
+      setTimeout(()=>{
+          container.innerHTML = '';
+          container.appendChild(renderer.domElement);
+      }, 1000)
+
 
       window.addEventListener('mousemove', onDocumentMouseMove, false);
       window.addEventListener('resize', onWindowResize, false);
@@ -249,20 +252,27 @@ class Space extends React.Component {
       closeButton = ''
     }
 
+    const loadingStyle = {
+        width : this.state.windowWidth,
+        height : this.state.windowHeight
+    }
+
     return (
-    <div className={s.container}>
-        <Link className={s.brand} to="/">
-            <span className={s.brandTxt}>anthony falco</span>
-        </Link>
-        <div className={s.space}>
-          <div id="theVoid" />
+        <div className={s.container}>
+            <Link className={s.brand} to="/">
+                <span className={s.brandTxt}>anthony falco</span>
+            </Link>
+            <div className={s.space}>
+              <div id="theVoid" />
+                {/* <div style={loadingStyle}>
+                    <h1>LOADING</h1>
+                </div> */}
+              <div>
+                  {closeButton}
+              </div>
 
-          <div>
-              {closeButton}
-          </div>
+            </div>
         </div>
-    </div>
-
     )
   }
 }
