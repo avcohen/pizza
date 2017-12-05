@@ -31,6 +31,7 @@ class Illustration extends React.Component {
 
     return (
       <div
+        id='illustration'
         className={cx(
           s.root,
           s['edge--top'],

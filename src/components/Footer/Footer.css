@@ -28,9 +28,8 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
-.text,
 .link {
-  padding: 2px 5px;
+  padding: 5px 10px;
   font-size: 1em;
 }
 
@@ -43,4 +42,8 @@
 
 .link:hover {
   color: rgba(255, 255, 255, 1);
+}
+
+.faIcon {
+    text-align: middle;
 }

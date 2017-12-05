@@ -111,7 +111,7 @@ app.get(
 // Register API middleware
 // -----------------------------------------------------------------------------
 
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
 
 //
 // Register server-side rendering middleware

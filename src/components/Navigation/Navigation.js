@@ -26,6 +26,7 @@ class Navigation extends React.Component {
     }
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.scrollToSection = this.scrollToSection.bind(this);
   }
 
   componentDidMount(){
@@ -46,6 +47,16 @@ class Navigation extends React.Component {
     this.setState({
       menuOpen : false
     })
+  }
+
+  scrollToSection(e){
+    const target = e.target.getAttribute("data-scrollTarget");
+    const section = document.querySelector(`#${target}`)
+    section.scrollIntoView({
+        block : 'start',
+        behavior: 'smooth'
+    });
+
   }
 
   hideMobileTitle(){
@@ -94,9 +105,11 @@ class Navigation extends React.Component {
     return (
         <div className={s.root} role="navigation">
             <div className={s.mobileMenu}>
-                <MobileMenu closeMenu={this.closeMenu}
+                <MobileMenu
+                  closeMenu={this.closeMenu}
                   visibility={this.state.menuOpen}
                   hideMobileTitle={this.hideMobileTitle}
+                  scrollToSection={this.scrollToSection}
                 />
 
                 <div id="mobileNavContainer" className={s.navContainer}></div>
@@ -116,10 +129,21 @@ class Navigation extends React.Component {
               </div>
               <div className={s.menu}>
                     <ul className={s.menuList}>
-                        <li><a className={s.menuItem} href="" >press</a></li>
-                        <li><a className={s.menuItem} href="" >illustration</a></li>
-                        <li><a className={s.menuItem} href="" >about</a></li>
-                        <li><a className={s.menuItem} href="" >contact</a></li>
+                        <li className={s.menuListItem}>
+                            <a className={s.menuLink} data-scrollTarget="consulting" onClick={this.scrollToSection}>consulting</a>
+                        </li>
+                        <li className={s.menuListItem}>
+                            <a className={s.menuLink} data-scrollTarget="press" onClick={this.scrollToSection}>press</a>
+                        </li>
+                        <li className={s.menuListItem}>
+                            <a className={s.menuLink} data-scrollTarget="illustration" onClick={this.scrollToSection}>illustration</a>
+                        </li>
+                        <li className={s.menuListItem}>
+                            <a className={s.menuLink} data-scrollTarget="about" onClick={this.scrollToSection}>about</a>
+                        </li>
+                        <li className={s.menuListItem}>
+                            <a className={s.menuLink}>contact</a>
+                        </li>
                     </ul>
               </div>
         </div>

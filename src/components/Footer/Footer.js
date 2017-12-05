@@ -12,24 +12,24 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Footer.css';
 import Link from '../Link';
+import FontAwesome from 'react-fontawesome';
 
 class Footer extends React.Component {
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {/* <span className={s.text}>© Your Company</span> */}
-          {/* <span className={s.spacer}>·</span> */}
-          <Link className={s.link} to="/">
-            +1 917 555 555
-          </Link>
-          <Link className={s.link} to="/">
-            @millenniumfalco
-          </Link>
+          <a className={s.link} href="tel:12062954206" alt="telephone">
+            <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='whatsapp' size="2x"/> +1 (206) 295-4206
+        </a>
+          <a className={s.link} href="https://www.instagram.com/millennium_falco/" target="_blank" alt="instagram">
+            <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='instagram' size="2x" /> @millenniumfalco
+        </a>
         </div>
       </div>
     );
   }
 }
+
 
 export default withStyles(s)(Footer);

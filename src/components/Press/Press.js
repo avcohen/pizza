@@ -51,6 +51,7 @@ class Press extends React.Component {
 
     return (
       <div
+        id="press"
         className={cx(
           s.root,
           s['edge--top'],
@@ -66,13 +67,14 @@ class Press extends React.Component {
 
           <div className={cx(s.row, s.videos)}>
             <h3 className={s.subsectionHeader}>videos</h3>
-            <div className={s.videoLinks}>
+            <div className={cx(s.videoLinks, s.clearfix)}>
                 {videos.map((v)=>{
                     return(
                         <div className={s.video}>
                             <ReactPlayer
                                 url={v.url}
-                                width='auto'
+                                // width='320px'
+                                // height='180px'
                                 style={videoStyles}
                                 controls='true'
                             />

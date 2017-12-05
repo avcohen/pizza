@@ -20,7 +20,7 @@ import aboutImg from './about.jpg';
 class About extends React.Component {
   render() {
     return (
-      <div className={s.root} >
+      <div id="about" className={s.root} >
         <div className={s.container}>
 
           <div className={s.row}>

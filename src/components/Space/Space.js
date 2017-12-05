@@ -154,10 +154,8 @@ class Space extends React.Component {
       // renderer.shadowMapEnabled = true;
       // renderer.shadowMapType = THREE.PCFSoftShadowMap;
       const container = document.getElementById('theVoid')
-      setTimeout(()=>{
-          container.innerHTML = '';
-          container.appendChild(renderer.domElement);
-      }, 1000)
+      container.innerHTML = '';
+      container.appendChild(renderer.domElement);
 
 
       window.addEventListener('mousemove', onDocumentMouseMove, false);
