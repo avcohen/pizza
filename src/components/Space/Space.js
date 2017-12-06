@@ -9,7 +9,7 @@ import THREEx from '../../scripts/threex.planets.js';
 // import ShaderExtras from '../../scripts/ShaderExtras.js';
 import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
 import FontAwesome from 'react-fontawesome';
-
+import loadingAnimation from './cutter.gif';
 import Link from '../Link';
 
 class Space extends React.Component {
@@ -52,6 +52,7 @@ class Space extends React.Component {
     let mouse = new THREE.Vector2(), INTERSECTED;
     let radius = 100
     let theta = 0;
+    // placeholder coordiantes for instagram post geolocation
     const coords = [
       {lat: 38.548165, lng: -76.289062},
       {lat: 3.513421, lng: -58.007812},
@@ -65,38 +66,39 @@ class Space extends React.Component {
     init();
     animate();
 
+
     function createPoint(lat, lng){
-      let phi   = (90-lat)*(Math.PI/180)
-      let t = (lng+180)*(Math.PI/180)
+        let phi   = (90-lat)*(Math.PI/180)
+        let t = (lng+180)*(Math.PI/180)
 
-      let x = -((0.6) * Math.sin(phi)*Math.cos(t))
-      let y = ((0.6) * Math.cos(phi))
-      let z = ((0.6) * Math.sin(phi)*Math.sin(t))
+        let x = -((0.6) * Math.sin(phi)*Math.cos(t))
+        let y = ((0.6) * Math.cos(phi))
+        let z = ((0.6) * Math.sin(phi)*Math.sin(t))
 
 
-      let dotGeometry = new THREE.SphereGeometry(.025, 16, 16);
-      let dotMaterial = new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
-        bumpMap : THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
-      });
-      let dot = new THREE.Mesh(dotGeometry, dotMaterial);
-      dot.position.set(x,y,z)
-      dot.info = "lol"
-      return dot;
+        let dotGeometry = new THREE.SphereGeometry(.025, 16, 16);
+        let dotMaterial = new THREE.MeshLambertMaterial({
+            map: THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
+            bumpMap : THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
+        });
+        let dot = new THREE.Mesh(dotGeometry, dotMaterial);
+        dot.position.set(x,y,z)
+        dot.info = "lol"
+        return dot;
     }
 
     function createStarfield(){
-      let starsGeometry = new THREE.Geometry();
-      for ( var i = 0; i < 10000; i ++ ) {
-        var star = new THREE.Vector3();
-        star.x = THREE.Math.randFloatSpread( 1000 );
-        star.y = THREE.Math.randFloatSpread( 1000 );
-        star.z = THREE.Math.randFloatSpread( 1000 );
-        starsGeometry.vertices.push( star );
-      }
-      let starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
-      let starField = new THREE.Points( starsGeometry, starsMaterial );
-      return starField;
+        let starsGeometry = new THREE.Geometry();
+        for ( var i = 0; i < 10000; i ++ ) {
+            var star = new THREE.Vector3();
+            star.x = THREE.Math.randFloatSpread( 1000 );
+            star.y = THREE.Math.randFloatSpread( 1000 );
+            star.z = THREE.Math.randFloatSpread( 1000 );
+            starsGeometry.vertices.push( star );
+        }
+        let starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
+        let starField = new THREE.Points( starsGeometry, starsMaterial );
+        return starField;
     }
 
     function init(){
@@ -109,8 +111,8 @@ class Space extends React.Component {
       // camera.lookAt(new THREE.Vector3(0, 0 ,0))
 
       scene = new THREE.Scene();
-      // glowScene = new THREE.Scene();
-      // glowScene.add(new THREE.AmbientLight(0xFFFFFF) );
+      glowScene = new THREE.Scene();
+      glowScene.add(new THREE.AmbientLight(0xFFFFFF) );
 
       // add background
       starfield = createStarfield();
@@ -118,7 +120,7 @@ class Space extends React.Component {
 
       // add planets
       earthMesh = THREEx.Planets.createEarth();
-      scene.add(earthMesh);
+    //   scene.add(earthMesh);
 
       coords.forEach((p, i) => {
         const dot = createPoint(p.lat, p.lng)
@@ -127,14 +129,14 @@ class Space extends React.Component {
 
       // TODO - GLow Mesh
       //glow mesh
-      // const glowgeo = new THREE.SphereGeometry(0.6, 32, 32);
-      // const glowmap = THREE.ImageUtils.loadTexture('../images/glow.png');
-      // const glowmaterial = new THREE.MeshPhongMaterial( { map: glowmap, ambient: 0xffffff, color: 0x000000 } );;
-      //
-      // let glowMesh = new THREE.Mesh(glowgeo, glowmaterial)
-      // glowMesh.overdraw = true;
-      //
-      // glowScene.add(glowMesh);
+      const glowgeo = new THREE.SphereGeometry(0.6, 32, 32);
+      const glowmap = THREE.ImageUtils.loadTexture('../images/glow.png');
+      const glowmaterial = new THREE.MeshPhongMaterial( { map: glowmap, ambient: 0xffffff, color: 0x000000 } );;
+
+      let glowMesh = new THREE.Mesh(glowgeo, glowmaterial)
+      glowMesh.overdraw = true;
+
+      glowScene.add(glowMesh);
 
       // add lights
       const ambientLight = new THREE.AmbientLight(0x404040, 3.5);
@@ -146,13 +148,11 @@ class Space extends React.Component {
       scene.add(dirLight);
 
       raycaster = new THREE.Raycaster();
-
       renderer = new THREE.WebGLRenderer();
-      // renderer.setClearColor(0x000000, 1.0);
+
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(windowWidth, windowHeight);
-      // renderer.shadowMapEnabled = true;
-      // renderer.shadowMapType = THREE.PCFSoftShadowMap;
+      document.getElementById('loadingScreen').outerHTML = '';
       const container = document.getElementById('theVoid')
       container.innerHTML = '';
       container.appendChild(renderer.domElement);
@@ -261,14 +261,16 @@ class Space extends React.Component {
                 <span className={s.brandTxt}>anthony falco</span>
             </Link>
             <div className={s.space}>
-              <div id="theVoid" />
-                {/* <div style={loadingStyle}>
-                    <h1>LOADING</h1>
-                </div> */}
-              <div>
-                  {closeButton}
-              </div>
-
+                <div id="loadingScreen"
+                    className={s.loadingStyle}
+                    style={{height: this.state.windowHeight, width: this.state.windowWidth}}>
+                    <h1>LOADING...</h1>
+                    <img src={loadingAnimation} alt="Loading"/>
+                </div>
+                <div id="theVoid" />
+                <div>
+                    {closeButton}
+                </div>
             </div>
         </div>
     )

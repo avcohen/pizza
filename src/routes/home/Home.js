@@ -23,7 +23,8 @@ class Home extends React.Component {
   constructor(){
     super();
     this.state = {
-      spacePizzaMode : false
+        isLoading : true,
+        spacePizzaMode : false
     }
 
     this.enterSpacePizza = this.enterSpacePizza.bind(this);

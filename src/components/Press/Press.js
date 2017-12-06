@@ -25,21 +25,22 @@ class Press extends React.Component {
   }
   render() {
     const articles = [
-      {title : "bon appetit", url: "https://www.bonappetit.com/story/pizza-questions-joe-beddia"},
-      {title : "esquire", url: "http://www.esquire.com/food-drink/food/a35024/summer-pizza-recipes/"},
-      {title : "evening standard", url: "https://www.standard.co.uk/goingout/restaurants/all-about-that-base-how-pizza-became-a-cult-london-dish-a3580771.html"},
-      {title : "eater", url: "https://www.eater.com/2014/3/17/6267123/the-speckenwolf-pizza-at-robertas-in-brooklyn"},
-      {title : "la weekly", url: "http://www.laweekly.com/restaurants/a-robertas-pizza-alum-is-hosting-a-pop-up-restaurant-at-prime-pizza-in-la-8328824"},
-      {title : "new york times", url: "https://www.nytimes.com/2017/01/12/magazine/why-clam-chowder-pizza-is-the-best-kind.html"},
-      {title : "huffington post", url: "https://www.huffingtonpost.com/2014/10/03/surprising-pizza-facts_n_5907308.html"},
-      {title : "gq brazil", url: "http://gq.globo.com/Prazeres/Gastronomia/noticia/2017/07/quais-sao-cinco-melhores-pizzas-do-mundo.html"},
+        {title : "toronto life", url: "https://torontolife.com/food/restaurants/whats-menu-general-assembly-new-pizza-place-tie-robertas-brooklyn/"},
+        {title : "bon appetit", url: "https://www.bonappetit.com/story/pizza-questions-joe-beddia"},
+        {title : "gq brazil", url: "http://gq.globo.com/Prazeres/Gastronomia/noticia/2017/07/quais-sao-cinco-melhores-pizzas-do-mundo.html"},
+        {title : "esquire", url: "http://www.esquire.com/food-drink/food/a35024/summer-pizza-recipes/"},
+        {title : "evening standard", url: "https://www.standard.co.uk/goingout/restaurants/all-about-that-base-how-pizza-became-a-cult-london-dish-a3580771.html"},
+        {title : "la weekly", url: "http://www.laweekly.com/restaurants/a-robertas-pizza-alum-is-hosting-a-pop-up-restaurant-at-prime-pizza-in-la-8328824"},
+        {title : "new york times", url: "https://www.nytimes.com/2017/01/12/magazine/why-clam-chowder-pizza-is-the-best-kind.html"},
+        {title : "huffington post", url: "https://www.huffingtonpost.com/2014/10/03/surprising-pizza-facts_n_5907308.html"},
+        {title : "eater", url: "https://www.eater.com/2014/3/17/6267123/the-speckenwolf-pizza-at-robertas-in-brooklyn"},
     ]
 
     const videos = [
-      {title: "new york times", url: "https://youtu.be/u-KDRmOYSb0"},
-      {title: "bráz elettrica", url: "https://vimeo.com/227790871"},
-      {title: "café monstruo", url: "https://youtu.be/Ew3d1oSFkI8"},
-      {title: "insider food", url: "https://youtu.be/boRWgOYmxYM"},
+        {title: "bráz elettrica", url: "https://vimeo.com/227790871"},
+        {title: "café monstruo", url: "https://youtu.be/Ew3d1oSFkI8"},
+        {title: "insider food", url: "https://youtu.be/boRWgOYmxYM"},
+        {title: "new york times", url: "https://youtu.be/u-KDRmOYSb0"},
     ]
 
     const videoStyles = {

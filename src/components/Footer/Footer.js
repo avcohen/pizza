@@ -17,16 +17,16 @@ import FontAwesome from 'react-fontawesome';
 class Footer extends React.Component {
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <a className={s.link} href="tel:12062954206" alt="telephone">
-            <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='whatsapp' size="2x"/> +1 (206) 295-4206
-        </a>
-          <a className={s.link} href="https://www.instagram.com/millennium_falco/" target="_blank" alt="instagram">
-            <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='instagram' size="2x" /> @millenniumfalco
-        </a>
+        <div className={s.root}>
+            <div className={s.container}>
+                <a className={s.link} href="tel:12062954206" alt="telephone">
+                    <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='whatsapp' size="2x"/> +1 (206) 295-4206
+                </a>
+                <a className={s.link} href="https://www.instagram.com/millennium_falco/" target="_blank" alt="instagram">
+                    <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='instagram' size="2x" /> @millennium_falco
+                </a>
+            </div>
         </div>
-      </div>
     );
   }
 }

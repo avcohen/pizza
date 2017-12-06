@@ -25,6 +25,24 @@
   font-weight: bold;
 }
 
+.loadingStyle {
+    padding-top: 40%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    height: 100vh;
+    margin: 0;
+    position: static;
+    top: 0;
+    left: 0;
+
+    img {
+        width: 80px;
+        height: auto;
+    }
+}
+
 @media screen and (max-width: 480px) {
   .brandTxt {
     font-size: 60px;
@@ -45,9 +63,6 @@
 #theVoid {
   z-index: 4;
   width: 100%;
-
-  /* max-width: var(--max-content-width); */
-
   height: auto;
   margin: 0;
   padding: 0;
