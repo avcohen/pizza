@@ -1,10 +1,9 @@
-import react from 'react';
+import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import s from "./ImageModal.css";
 
 const ImageModal = ({imageData, closeModal}) =>{
-
     return(
         <div className={s.backDrop}>
             <div id="modal" className={s.modalContainer}>
