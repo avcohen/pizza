@@ -42,6 +42,7 @@ class Illustration extends React.Component {
     }
 
     handleImageClick(e){
+        e.preventDefault();
         const imageToDisplay = {
             image : e.target.getAttribute('src'),
             title : e.target.getAttribute('alt')
