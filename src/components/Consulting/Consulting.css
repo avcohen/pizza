@@ -14,6 +14,7 @@
   background: var(--color-1);
   color: #fff;
   width: 100%;
+  padding-bottom: 60px;
 }
 
 /* .container {
@@ -100,33 +101,38 @@
 }
 
 @media screen and (max-width: 768px) {
-  .text {
-    font-size: 0.8em;
-  }
 
-  .row {
-    flex-direction: column;
-  }
+    .root {
+          padding-bottom: 0px;
+    }
+    
+    .text {
+        font-size: 0.8em;
+    }
 
-  .consultingImg {
-    width: 100%;
-  }
+    .row {
+        flex-direction: column;
+    }
 
-  .sectionHeader {
-    font-size: 4em;
-    text-align: center;
-  }
+    .consultingImg {
+        width: 100%;
+    }
 
-  .underLine {
-    width: 80%;
-    margin: auto;
-    align-self: center;
-  }
+    .sectionHeader {
+        font-size: 4em;
+        text-align: center;
+    }
 
-  .textContainer {
-    width: 100%;
-    margin: 20px 0;
-  }
+    .underLine {
+        width: 80%;
+        margin: auto;
+        align-self: center;
+    }
+
+    .textContainer {
+        width: 100%;
+        margin: 20px 0;
+    }
 }
 
 .sliderCopy {

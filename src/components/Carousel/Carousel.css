@@ -3,6 +3,6 @@
 .sliderContainer {
     margin: 0 auto;
     max-width: 80vw;
-    padding: 20px 0;
-    height: 50px;
+    padding: 40px 0;
+    height: auto;
 }

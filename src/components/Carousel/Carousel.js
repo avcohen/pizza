@@ -63,11 +63,11 @@ class Carousel extends React.Component {
           s['-dark'],
       )}>
       <div className={s.sliderContainer}>
-        {/* <Slider {...settings}>
+        <Slider {...settings}>
             {slides.map((s, i)=>{
                 return <img src={s.image} alt={s.title} index={i} />
             })}
-        </Slider> */}
+        </Slider>
         </div>
     </div>
     );

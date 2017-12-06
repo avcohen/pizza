@@ -141,9 +141,9 @@ class Navigation extends React.Component {
                         <li className={s.menuListItem}>
                             <a className={s.menuLink} data-scrollTarget="about" onClick={this.scrollToSection}>about</a>
                         </li>
-                        <li className={s.menuListItem}>
+                        {/* <li className={s.menuListItem}>
                             <a className={s.menuLink}>contact</a>
-                        </li>
+                        </li> */}
                     </ul>
               </div>
         </div>
