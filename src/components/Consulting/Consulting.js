@@ -10,12 +10,10 @@
 
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Slider from '../Slider';
 import cx from 'classnames';
 import s from './Consulting.css';
 import Link from '../Link';
 import consultingImg from './consultingImg.jpg';
-import cafe from './cafe.png'
 
 class Footer extends React.Component {
   render() {
@@ -31,12 +29,11 @@ class Footer extends React.Component {
           <div className={cx(s.row, s.wrap)}>
               <img className={s.consultingImg} src={consultingImg} />
               <div className={s.textContainer}>
-                <p className={s.text}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac viverra arcu. Quisque leo dolor.</p>
-                <p className={s.tick}></p>
+                <p className={s.text}>Falco has consulted in Sao Paulo, Bogota, Panama, Toronto, London, New York City, Chicago, Los Angeles, Seattle, Charleston, Iowa, and currently has projects in development in Argentina, Spain, Australia, Kuwait, India and Singapore</p>
+                {/* <p className={s.tick}></p>
                 <p className={cx(s.text,s.text2)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
-                <p className={s.tick}></p>
-                <p className={s.text}>Donec eget lacinia tellus, in fermentum augue. Donec id dui at arcu tristique bibendum et quis magna.</p>
-                <p className={cx(s.text,s.link)}>Lorem ipsum dolor sit amet.</p>
+                <p className={s.tick}></p> */}
+                {/* <p className={cx(s.text,s.link)}>Lorem ipsum dolor sit amet.</p> */}
               </div>
           </div>
 
