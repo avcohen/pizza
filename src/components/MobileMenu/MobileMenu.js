@@ -46,7 +46,7 @@ class MobileMenu extends React.Component {
                 <a onClick={this.handleScrollToElement} data-scrollTarget="press" >press</a>
                 <a onClick={this.handleScrollToElement} data-scrollTarget="illustration" >illustration</a>
                 <a onClick={this.handleScrollToElement} data-scrollTarget="about" >about</a>
-                <a onClick={this.handleScrollToElement} data-scrollTarget="contact" >contact</a>
+                {/* <a onClick={this.handleScrollToElement} data-scrollTarget="contact" >contact</a> */}
               </div>
 
               <div className={cx(s.row, s.socialRow)}>
