@@ -2,7 +2,14 @@
 
 .sliderContainer {
     margin: 0 auto;
+    min-width: 0;
     max-width: 80vw;
     padding: 40px 0;
-    height: auto;
+}
+
+.slideImage {
+    display: inline;
+    /* float: left; */
+    max-height: 100px;
+    max-width: 120px;
 }

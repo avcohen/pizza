@@ -19,5 +19,35 @@
 }
 
 .container {
-  margin: 0 auto;
+  /* margin: 0 auto; */
+}
+
+.brand {
+  position: absolute;
+  transform: rotate(-90deg);
+  color: var(--color-4);
+  text-decoration: none;
+  top: 265px;
+  left: -220px;
+}
+
+.brand:hover{
+    color: var(--color-4);
+    text-decoration: none;
+}
+
+.brandTxt {
+  font-size: 90px;
+  font-weight: bold;
+
+}
+
+@media screen and (max-width : 768px ) {
+    .brand {
+        top: 205px;
+        left: -190px;
+    }
+    .brandTxt {
+        font-size: 75px;
+    }
 }

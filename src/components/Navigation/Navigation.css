@@ -9,16 +9,16 @@
 @import '../variables.css';
 
 .root {
-  z-index: 100;
-  width: 100%;
-  flex: none;
-  position: fixed;
+    z-index: 100;
+    width: 100%;
+    flex: none;
+    position: fixed;
 }
 
 .navContainer {
-  width: 100%;
-  height: 50px;
-  position: fixed;
+    width: 100%;
+    height: 50px;
+    position: fixed;
 }
 
 .backgroundVisible {
@@ -33,12 +33,13 @@
 }
 
 .menuHeader {
-  font-size: 20px;
+  font-size: 18px;
   display: inline;
   position: fixed;
   top: -3px;
   left: 15px;
-  color: var(--color-2);
+  margin: 15px;
+  color: var(--color-1);
 }
 
 .link {
@@ -47,7 +48,7 @@
   position: relative;
   margin: 10px;
   display: inline-block;
-  color: var(--color-1);
+  color: var(--color-5);
 }
 
 .link,
@@ -132,13 +133,43 @@ img.sliceLayer {
 
 .menu {
     display: none;
-    float: right;
-    margin: 40px;
+    width: 100%;
+    padding: 5px 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.title {
+    text-align: center;
+}
+
+.titleHeader {
+    /* margin: 0 0 10px 0; */
+    color: var(--color-1);
+    text-decoration: none;
+}
+
+.titleHeader > h1 {
+    margin: 0;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.titleHeader:hover {
+    color: var(--color-1);
+}
+
+.titleSubheader{
+    color: var(--color-1);
+    margin: 0;
+    line-height: normal;
+    font-size: .8em;
+    font-style: italic;
 }
 
 .menuList {
-    margin-top: 0;
-    /* display: inline; */
+    padding: 10px 20px;
 }
 
 .menuListItem {
@@ -149,17 +180,17 @@ img.sliceLayer {
 
 .menuLink {
     position: relative;
-    color: white;
+    color: var(--color-4);
     text-decoration: none;
     display: inline-block;
     font-size: 1.5em;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .menuLink:hover {
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
+    color: var(--color-4);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .menuLink:before {
@@ -169,7 +200,7 @@ img.sliceLayer {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #fff;
+  background-color: var(--color-4);
   visibility: hidden;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -190,10 +221,16 @@ img.sliceLayer {
     }
 
     .menu {
-        display: block;
+        display: flex;
     }
 
     .root {
         position: absolute;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .titleHeader {
+        font-size: 70px;
     }
 }

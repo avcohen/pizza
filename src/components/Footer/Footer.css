@@ -10,14 +10,17 @@
 @import '../variables.css';
 
 .root {
-  background: #333;
+  background: var(--color-4);
   color: #fff;
 }
 
 .container {
   margin: 0 auto;
-  padding: 50px 15px;
-  text-align: center;
+  padding: 35px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
@@ -37,14 +40,40 @@
 .link,
 .link:active,
 .link:visited {
-  color: rgba(255, 255, 255, 0.6);
+  color: #fff;
   text-decoration: none;
 }
 
 .link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--color-2);
 }
 
 .faIcon {
     text-align: middle;
+}
+
+.pizzaCutter {
+    width: 50px;
+    display: inline;
+    margin: 0 30px;
+}
+
+.pizzaCutterMobile {
+    visibility: hidden;
+    display: inline;
+    width: 50px;
+    margin: 5px 0;
+}
+
+@media screen and (max-width: 600px){
+    .container{
+        padding: 20px 0px;
+        flex-direction: column;
+    }
+    .pizzaCutterMobile {
+        visibility: visible;
+    }
+    .pizzaCutter{
+        display: none;
+    }
 }

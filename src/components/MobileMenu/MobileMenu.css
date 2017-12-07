@@ -34,9 +34,15 @@ nav {
     position: relative;
     overflow-y: hidden;
 
+    .menuTitle {
+        font-weight: bold;
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+
     a {
         cursor: pointer;
-        font-size: 3em;
+        font-size: 2em;
         position: relative;
         text-decoration: none;
         font-weight: 500;

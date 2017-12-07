@@ -45,30 +45,19 @@ class Home extends React.Component {
   }
 
   render() {
-    let html = ''
-    if (this.state.spacePizzaMode === false) {
-    html =    <div>
-                <Consulting />
-                <Carousel />
-                <Press />
-                <Illustration />
-                <About />
-              </div>
-    }
-    else {
-      html = ''
-    }
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <div onClick={this.enterSpacePizza}>
+            <Consulting />
             <Space
-              spacePizzaMode={this.state.spacePizzaMode}
-              exitMode={this.exitSpacePizza}
+                spacePizzaMode={this.state.spacePizzaMode}
+                exitMode={this.exitSpacePizza}
             />
-          </div>
-          {html}
+            <Carousel />
+            <Press />
+            <Illustration />
+            <About />
         </div>
       </div>
     );

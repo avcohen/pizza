@@ -25,7 +25,7 @@ class Space extends React.Component {
 
   componentDidMount() {
     const ww = window.innerWidth;
-    const wh = window.innerHeight;
+    const wh = 400
     this.setState({
       windowWidth: ww,
       windowHeight: wh
@@ -103,11 +103,11 @@ class Space extends React.Component {
 
     function init(){
 
-      camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.01, 1000);
-      camera.aspect = windowWidth / windowHeight
+      camera = new THREE.PerspectiveCamera( 35, window.innerWidth / (window.innerHeight / 2), 0.01, 1000);
+      camera.aspect = windowWidth / (windowHeight / 2)
       camera.position.x = windowWidth / windowWidth;
       camera.position.y = 2;
-      camera.position.z = 3.25;
+      camera.position.z = 1.5;
       // camera.lookAt(new THREE.Vector3(0, 0 ,0))
 
       scene = new THREE.Scene();
@@ -120,7 +120,7 @@ class Space extends React.Component {
 
       // add planets
       earthMesh = THREEx.Planets.createEarth();
-    //   scene.add(earthMesh);
+      scene.add(earthMesh);
 
       coords.forEach((p, i) => {
         const dot = createPoint(p.lat, p.lng)
@@ -151,7 +151,7 @@ class Space extends React.Component {
       renderer = new THREE.WebGLRenderer();
 
       renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(windowWidth, windowHeight);
+      renderer.setSize(windowWidth, windowHeight / 2);
       document.getElementById('loadingScreen').outerHTML = '';
       const container = document.getElementById('theVoid')
       container.innerHTML = '';
@@ -163,9 +163,9 @@ class Space extends React.Component {
     }
 
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = window.innerWidth / (window.innerHeight / 2);
       camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.setSize( window.innerWidth, (window.innerHeight / 2));
     }
 
     function onDocumentMouseMove( event ) {
@@ -231,48 +231,37 @@ class Space extends React.Component {
         if ( INTERSECTED ) INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
         INTERSECTED = null;
       }
-      renderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.setSize( window.innerWidth, window.innerHeight / 2 );
       renderer.render(scene, camera);
     }
   }
 
   render() {
 
-    let { spacePizzaMode } = this.props;
-    let closeButton = ''
-    if (spacePizzaMode === true){
-        closeButton =
-            <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
-              <FontAwesome name='times' size='3x'/>
-            </span>
-    }
-    else {
-      closeButton = ''
-    }
-
-    const loadingStyle = {
-        width : this.state.windowWidth,
-        height : this.state.windowHeight
-    }
+    // let { spacePizzaMode } = this.props;
+    // let closeButton = ''
+    // if (spacePizzaMode === true){
+    //     closeButton =
+    //         <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
+    //           <FontAwesome name='times' size='3x'/>
+    //         </span>
+    // }
+    // else {
+    //   closeButton = ''
+    // }
 
     return (
-        <div className={s.container}>
-            <Link className={s.brand} to="/">
-                <span className={s.brandTxt}>anthony falco</span>
-            </Link>
+
             <div className={s.space}>
                 <div id="loadingScreen"
                     className={s.loadingStyle}
-                    style={{height: this.state.windowHeight, width: this.state.windowWidth}}>
+                    style={{height: this.state.windowHeight / 2, width: this.state.windowWidth}}>
                     <h1>LOADING...</h1>
                     <img src={loadingAnimation} alt="Loading"/>
                 </div>
                 <div id="theVoid" />
-                <div>
-                    {closeButton}
-                </div>
             </div>
-        </div>
+
     )
   }
 }

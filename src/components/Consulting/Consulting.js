@@ -16,32 +16,33 @@ import Link from '../Link';
 import consultingImg from './consultingImg.jpg';
 
 class Footer extends React.Component {
-  render() {
-    return (
-      <div className={s.root} id='consulting' >
-        <div className={s.container}>
 
-          <div className={s.row}>
-            <h2 className={s.sectionHeader}>consulting</h2>
-            <div className={s.underLine}></div>
-          </div>
+    componentDidMount(){
+        // const pizzaEmoji = document.getElementById('pizzaEmoji')
+        // pizzaEmoji.classList.add(s.spin)
+    }
 
-          <div className={cx(s.row, s.wrap)}>
-              <img className={s.consultingImg} src={consultingImg} />
-              <div className={s.textContainer}>
-                <p className={s.text}>Falco has consulted in Sao Paulo, Bogota, Panama, Toronto, London, New York City, Chicago, Los Angeles, Seattle, Charleston, Iowa, and currently has projects in development in Argentina, Spain, Australia, Kuwait, India and Singapore</p>
-                {/* <p className={s.tick}></p>
-                <p className={cx(s.text,s.text2)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
-                <p className={s.tick}></p> */}
-                {/* <p className={cx(s.text,s.link)}>Lorem ipsum dolor sit amet.</p> */}
-              </div>
-          </div>
-
-        </div>
-
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className={cx(s.root)}>
+                <div className={s.container}>
+                    <div className={s.row}>
+                        <div className={s.col}>
+                            <h2 className={s.sectionHeader}>🌎&nbsp;international pizza consultant</h2>
+                            <div className={s.textContainer}>
+                                <p className={s.text}>Falco has consulted in Sao Paulo, Bogota, Panama, Toronto, London, New York City, Chicago, Los Angeles, Seattle, Charleston, Iowa, and currently has projects in development in Argentina, Spain, Australia, Kuwait, India and Singapore</p>
+                                <p className={s.tick}></p>
+                                <p className={s.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
+                            </div>
+                        </div>
+                        <div className={s.imgCol}>
+                            <img className={s.consultingImg} src={consultingImg} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default withStyles(s)(Footer);

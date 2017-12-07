@@ -42,11 +42,10 @@ class MobileMenu extends React.Component {
           <div className={s.container}>
             <nav>
               <div className={s.row}>
-                <a onClick={this.handleScrollToElement} data-scrollTarget="consulting" >consulting</a>
+                <span className={s.menuTitle}>anthony falco</span>
                 <a onClick={this.handleScrollToElement} data-scrollTarget="press" >press</a>
                 <a onClick={this.handleScrollToElement} data-scrollTarget="illustration" >illustration</a>
                 <a onClick={this.handleScrollToElement} data-scrollTarget="about" >about</a>
-                {/* <a onClick={this.handleScrollToElement} data-scrollTarget="contact" >contact</a> */}
               </div>
 
               <div className={cx(s.row, s.socialRow)}>

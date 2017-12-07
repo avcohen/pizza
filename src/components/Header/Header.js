@@ -20,6 +20,9 @@ class Header extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <Navigation />
+          <Link className={s.brand} to="/">
+              <span className={s.brandTxt}>anthony falco</span>
+          </Link>
         </div>
       </div>
     );

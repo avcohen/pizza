@@ -9,29 +9,15 @@
 
 @import '../variables.css';
 
-.brand {
-  position: absolute;
-  z-index: 10;
-  transform: rotate(-90deg);
-  color: white;
-  text-decoration: none;
-  font-size: 1.75em;
-  top: 275px;
-  left: -225px;
-}
 
-.brandTxt {
-  font-size: 90px;
-  font-weight: bold;
-}
 
 .loadingStyle {
-    padding-top: 40%;
+    padding-top: 20%;
     background-color: black;
     color: white;
     text-align: center;
     vertical-align: middle;
-    height: 100vh;
+    height: 50vh;
     margin: 0;
     position: static;
     top: 0;
@@ -61,7 +47,6 @@
 }
 
 #theVoid {
-  z-index: 4;
   width: 100%;
   height: auto;
   margin: 0;

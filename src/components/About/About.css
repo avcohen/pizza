@@ -23,11 +23,7 @@
 .row {
   align-items: center;
   margin: 30px;
-}
-
-.wrap {
-  display: flex;
-  flex-direction: row;
+  vertical-align: middle;
 }
 
 .row::after {
@@ -35,10 +31,10 @@
 }
 
 .sectionHeader {
-  margin-bottom: -20px;
+  margin-bottom: -10px;
   text-align: left;
   align-self: flex-start;
-  font-size: 5em;
+  font-size: 3em;
   font-weight: 100;
   color: var(--color-6);
 }
@@ -46,35 +42,15 @@
 .underLine {
   flex-wrap: wrap;
   border-bottom: 2px solid var(--color-4);
-  width: 50%;
-}
-
-.consultingSlider {
-  align-self: center;
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.sliderImg {
-  align-self: center;
-}
-
-.sliderImgArrow {
-  margin: 10px;
+  width: 30%;
 }
 
 .text {
   text-align: left;
-
-  /* margin: 1em 0; */
   font-size: 1em;
   color: var(--color-6);
 }
 
-.text2 {
-  margin: 0 15px;
-}
 
 .link {
   margin-top: 10px;
@@ -83,33 +59,44 @@
   font-weight: 500;
 }
 
-.tick {
-  margin: 0;
-  color: var(--color-6);
-  text-align: center;
-  font-size: 1em;
-}
-
-.tick::after {
-  content: '—';
-}
-
 .aboutImg {
-  width: 60%;
-  max-width: 720px;
+    float: left;
+    padding: 0 20px 20px 0;
+    width: 60%;
+    /* max-width: 380px; */
+}
+
+.sliderCopy {
+  align-self: center;
+}
+
+.textContainer {
+  align-self: auto;
+  flex-direction: column;
+}
+
+.spacer {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@media screen and (min-width: 928px) {
+    .wrap {
+      display: flex;
+      flex-direction: row;
+    }
 }
 
 @media screen and (max-width: 768px) {
+
   .text {
-    font-size: 0.8em;
+    /* font-size: 0.8em; */
   }
 
-  .row {
-    flex-direction: column;
+  .aboutImg {
+      width: 50%;
   }
 
   .sectionHeader {
-    font-size: 4em;
     text-align: center;
   }
 
@@ -121,20 +108,15 @@
 
   .textContainer {
     width: 100%;
-    margin: 20px 0;
   }
 }
 
-.sliderCopy {
-  align-self: center;
-}
-
-.textContainer {
-  align-self: auto;
-  margin: 20px 10px 20px 30px;
-  flex-direction: column;
-}
-
-.spacer {
-  color: rgba(255, 255, 255, 0.3);
+@media screen and (max-width: 480px){
+    .row {
+      flex-direction: column;
+    }
+    .aboutImg {
+        float: none;
+        width: 100%;
+    }
 }

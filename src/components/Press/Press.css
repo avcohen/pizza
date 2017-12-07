@@ -24,18 +24,18 @@
 }
 
 .sectionHeader {
-  margin-bottom: -20px;
-  text-align: left;
-  align-self: flex-start;
-  font-size: 5em;
-  font-weight: 100;
-  color: var(--color-4);
+    margin-bottom: -10px;
+    text-align: left;
+    align-self: flex-start;
+    font-size: 3em;
+    font-weight: 100;
+    color: var(--color-4);
 }
 
 .underLine {
-  flex-wrap: wrap;
-  border-bottom: 2px solid var(--color-4);
-  width: 50%;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--color-4);
+    width: 30%;
 }
 
 .category {
@@ -109,7 +109,6 @@
 
 @media screen and (max-width: 768px) {
   .sectionHeader {
-    font-size: 4em;
     text-align: center;
   }
 

@@ -13,15 +13,19 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Footer.css';
 import Link from '../Link';
 import FontAwesome from 'react-fontawesome';
+import cutterImg from './cutter.png'
 
 class Footer extends React.Component {
+
   render() {
     return (
         <div className={s.root}>
             <div className={s.container}>
+                <img src={cutterImg} className={s.pizzaCutterMobile} alt="Pizza Cutter"/>
                 <a className={s.link} href="tel:12062954206" alt="telephone">
                     <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='whatsapp' size="2x"/> +1 (206) 295-4206
                 </a>
+                <img src={cutterImg} className={s.pizzaCutter} alt="Pizza Cutter"/>
                 <a className={s.link} href="https://www.instagram.com/millennium_falco/" target="_blank" alt="instagram">
                     <FontAwesome style={{verticalAlign: 'middle', marginRight: '5px'}} name='instagram' size="2x" /> @millennium_falco
                 </a>

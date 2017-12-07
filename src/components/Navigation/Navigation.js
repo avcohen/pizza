@@ -27,6 +27,7 @@ class Navigation extends React.Component {
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.scrollToSection = this.scrollToSection.bind(this);
+    this.unHideMobileTitle = this.unHideMobileTitle.bind(this);
   }
 
   componentDidMount(){
@@ -38,15 +39,18 @@ class Navigation extends React.Component {
   }
 
   openMenu(){
+    this.unHideMobileTitle();
     this.setState({
-      menuOpen : !this.state.menuOpen
+        menuOpen : !this.state.menuOpen
     })
   }
 
   closeMenu(){
+      this.unHideMobileTitle();
     this.setState({
       menuOpen : false
     })
+
   }
 
   scrollToSection(e){
@@ -66,29 +70,27 @@ class Navigation extends React.Component {
 
   unHideMobileTitle(){
     let mobileHeader = document.querySelector('#mobileHeader');
-    mobileHeader.innerHTML = ''
     mobileHeader.innerHTML = 'anthony falco'
   }
 
   toggleNavVisibilityOnScroll(e){
     let scrollTop = window.scrollY
-    let voidHeight = document.querySelector('#theVoid').offsetHeight;
-
+    let voidHeight = document.querySelector('#theVoid').offsetTop;
     let mobileNavContainer = document.querySelector('#mobileNavContainer')
     let mobileHeader = document.querySelector('#mobileHeader');
     let sliceStack = document.querySelector('#sliceStack');
 
     if (scrollTop > 0 && scrollTop <= voidHeight){
-      // in the void
+      // past the header section
       sliceStack.classList.remove(s.hidden)
-      sliceStack.classList.add(s.unhidden)
       mobileHeader.classList.remove(s.unhidden)
       mobileHeader.classList.add(s.hidden)
+      sliceStack.classList.add(s.unhidden)
       mobileNavContainer.classList.add(s.backgroundInvisible)
     }
 
     if (scrollTop > voidHeight) {
-      // past the void
+      // past the header section
       mobileHeader.classList.add(s.unhidden)
       mobileNavContainer.classList.remove(s.backgroundInvisible)
       mobileNavContainer.classList.add(s.backgroundVisible)
@@ -109,6 +111,7 @@ class Navigation extends React.Component {
                   closeMenu={this.closeMenu}
                   visibility={this.state.menuOpen}
                   hideMobileTitle={this.hideMobileTitle}
+                  unHideMobileTitle={this.unHideMobileTitle}
                   scrollToSection={this.scrollToSection}
                 />
 
@@ -130,9 +133,6 @@ class Navigation extends React.Component {
               <div className={s.menu}>
                     <ul className={s.menuList}>
                         <li className={s.menuListItem}>
-                            <a className={s.menuLink} data-scrollTarget="consulting" onClick={this.scrollToSection}>consulting</a>
-                        </li>
-                        <li className={s.menuListItem}>
                             <a className={s.menuLink} data-scrollTarget="press" onClick={this.scrollToSection}>press</a>
                         </li>
                         <li className={s.menuListItem}>
@@ -141,9 +141,6 @@ class Navigation extends React.Component {
                         <li className={s.menuListItem}>
                             <a className={s.menuLink} data-scrollTarget="about" onClick={this.scrollToSection}>about</a>
                         </li>
-                        {/* <li className={s.menuListItem}>
-                            <a className={s.menuLink}>contact</a>
-                        </li> */}
                     </ul>
               </div>
         </div>
