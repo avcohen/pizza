@@ -5,12 +5,36 @@ import slickTheme from 'slick-carousel/slick/slick-theme.css'
 import cx from 'classnames';
 import s from './Carousel.css';
 import Slick from 'react-slick';
+import FontAwesome from 'react-fontawesome';
 
 import cafe from './cafe.png'
 import braz from './braz.png'
 import marquee from './marquee.png'
 import ga from './ga.png'
 
+function SampleNextArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={s.SliderArrow}
+      style={{...style, display: 'flex'}}
+      onClick={onClick}
+    >
+    <FontAwesome name='whatsapp'/></div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const {className, style, onClick} = props
+  return (
+    <div
+      className={s.SliderArrow}
+      style={{...style, display: 'flex'}}
+      onClick={onClick}
+    >
+    <FontAwesome name='whatsapp'/></div>
+  );
+}
 
 class Carousel extends React.Component {
     constructor() {
@@ -53,6 +77,7 @@ class Carousel extends React.Component {
       ]
 
       const settings = {
+        slidesToShow: 3,
         dots: false,
         adaptiveHeight: false,
         centerMode : true,
@@ -60,8 +85,7 @@ class Carousel extends React.Component {
         infinite: true,
         arrows: false,
         speed: 500,
-        autoplay: true,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 1,
         responsive: [

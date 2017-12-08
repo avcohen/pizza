@@ -3,13 +3,13 @@
 .sliderContainer {
     margin: 0 auto;
     min-width: 0;
-    max-width: 80vw;
-    padding: 40px 0;
+    max-width: 70vw;
+    padding-bottom: 30px;
 }
 
 .slideImage {
     display: inline;
     /* float: left; */
-    max-height: 100px;
-    max-width: 120px;
+    max-height: 90px;
+    max-width: 110px;
 }

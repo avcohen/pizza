@@ -49,6 +49,14 @@
   margin: 10px;
   display: inline-block;
   color: var(--color-5);
+
+  span {
+      font-size: 1.25em;
+  }
+}
+
+.socialLink {
+    margin: 0 3px;
 }
 
 .link,
@@ -133,6 +141,7 @@ img.sliceLayer {
 
 .menu {
     display: none;
+    background-color: var(--color-4);
     width: 100%;
     padding: 5px 0;
     flex-direction: column;
@@ -169,7 +178,7 @@ img.sliceLayer {
 }
 
 .menuList {
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 
 .menuListItem {
@@ -180,7 +189,7 @@ img.sliceLayer {
 
 .menuLink {
     position: relative;
-    color: var(--color-4);
+    color: var(--color-1);
     text-decoration: none;
     display: inline-block;
     font-size: 1.5em;
@@ -188,7 +197,7 @@ img.sliceLayer {
 }
 
 .menuLink:hover {
-    color: var(--color-4);
+    color: var(--color-1);
     cursor: pointer;
     text-decoration: none;
 }
@@ -200,11 +209,9 @@ img.sliceLayer {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: var(--color-4);
+  background-color: var(--color-1);
   visibility: hidden;
-  -webkit-transform: scaleX(0);
   transform: scaleX(0);
-  -webkit-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
 }
 
@@ -212,6 +219,15 @@ img.sliceLayer {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+.socialLinksContainer {
+    display: none;
+    margin-left: 8px;
+}
+
+.socialLinkItem {
+    margin: 0 2px;
 }
 
 

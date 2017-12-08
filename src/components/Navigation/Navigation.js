@@ -13,6 +13,8 @@ import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Navigation.css';
 import Link from '../Link';
+
+import FontAwesome from 'react-fontawesome';
 import MobileMenu from '../MobileMenu';
 
 import sliceTop from './slice-top.png';
@@ -54,7 +56,7 @@ class Navigation extends React.Component {
   }
 
   scrollToSection(e){
-    const target = e.target.getAttribute("data-scrollTarget");
+    const target = e.target.getAttribute("data-scrolltarget");
     const section = document.querySelector(`#${target}`)
     section.scrollIntoView({
         block : 'start',
@@ -98,6 +100,18 @@ class Navigation extends React.Component {
 
   }
 
+    showContactLinks(e){
+      const contactListItem = document.querySelector('#contactLink');
+      const socialLinksContainer = document.querySelector('#socialLinksContainer')
+      contactListItem.setAttribute('style', `display : none`);
+      socialLinksContainer.setAttribute('style', `display : inline`);
+      socialLinksContainer.addEventListener('mouseleave', () => {
+          contactListItem.setAttribute('style', `display : inline`);
+          socialLinksContainer.setAttribute('style', `display : none`);
+      })
+
+    }
+
   render() {
     let sliceTopClass = [s.sliceLayer, s.sliceLayerTop]
     if (this.state.menuOpen === true) {
@@ -133,14 +147,34 @@ class Navigation extends React.Component {
               <div className={s.menu}>
                     <ul className={s.menuList}>
                         <li className={s.menuListItem}>
-                            <a className={s.menuLink} data-scrollTarget="press" onClick={this.scrollToSection}>press</a>
+                            <a className={s.menuLink} data-scrolltarget="press" onClick={this.scrollToSection}>press</a>
                         </li>
                         <li className={s.menuListItem}>
-                            <a className={s.menuLink} data-scrollTarget="illustration" onClick={this.scrollToSection}>illustration</a>
+                            <a className={s.menuLink} data-scrolltarget="illustration" onClick={this.scrollToSection}>illustration</a>
                         </li>
                         <li className={s.menuListItem}>
-                            <a className={s.menuLink} data-scrollTarget="about" onClick={this.scrollToSection}>about</a>
+                            <a className={s.menuLink} data-scrolltarget="about" onClick={this.scrollToSection}>about</a>
                         </li>
+                        <li className={cx(s.menuListItem, s.contactLink)} id="contactLink" onClick={this.showContactLinks} >
+                            <a className={s.menuLink} >contact</a>
+                        </li>
+                        <div id="socialLinksContainer" className={s.socialLinksContainer}>
+                            <li className={cx(s.menuListItem, s.socialLinkItem)}>
+                                <a className={cx(s.menuLink, s.socialLink)} href="tel:12062954206" alt="telephone">
+                                    <FontAwesome name='whatsapp'/>
+                                </a>
+                            </li>
+                            <li className={cx(s.menuListItem, s.socialLinkItem)}>
+                                <a className={cx(s.menuLink, s.socialLink)} href="mailto:tony@piz.za.com?Subject=Inquiry" alt="email">
+                                    <FontAwesome name='envelope-o'/>
+                                </a>
+                            </li>
+                            <li className={cx(s.menuListItem, s.socialLinkItem)}>
+                                <a className={cx(s.menuLink, s.socialLink)} href="https://www.instagram.com/millennium_falco/" target="_blank" alt="instagram">
+                                    <FontAwesome name='instagram' />
+                                </a>
+                            </li>
+                        </div>
                     </ul>
               </div>
         </div>

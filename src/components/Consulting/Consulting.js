@@ -30,9 +30,11 @@ class Footer extends React.Component {
                         <div className={s.col}>
                             <h2 className={s.sectionHeader}>🌎&nbsp;international pizza consultant</h2>
                             <div className={s.textContainer}>
-                                <p className={s.text}>Falco has consulted in Sao Paulo, Bogota, Panama, Toronto, London, New York City, Chicago, Los Angeles, Seattle, Charleston, Iowa, and currently has projects in development in Argentina, Spain, Australia, Kuwait, India and Singapore</p>
+                                <p className={s.text}>Hi, My name is Anthony Falco and I'm an international pizza consultant. I help people achieve their dreams of starting pizzerias and perfecting their craft. My services include kitchen design, equipment selection, natural fermentation techniques, staff training, menu development, food costing, social media strategies and more.</p>
                                 <p className={s.tick}></p>
-                                <p className={s.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
+                                <p className={s.text}>I've helped people all over the world create stand out pizza programs and world class food brands.</p>
+                                <p className={s.tick}></p>
+                                <p className={s.text}>Email me and let's make a pizza party happen.</p>
                             </div>
                         </div>
                         <div className={s.imgCol}>

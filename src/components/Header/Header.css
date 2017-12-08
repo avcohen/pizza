@@ -27,8 +27,8 @@
   transform: rotate(-90deg);
   color: var(--color-4);
   text-decoration: none;
-  top: 265px;
-  left: -220px;
+  top: 325px;
+  left: -200px;
 }
 
 .brand:hover{
@@ -42,12 +42,23 @@
 
 }
 
-@media screen and (max-width : 768px ) {
+@media screen and (max-width : 767px ) {
     .brand {
-        top: 205px;
-        left: -190px;
+        top: 275px;
+        left: -205px;
     }
     .brandTxt {
+        font-size: 90px;
+    }
+}
+
+@media screen and (max-width : 620px) {
+    .brandTxt {
         font-size: 75px;
+    }
+
+    .brand {
+        top: 235px;
+        left: -190px;
     }
 }

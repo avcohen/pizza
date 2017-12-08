@@ -51,7 +51,9 @@ class MobileMenu extends React.Component {
               <div className={cx(s.row, s.socialRow)}>
                 <a href="tel:12062954206" className={s.socialLinks} target="_blank">
                     <FontAwesome name='whatsapp' />
-
+                </a>
+                <a href="mailto:tony@piz.za.com?Subject=Inquiry" className={s.socialLinks} target="_blank">
+                    <FontAwesome name='envelope-o' />
                 </a>
                 <a href="https://www.instagram.com/millennium_falco/" className={s.socialLinks} target="_blank">
                     <FontAwesome name='instagram' />
