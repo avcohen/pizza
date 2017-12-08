@@ -34,7 +34,7 @@ class Footer extends React.Component {
                                 <p className={s.tick}></p>
                                 <p className={s.text}>I've helped people all over the world create stand out pizza programs and world class food brands.</p>
                                 <p className={s.tick}></p>
-                                <p className={s.text}>Email me and let's make a pizza party happen.</p>
+                                <p className={s.text}><a className={s.link} href="mailto:tony@piz.za.com?Subject=Inquiry" alt="email">Email me</a> and let's make a pizza party happen.</p>
                             </div>
                         </div>
                         <div className={s.imgCol}>
