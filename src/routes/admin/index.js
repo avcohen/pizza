@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import Layout from '../../components/Layout';
 import Admin from './Admin';
 
 const title = 'Admin Page';

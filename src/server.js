@@ -1,24 +1,7 @@
 import express from 'express';
 import path from 'path';
-
-//
-// Initialize DB Connection
-// -----------------------------------------------------------------------------
 import mongoose from 'mongoose';
-
 // require('./models/Client');
-
-mongoose.connect(process.env.DATABASE_URL, {
-  useMongoClient: true,
-});
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', err => {
-  console.error(`DB Connection ERROR : ${err.message}`);
-});
-mongoose.connection.once('open', () => {
-  console.log('DB Connection SUCCESS!');
-});
-
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
@@ -33,7 +16,7 @@ import App from './components/App';
 import Html from './components/Html';
 
 // api routes
-import apiRoutes from './routes/apiRoutes.js';
+// import apiRoutes from './routes/apiRoutes';
 
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
 import errorPageStyle from './routes/error/ErrorPage.css';
@@ -63,6 +46,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //
+// Initialize DB Connection
+// -----------------------------------------------------------------------------
+mongoose.connect(process.env.DATABASE_URL, {
+  useMongoClient: true,
+});
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', err => {
+  console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
+});
+mongoose.connection.once('open', () => {
+  console.log('DB Connection SUCCESS!'); //eslint-disable-line
+});
+
+//
 // Authentication
 // -----------------------------------------------------------------------------
 app.use(
@@ -90,9 +87,9 @@ if (__DEV__) {
   app.enable('trust proxy');
 }
 
-app.get('/login/instagram', passport.authenticate('instagram'), (req, res) => {
-  // IG Handles authentication
-});
+// app.get('/login/instagram', passport.authenticate('instagram'), (req, res) => {
+// IG Handles authentication
+// });
 
 app.get(
   '/login/instagram/return',
@@ -192,13 +189,10 @@ app.use((err, req, res, next) => {
 
 // Launch the server
 // -----------------------------------------------------------------------------
-// const promise = models.sync().catch(err => console.error(err.stack));
 if (!module.hot) {
-  // promise.then(() => {
     app.listen(config.port, () => {
-      console.info(`The server is running at http://localhost:${config.port}/`);
+        console.info(`The server is running at http://localhost:${config.port}/`);
     });
-  // });
 }
 
 //

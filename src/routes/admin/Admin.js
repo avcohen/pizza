@@ -6,18 +6,17 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+
 import React from 'react';
+import { Container } from 'semantic-ui-react';
+import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import Link from '../../components/Link';
 import ClientPanel from '../../components/ClientPanel';
 import ClientModal from '../../components/ClientModal';
-
-import { Container } from 'semantic-ui-react';
-
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Admin.css';
-import FontAwesome from 'react-fontawesome';
 
 class Admin extends React.Component {
   constructor() {
@@ -26,7 +25,7 @@ class Admin extends React.Component {
     this.state = {
       editingItem: false,
       fetchingData: false,
-      clientData : [],
+      clientData: [],
     };
 
     this.fetchItems = this.fetchItems.bind(this);
@@ -36,7 +35,7 @@ class Admin extends React.Component {
     this.deleteItem = this.deleteItem.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchItems('client');
   }
 
@@ -51,12 +50,12 @@ class Admin extends React.Component {
       .then(d => d)
       .catch(e => console.error(e));
     this.setState({ fetchingData: false });
-    this.setState({ [`${type}Data`] : fetchedItems })
+    this.setState({ [`${type}Data`]: fetchedItems });
   }
 
   async fetchSingleItem(entry, type) {
     this.setState({ fetchingData: true });
-    const data = await fetch(`http://localhost:3000/api/${type}s/${entry._id}`)
+    await fetch(`http://localhost:3000/api/${type}s/${entry._id}`)
       .then(r => {
         if (r.ok === true) {
           return r.json();

@@ -49,6 +49,7 @@
     "preact-compat": "^3.17.0",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.6.0",
+    "quadtree2": "^0.6.0",
     "query-string": "^5.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.2.0",
@@ -69,7 +70,9 @@
     "style-loader": "^0.19.0",
     "three": "^0.87.1",
     "three-effectcomposer-es6": "0.0.4",
+    "three-orbit-controls": "^82.1.0",
     "universal-router": "^4.2.0",
+    "vec2": "^1.6.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
