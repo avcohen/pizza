@@ -9,24 +9,28 @@
 
 @import '../variables.css';
 
-
+.hidden {
+    display: none;
+}
 
 .loadingStyle {
-    /* padding-top: 20%; */
+    height: 300px;
+    margin: 0;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
     background-color: black;
     color: white;
     text-align: center;
-    vertical-align: middle;
-    height: 50vh!important;
-    padding-top: 50px;
-    margin: 0;
-    position: static;
-    top: 0;
-    left: 0;
+    align-content: center;
+    justify-content: center;
 
     img {
         width: 80px;
         height: auto;
+        align-self: center;
     }
 }
 
@@ -45,6 +49,7 @@
 .space{
   display: flex;
   flex-direction: column;
+  margin-bottom: -5px;
 }
 
 #theVoid {

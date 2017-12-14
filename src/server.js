@@ -48,16 +48,16 @@ app.use(bodyParser.json());
 //
 // Initialize DB Connection
 // -----------------------------------------------------------------------------
-mongoose.connect(process.env.DATABASE_URL, {
-  useMongoClient: true,
-});
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', err => {
-  console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
-});
-mongoose.connection.once('open', () => {
-  console.log('DB Connection SUCCESS!'); //eslint-disable-line
-});
+// mongoose.connect(process.env.DATABASE_URL, {
+//   useMongoClient: true,
+// });
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', err => {
+//   console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
+// });
+// mongoose.connection.once('open', () => {
+//   console.log('DB Connection SUCCESS!'); //eslint-disable-line
+// });
 
 //
 // Authentication

@@ -22,26 +22,6 @@ import About from '../../components/About';
 class Home extends React.Component {
   constructor(){
     super();
-    this.state = {
-        isLoading : true,
-        spacePizzaMode : false
-    }
-
-    this.enterSpacePizza = this.enterSpacePizza.bind(this);
-    this.exitSpacePizza = this.exitSpacePizza.bind(this);
-  }
-
-  enterSpacePizza(){
-    this.setState({
-      spacePizzaMode : true
-    })
-  }
-
-  exitSpacePizza(e){
-    e.stopPropagation()
-    this.setState({
-      spacePizzaMode : false
-    })
   }
 
   render() {
@@ -50,10 +30,7 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
             <Consulting />
-            <Space
-                spacePizzaMode={this.state.spacePizzaMode}
-                exitMode={this.exitSpacePizza}
-            />
+            <Space />
             <Carousel />
             <Press />
             <Illustration />
