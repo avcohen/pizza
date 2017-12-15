@@ -8714,6 +8714,12 @@ qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
+quadtree2@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/quadtree2/-/quadtree2-0.6.0.tgz#e7940d15a97979731d9a5bc5123d1073d95640c9"
+  dependencies:
+    vec2 "1.4.0"
+
 query-string@^4.1.0:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"
@@ -10452,6 +10458,10 @@ three-effectcomposer-es6@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/three-effectcomposer-es6/-/three-effectcomposer-es6-0.0.4.tgz#da3471bac92c721845790e964e52835d5cbd8cf2"
 
+three-orbit-controls@^82.1.0:
+  version "82.1.0"
+  resolved "https://registry.yarnpkg.com/three-orbit-controls/-/three-orbit-controls-82.1.0.tgz#11a7f33d0a20ecec98f098b37780f6537374fab4"
+
 three@^0.87.1:
   version "0.87.1"
   resolved "https://registry.yarnpkg.com/three/-/three-0.87.1.tgz#466a34edc4543459ced9b9d7d276b65216fe2ba8"
@@ -10852,6 +10862,14 @@ value-equal@^0.4.0:
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+
+vec2@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vec2/-/vec2-1.4.0.tgz#47247a6e3987f5ea66525fdc83a9759963b1a2a6"
+
+vec2@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/vec2/-/vec2-1.6.0.tgz#d2886b95fbbf638fa583aedf790ed0ee0df12185"
 
 vendors@^1.0.0:
   version "1.0.1"
