@@ -34,7 +34,9 @@ nav {
   padding: 5px;
 }
 
-
+.navItem {
+    
+}
 
 .active {
   font-weight: bold;

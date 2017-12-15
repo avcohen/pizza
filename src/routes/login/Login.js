@@ -22,36 +22,11 @@ class Login extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1>{this.props.title}</h1>
-          <form method="post">
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="usernameOrEmail">
-                Username or email address:
-              </label>
-              <input
-                className={s.input}
-                id="usernameOrEmail"
-                type="text"
-                name="usernameOrEmail"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-              />
-            </div>
-            <div className={s.formGroup}>
-              <label className={s.label} htmlFor="password">
-                Password:
-              </label>
-              <input
-                className={s.input}
-                id="password"
-                type="password"
-                name="password"
-              />
-            </div>
-            <div className={s.formGroup}>
-              <button className={s.button} type="submit">
-                Log in
-              </button>
-            </div>
-          </form>
+          <div className={s.formGroup}>
+            <a className={s.facebook} href="/login/instagram">
+              <span>Log in with Instagram</span>
+            </a>
+          </div>
         </div>
       </div>
     );

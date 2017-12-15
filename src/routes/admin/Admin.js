@@ -6,127 +6,76 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+
 import React from 'react';
+import { Container } from 'semantic-ui-react';
+import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import Link from '../../components/Link';
 import ClientPanel from '../../components/ClientPanel';
-
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import ClientModal from '../../components/ClientModal';
 import s from './Admin.css';
-import FontAwesome from 'react-fontawesome';
 
 class Admin extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
       editingItem: false,
       fetchingData: false,
-      clientData: null,
-      illustrationData: null,
-      instagramData: null,
-      moduloOpen: false,
+      clientData: [],
     };
 
+    this.fetchItems = this.fetchItems.bind(this);
+    this.fetchSingleItem = this.fetchSingleItem.bind(this);
+    this.createItem = this.createItem.bind(this);
     this.editItem = this.editItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
-    this.createItem = this.createItem.bind(this);
-    this.closeModulo = this.closeModulo.bind(this);
-    this.fetchClients = this.fetchClients.bind(this);
   }
 
-
-  closeModulo() {
-    this.setState({
-      editingItem: false,
-      moduloOpen: false,
-    });
+  componentDidMount() {
+    this.fetchItems('client');
   }
 
-  async fetchClients() {
+  async fetchItems(type) {
     this.setState({ fetchingData: true });
-    const clientData = await fetch('http://localhost:3000/api/clients')
+    const fetchedItems = await fetch(`http://localhost:3000/api/${type}s`)
       .then(r => {
-        this.setState({ fetchingData: false });
+        if (r.ok === true) {
+          return r.json();
+        }
+      })
+      .then(d => d)
+      .catch(e => console.error(e));
+    this.setState({ fetchingData: false });
+    this.setState({ [`${type}Data`]: fetchedItems });
+  }
+
+  async fetchSingleItem(entry, type) {
+    this.setState({ fetchingData: true });
+    await fetch(`http://localhost:3000/api/${type}s/${entry._id}`)
+      .then(r => {
         if (r.ok === true) {
           return r.json();
         }
       })
       .then(data => data)
       .catch(e => console.error(e));
-
-    if (!clientData === null) {
-      this.setState({ clientData: 'ERROR' });
-      return;
-    }
-    this.setState({ clientData });
+    this.setState({ fetchingData: false });
   }
 
-  async fetchIllustrations() {
-    this.setState({ fetchingData: true });
-    const illustrationData = await fetch('/api/illustrations')
-      .then(r => {
-        this.setState({ fetchingData: false });
-        if (r.ok === true) {
-          return r.json();
-        }
-      })
-      .then(data => data)
-      .catch(e => console.error(e));
-
-    if (!illustrationData === null) {
-      this.setState({ clientData: 'ERROR' });
-      return;
-    }
-    this.setState({ illustrationData });
+  createItem(item) {
+    console.log(item)
   }
 
-  async createItem({ ...itemDetails }) {
-    this.setState({ moduloOpen: true });
+  editItem(item) {
+    console.log(item)
   }
 
-  async editItem(entry) {
-    this.setState({ editingItem: true });
-    const itemToEdit = await fetch(`http://localhost:3000/api/client/${entry._id}`)
-        .then(r => {
-            this.setState({fetchingData : false })
-            if (r.ok === true){
-                return r.json();
-            }
-        })
-        .then(data => data)
-        .catch(err => console.err(err));
-    this.setState({ itemToEdit })
-    this.setState({ moduloOpen: true });
-  }
-
-  async deleteItem(entry) {
-    this.setState({ editingItem: true });
-    await confirm(`Delete entry '${entry.name}' ?`);
-    await fetch(`http://localhost:3000/api/clients/${entry._id}`, {
-        method : 'DELETE'
-    }).catch(err => console.error(err));
-    this.setState({ editingItem: false });
-    this.fetchClients();
-  }
-
-  createWidgets() {
-    const props = {
-      title: 'Clients',
-      data: this.state.clientData,
-      editItem: this.editItem,
-      deleteItem: this.deleteItem,
-      createItem: this.createItem,
-      moduloOpen: this.state.moduloOpen,
-      closeModulo: this.closeModulo,
-      fetchClients: this.fetchClients,
-      itemToEdit : this.state.itemToEdit,
-    };
-    return <ClientPanel {...props} />;
-  }
-
-  componentDidMount(){
-      this.fetchClients();
+  deleteItem(item){
+    console.log(item)
   }
 
   render() {
@@ -155,7 +104,21 @@ class Admin extends React.Component {
             </nav>
           </div>
           <hr />
-          <div className={s.row}>{this.createWidgets()}</div>
+          <Container>
+          <ClientModal
+            headerTitle='Add Client'
+            buttonTriggerTitle='Add New'
+            buttonSubmitTitle='Add'
+            buttonColor='green'
+            onClientAdded={this.createItem}
+          />
+
+          <ClientPanel
+            onClientUpdated={this.editItem}
+            onClientDeleted={this.deleteItem}
+            clients={this.state.clientData}
+          />
+          </Container>
         </div>
       </div>
     );

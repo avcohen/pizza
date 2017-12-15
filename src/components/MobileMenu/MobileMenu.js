@@ -19,29 +19,45 @@ import FontAwesome from 'react-fontawesome';
 class MobileMenu extends React.Component {
   constructor(){
     super();
+    this.handleScrollToElement = this.handleScrollToElement.bind(this);
+  }
+
+  handleScrollToElement(e){
+    e.preventDefault();
+    this.props.closeMenu();
+    this.props.scrollToSection(e)
   }
 
   render() {
+
+
     let mobileMenu = null;
     if (this.props.visibility === false ) {
       mobileMenu = '';
     }
+
     else {
       this.props.hideMobileTitle();
       mobileMenu = (
           <div className={s.container}>
             <nav>
               <div className={s.row}>
-                <a href="" >consulting</a>
-                <a href="" >press</a>
-                <a href="" >illustration</a>
-                <a href="" >about</a>
-                <a href="" >contact</a>
+                <span className={s.menuTitle}>anthony falco</span>
+                <a onClick={this.handleScrollToElement} data-scrollTarget="press" >press</a>
+                <a onClick={this.handleScrollToElement} data-scrollTarget="illustration" >illustration</a>
+                <a onClick={this.handleScrollToElement} data-scrollTarget="about" >about</a>
               </div>
 
               <div className={cx(s.row, s.socialRow)}>
-                <a href="" className={s.socialLinks}><FontAwesome name='instagram' /></a>
-                <a href="" className={s.socialLinks}><FontAwesome name='whatsapp' /></a>
+                <a href="tel:12062954206" className={s.socialLinks} target="_blank">
+                    <FontAwesome name='whatsapp' />
+                </a>
+                <a href="mailto:tony@piz.za.com?Subject=Inquiry" className={s.socialLinks} target="_blank">
+                    <FontAwesome name='envelope-o' />
+                </a>
+                <a href="https://www.instagram.com/millennium_falco/" className={s.socialLinks} target="_blank">
+                    <FontAwesome name='instagram' />
+                </a>
               </div>
 
               <div className={cx(s.rowCentered, s.row)}>

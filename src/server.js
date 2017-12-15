@@ -1,33 +1,10 @@
-import path from 'path';
-//
-// Enviornment Config
-// -----------------------------------------------------------------------------
-// require('dotenv').config({path: '../.env'});
-
 import express from 'express';
-
-//
-// Initialize DB Connection
-// -----------------------------------------------------------------------------
+import path from 'path';
 import mongoose from 'mongoose';
-
-require('./models/Client');
-
-mongoose.connect('mongodb://anthony:pizza666@ds155325.mlab.com:55325/pizza', {
-  useMongoClient: true,
-});
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', err => {
-  console.error(`XXX ${err.message}`);
-});
-mongoose.connection.once('open', () => {
-  console.log('DB Connection __OPEN__');
-});
-
+// require('./models/Client');
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
-import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
 
@@ -39,7 +16,7 @@ import App from './components/App';
 import Html from './components/Html';
 
 // api routes
-import apiRoutes from './routes/apiRoutes.js';
+// import apiRoutes from './routes/apiRoutes';
 
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
 import errorPageStyle from './routes/error/ErrorPage.css';
@@ -47,8 +24,7 @@ import createFetch from './createFetch';
 
 import passport from './passport';
 import router from './router';
-import models from './data/models';
-import schema from './data/schema';
+
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import config from './config';
 
@@ -68,6 +44,20 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//
+// Initialize DB Connection
+// -----------------------------------------------------------------------------
+// mongoose.connect(process.env.DATABASE_URL, {
+//   useMongoClient: true,
+// });
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', err => {
+//   console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
+// });
+// mongoose.connection.once('open', () => {
+//   console.log('DB Connection SUCCESS!'); //eslint-disable-line
+// });
 
 //
 // Authentication
@@ -91,22 +81,19 @@ app.use((err, req, res, next) => {
 });
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 if (__DEV__) {
   app.enable('trust proxy');
 }
 
-app.get(
-  '/login/facebook',
-  passport.authenticate('facebook', {
-    scope: ['email', 'user_location'],
-    session: false,
-  }),
-);
+// app.get('/login/instagram', passport.authenticate('instagram'), (req, res) => {
+// IG Handles authentication
+// });
 
 app.get(
-  '/login/facebook/return',
-  passport.authenticate('facebook', {
+  '/login/instagram/return',
+  passport.authenticate('instagram', {
     failureRedirect: '/login',
     session: false,
   }),
@@ -120,17 +107,8 @@ app.get(
 
 // Register API middleware
 // -----------------------------------------------------------------------------
-app.use(
-  '/graphql',
-  expressGraphQL(req => ({
-    schema,
-    graphiql: __DEV__,
-    rootValue: { request: req },
-    pretty: __DEV__,
-  })),
-);
 
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
 
 //
 // Register server-side rendering middleware
@@ -138,7 +116,6 @@ app.use('/api', apiRoutes);
 app.get('*', async (req, res, next) => {
   try {
     const css = new Set();
-
     // Global (context) variables that can be easily accessed from any React component
     // https://facebook.github.io/react/docs/context.html
     const context = {
@@ -159,13 +136,13 @@ app.get('*', async (req, res, next) => {
       ...context,
       pathname: req.path,
       query: req.query,
+      admin: req.isAuthenticated(),
     });
 
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
       return;
     }
-
     const data = { ...route };
     data.children = ReactDOM.renderToString(
       <App context={context}>{route.component}</App>,
@@ -212,13 +189,10 @@ app.use((err, req, res, next) => {
 
 // Launch the server
 // -----------------------------------------------------------------------------
-const promise = models.sync().catch(err => console.error(err.stack));
 if (!module.hot) {
-  promise.then(() => {
     app.listen(config.port, () => {
-      console.info(`The server is running at http://localhost:${config.port}/`);
+        console.info(`The server is running at http://localhost:${config.port}/`);
     });
-  });
 }
 
 //

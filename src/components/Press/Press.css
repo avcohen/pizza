@@ -6,94 +6,109 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 @import '../variables.css';
+/* @import '../../../node_modules/video-react/dist/video-react.css'; */
+
 
 .root {
   display: flex;
+  padding-bottom: 50px;
   background: var(--color-1);
   width: 100%;
 }
 
 .row {
+    clear: both;
   align-items: center;
   margin: 30px;
 }
 
 .sectionHeader {
-  margin-bottom: -20px;
-  text-align: left;
-  align-self: flex-start;
-  font-size: 5em;
-  font-weight: 100;
-  color: var(--color-4);
+    margin-bottom: -10px;
+    text-align: left;
+    align-self: flex-start;
+    font-size: 3em;
+    font-weight: 100;
+    color: var(--color-4);
 }
 
 .underLine {
-  flex-wrap: wrap;
-  border-bottom: 2px solid var(--color-4);
-  width: 50%;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--color-4);
+    width: 30%;
 }
 
 .category {
-  text-align: center;
+    text-align: center;
 }
 
-.articles {
-  margin-bottom: 90px;
+.articleLinks{
+    padding: 0;
+    display: block;
 }
 
 .article {
-  color: var(--color-1);
-  list-style: none;
-  display: inline;
-  margin: 5px 10px;
+    color: var(--color-1);
+    list-style: none;
+    display: inline;
+    margin: 10px 20px 10px 0px
 }
 
 .articleLink {
-  color: var(--color-4);
-  font-weight: bold;
-  display: inline;
-  font-style: italic;
-  text-decoration: underline;
-  font-size: 1.5em;
+    position: relative;
+    text-decoration: none;
+    color: var(--color-4);
+    font-weight: bold;
+    display: inline-block;
+    font-style: italic;
+    font-size: 1.5em;
 }
 
-.categoryItem:hover {
-  cursor: pointer;
-  text-decoration: underline;
-  transition: 1s;
+.articleLink:hover {
+  color: var(--color-4);
+  text-decoration: none;
+}
+
+.articleLink:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.articleLink:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .videoLinks {
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .video {
-  width: 100%;
-  max-width: 750px;
-  margin: 30px;
-}
+    margin: 15px;
 
-.imageContainer {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  align-content: flex-start;
-}
-
-.image {
-  width: 30%;
-  max-width: 300px;
-  padding: 5px;
+    div {
+        width: 320px !important;
+        height: 180px !important;
+    }
 }
 
 @media screen and (max-width: 768px) {
   .sectionHeader {
-    font-size: 4em;
     text-align: center;
   }
 
@@ -102,4 +117,46 @@
     margin: auto;
     align-self: center;
   }
+
+  .video {
+      margin: 15px;
+      div {
+          width: 270px !important;
+          height: 150px !important;
+      }
+  }
+}
+
+@media screen and (max-width: 575px){
+    .video {
+        width: 100%;
+        margin: 15px;
+    }
+}
+
+@media screen and (min-width: 976px){
+    .video{
+        div {
+            width: 360px !important;
+            height: 200px !important;
+        }
+    }
+}
+
+@media screen and (min-width: 1115px){
+    .video{
+        div {
+            width: 480px !important;
+            height: 270px !important;
+        }
+    }
+}
+
+@media screen and (min-width: 1495px){
+    .video{
+        div {
+            width: 640px !important;
+            height: 360px !important;
+        }
+    }
 }

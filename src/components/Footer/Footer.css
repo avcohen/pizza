@@ -10,15 +10,18 @@
 @import '../variables.css';
 
 .root {
-  background: #333;
+  background: var(--color-4);
   color: #fff;
 }
 
 .container {
   margin: 0 auto;
-  padding: 20px 15px;
-  max-width: var(--max-content-width);
-  text-align: center;
+  padding: 35px 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
@@ -29,19 +32,77 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
-.text,
 .link {
-  padding: 2px 5px;
+  padding: 5px 10px;
   font-size: 1em;
-}
-
-.link,
-.link:active,
-.link:visited {
-  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  position: relative;
+  color: var(--color-1);
   text-decoration: none;
+  display: inline-block;
 }
 
 .link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--color-1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-1);
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.link:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+
+}
+
+.faIcon {
+    text-align: middle;
+}
+
+.row {
+    width: 100%;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.pizzaCutter {
+    width: 100%;
+    align-self: center;
+    width: 50px;
+    display: inline;
+    margin: 0 30px;
+}
+
+.pizzaCutterMobile {
+    display: none;
+    width: 50px;
+    margin: 0px 0 10px 0;
+}
+
+@media screen and (max-width: 600px){
+
+    .container{
+        padding: 20px 0px;
+        flex-direction: column;
+    }
+
+    .pizzaCutterMobile {
+        display: inline;
+    }
+    .pizzaCutter{
+        display: none;
+    }
 }

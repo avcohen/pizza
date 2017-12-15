@@ -8,16 +8,14 @@
  */
 
 import React from 'react';
-import Layout from '../../components/Layout';
 import Admin from './Admin';
 
 const title = 'Admin Page';
-const isAdmin = false;
 
 function action(context, params) {
-  // if (!isAdmin) {
-  //   return { redirect: '/login' };
-  // }
+  if (context.admin === false) {
+    return { redirect: '/login' };
+  }
 
   return {
     chunks: ['admin'],

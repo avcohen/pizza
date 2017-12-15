@@ -2,261 +2,240 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Space.css';
-import * as THREE from 'THREE';
-import THREEx from '../../scripts/threex.planets.js';
-// import ShaderExtras from '../../scripts/ShaderExtras.js';
-import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
-import FontAwesome from 'react-fontawesome';
+import * as THREE from 'three';
+import { Shaders } from './Shaders';
+import worldImg from './world.jpg';
 
+import FontAwesome from 'react-fontawesome';
+import loadingAnimation from './cutter.gif';
 import Link from '../Link';
 
 class Space extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      windowWidth: null,
-      windowHeight: null,
-      clickX : null,
-      clickY : null,
+    constructor() {
+        super();
+        this.state = {
+            loadingTheVoid : true,
+            voidWidth: null,
+            voidHeight: null,
+            igPostData : [
+                  {lat: 38.548165, lng: -76.289062, title: "ONE" },
+                  {lat: 3.513421, lng: -58.007812, title: "TWO" },
+                  {lat: 46.55886, lng: 3.515625, title: "THREE" },
+                  {lat: 52.908902, lng: -1.40625, title: "FOUR" },
+                  {lat: 24.20689, lng: 80.507813, title: "FIVE" },
+                  {lat: 25.482951, lng: 51.679688, title: "SIX" },
+                  {lat: 39.095963, lng: 139.570313, title: "SEVEN" },
+              ],
+        };
+        this.onVoidLoaded = this.onVoidLoaded.bind(this);
     };
-  }
 
-  componentDidMount() {
-    const ww = window.innerWidth;
-    const wh = window.innerHeight;
-    this.setState({
-      windowWidth: ww,
-      windowHeight: wh
-    });
-    this.enterTheVoid(ww, wh);
-    this.updateClickCoords();
-  }
+    componentDidMount() {
+        const ww = window.innerWidth;
+        const wh = window.innerHeight;
+        this.setState({
+            voidWidth: ww,
+            voidHeight: (wh * 0.666)
+        });
+        const container = document.getElementById('theVoid');
+        this.enterTheVoid( ww, (wh * 0.666));
+        this.onVoidLoaded();
+    };
 
-  updateClickCoords(){
-    const container = document.getElementById('theVoid');
-    container.addEventListener('click', (e) =>{
-      e.preventDefault;
-      this.setState({
-        clickX : e.clientX,
-        clickY : e.clientY,
-      })
-    })
-  }
+    enterTheVoid(voidWidth, voidHeight){
+        let igPostData = this.state.igPostData;
 
-  enterTheVoid(windowWidth, windowHeight) {
-    // let container;
-    let earthMesh, starfield, pizzaMoon;
-    let camera, scene, glowScene, raycaster, renderer, loadingManager;
-    let mouse = new THREE.Vector2(), INTERSECTED;
-    let radius = 100
-    let theta = 0;
-    const coords = [
-      {lat: 38.548165, lng: -76.289062},
-      {lat: 3.513421, lng: -58.007812},
-      {lat: 46.55886, lng: 3.515625},
-      {lat: 52.908902, lng: -1.40625},
-      {lat: 24.20689, lng: 80.507813},
-      {lat: 25.482951, lng: 51.679688},
-      {lat: 39.095963, lng: 139.570313},
-    ];
+        let earthMesh,
+            atmosphere,
+            camera,
+            scene,
+            renderer,
+            raycaster,
+            loadingManager
 
-    init();
-    animate();
+        let points = [];
 
-    function createPoint(lat, lng){
-      let phi   = (90-lat)*(Math.PI/180)
-      let t = (lng+180)*(Math.PI/180)
+        let mouse = new THREE.Vector2(), INTERSECTED;
+        var rotation = { x: 0, y: 0 };
+        let radius = 200,
+            theta = 0;
 
-      let x = -((0.6) * Math.sin(phi)*Math.cos(t))
-      let y = ((0.6) * Math.cos(phi))
-      let z = ((0.6) * Math.sin(phi)*Math.sin(t))
+        var distance = 1000,
+            distanceTarget = 500;
 
+        init();
+        animate();
 
-      let dotGeometry = new THREE.SphereGeometry(.025, 16, 16);
-      let dotMaterial = new THREE.MeshLambertMaterial({
-        map: THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
-        bumpMap : THREE.ImageUtils.loadTexture(`../../images/pizza.jpg`),
-      });
-      let dot = new THREE.Mesh(dotGeometry, dotMaterial);
-      dot.position.set(x,y,z)
-      dot.info = "lol"
-      return dot;
+        function deg2ra(d){
+            return d * (Math.PI/180);
+        }
+
+        function addPoint(p, height = 0) {
+            if (p.lat == 0 && p.lng == 0) return;
+            let phi = (90 - p.lat) * Math.PI/180;
+            let theta = (p.lng + 180) * Math.PI/180;
+
+            let x = -(radius + height) * Math.sin(phi) * Math.cos(theta);
+            let y = (radius + height) * Math.cos(phi);
+            let z = (radius + height) * Math.sin(phi) * Math.sin(theta);
+
+            let pointGeometry = new THREE.SphereGeometry(10, 16, 16);
+            let pointMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    "c":   { type: "f", value: 1 },
+                    "p":   { type: "f", value: 0.5 },
+                    glowColor: { type: "c", value: new THREE.Color(0xb1e5f2) },
+                    viewVector: { type: "v3", value: camera.position }
+                },
+                vertexShader: Shaders['point'].vertexShader,
+                fragmentShader: Shaders['point'].fragmentShader,
+                side: THREE.FrontSide,
+                blending: THREE.AdditiveBlending,
+                transparent: true
+            });
+            let point = new THREE.Mesh(pointGeometry, pointMaterial);
+            point.position.set(x,y,z);
+            point.info = {
+                title : p.title
+            }
+            return point;
+        }
+
+        function createAtmosphere(){
+            const geometry = new THREE.SphereGeometry(radius, 40, 30);
+            const shader = Shaders['atmosphere'];
+            const material = new THREE.ShaderMaterial({
+                uniforms: shader.uniforms,
+                vertexShader: shader.vertexShader,
+                fragmentShader: shader.fragmentShader,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                side: THREE.BackSide
+            });
+            let mesh = new THREE.Mesh( geometry, material );
+                mesh.scale.set(1.1, 1.1, 1.1)
+                mesh.updateMatrix();
+            return mesh;
+        }
+
+        function createEarth(){
+            const geometry = new THREE.SphereGeometry(radius, 40, 30);
+            const shader = Shaders['earth'];
+            let uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+                uniforms['texture'].value = new THREE.TextureLoader().load('../../images/world.jpg');
+            const material = new THREE.ShaderMaterial({
+                uniforms : uniforms,
+                vertexShader: shader.vertexShader,
+                fragmentShader : shader.fragmentShader
+            })
+            const mesh = new THREE.Mesh(geometry, material);
+                  mesh.rotation.x = deg2ra(23.5);
+                  mesh.rotation.y = deg2ra(-25);
+            return mesh;
+        }
+
+        function init(){
+            //camera
+            camera = new THREE.PerspectiveCamera( 35, voidWidth / voidHeight , .01, 10000 );
+            camera.position.x = distance * Math.sin(rotation.x) * Math.cos(rotation.y);
+            camera.position.y = distance * Math.sin(rotation.y);
+            camera.position.z = (distance * 1.15) * Math.cos(rotation.x) * Math.cos(rotation.y);
+
+            // scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+
+            // scene objects
+            earthMesh = createEarth();
+            scene.add(earthMesh);
+
+            // atmosphere
+            scene.add(createAtmosphere());
+
+            igPostData.forEach((p,i) =>{
+                let point = addPoint(p)
+                earthMesh.add(point);
+                points.push(point);
+            })
+
+            raycaster = new THREE.Raycaster();
+            renderer = new THREE.WebGLRenderer();
+
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(voidWidth, voidHeight);
+            let container = document.getElementById('theVoid');
+            container.innerHTML = '';
+            container.appendChild(renderer.domElement);
+
+            // container.addEventListener('touchstart', onDocumentTouchStart, false);
+            // container.addEventListener('mousedown', onDocumentMouseDown, false);
+
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onDocumentTouchStart(event) {
+            event.preventDefault();
+            event.clientX = event.touches[0].clientX;
+            event.clientY = event.touches[0].clientY;
+            onDocumentMouseDown(event);
+        }
+
+        function onDocumentMouseDown(event){
+            event.preventDefault();
+            mouse.x = ( ( event.clientX ) / renderer.domElement.clientWidth ) * 2 - 1;
+            mouse.y = - ( ( event.clientY ) / renderer.domElement.clientHeight ) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+
+            let intersects = raycaster.intersectObjects(points);
+            if (intersects.length > 0){
+                // intersects[0].object.material.color.setHex(Math.random() * 0xffffff);
+                console.log(intersects[0])
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
+
+        function animate(){
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render(){
+            earthMesh.rotation.y += 1 / 300;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+        }
     }
 
-    function createStarfield(){
-      let starsGeometry = new THREE.Geometry();
-      for ( var i = 0; i < 10000; i ++ ) {
-        var star = new THREE.Vector3();
-        star.x = THREE.Math.randFloatSpread( 1000 );
-        star.y = THREE.Math.randFloatSpread( 1000 );
-        star.z = THREE.Math.randFloatSpread( 1000 );
-        starsGeometry.vertices.push( star );
-      }
-      let starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
-      let starField = new THREE.Points( starsGeometry, starsMaterial );
-      return starField;
+    onVoidLoaded(){
+        this.setState({ loadingTheVoid : false});
     }
 
-    function init(){
-
-      camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.01, 1000);
-      camera.aspect = windowWidth / windowHeight
-      camera.position.x = windowWidth / windowWidth;
-      camera.position.y = 2;
-      camera.position.z = 3.25;
-      // camera.lookAt(new THREE.Vector3(0, 0 ,0))
-
-      scene = new THREE.Scene();
-      // glowScene = new THREE.Scene();
-      // glowScene.add(new THREE.AmbientLight(0xFFFFFF) );
-
-      // add background
-      starfield = createStarfield();
-      scene.add(starfield);
-
-      // add planets
-      earthMesh = THREEx.Planets.createEarth();
-      scene.add(earthMesh);
-
-      coords.forEach((p, i) => {
-        const dot = createPoint(p.lat, p.lng)
-        earthMesh.add(dot);
-      })
-
-      // TODO - GLow Mesh
-      //glow mesh
-      // const glowgeo = new THREE.SphereGeometry(0.6, 32, 32);
-      // const glowmap = THREE.ImageUtils.loadTexture('../images/glow.png');
-      // const glowmaterial = new THREE.MeshPhongMaterial( { map: glowmap, ambient: 0xffffff, color: 0x000000 } );;
-      //
-      // let glowMesh = new THREE.Mesh(glowgeo, glowmaterial)
-      // glowMesh.overdraw = true;
-      //
-      // glowScene.add(glowMesh);
-
-      // add lights
-      const ambientLight = new THREE.AmbientLight(0x404040, 3.5);
-      scene.add(ambientLight);
-
-      const dirLight = new THREE.DirectionalLight('white', 0.08);
-      dirLight.position.set(20, 20, 30);
-      dirLight.target.position.set(0, 0, 0);
-      scene.add(dirLight);
-
-      raycaster = new THREE.Raycaster();
-
-      renderer = new THREE.WebGLRenderer();
-      // renderer.setClearColor(0x000000, 1.0);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(windowWidth, windowHeight);
-      // renderer.shadowMapEnabled = true;
-      // renderer.shadowMapType = THREE.PCFSoftShadowMap;
-      const container = document.getElementById('theVoid')
-      container.appendChild(renderer.domElement);
-
-      window.addEventListener('mousemove', onDocumentMouseMove, false);
-      window.addEventListener('resize', onWindowResize, false);
+    render(){
+        const loading = <div
+                            id="loadingScreen"
+                            className={s.loadingStyle}
+                            style={{"width" : "100%", height : this.state.voidHeight}}
+                        >
+                            <h1>LOADING...</h1>
+                            <img src={loadingAnimation} alt="Loading"/>
+                        </div>
+        return (
+                <div className={s.space}>
+                    {this.state.loadingTheVoid ? loading : ''}
+                    <div id="theVoid" />
+                </div>
+        )
     }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight );
-    }
-
-    function onDocumentMouseMove( event ) {
-      event.preventDefault();
-      mouse.x = ( ( event.clientX ) / renderer.domElement.clientWidth ) * 2 - 1;
-      mouse.y = - ( ( event.clientY ) / renderer.domElement.clientHeight ) * 2 + 1;
-    }
-
-    function animate(){
-
-      requestAnimationFrame(animate);
-      render();
-    }
-
-    function render(){
-
-      // GLOW MESH RENDER TODO
-      // // Prepare the glow composer's render target
-      // const renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBufer: false };
-      // let renderTargetGlow = new THREE.WebGLRenderTarget( windowWidth, windowHeight, renderTargetParameters );
-      //
-      // // Prepare the blur shader passes
-      // let hblur = new ShaderPass( ShaderExtras[ "horizontalBlur" ] );
-      // let vblur = new ShaderPass( ShaderExtras[ "verticalBlur" ] );
-      //
-      // let bluriness = 3;
-      //
-      // hblur.uniforms[ "h" ].value = bluriness / windowWidth;
-      // vblur.uniforms[ "v" ].value = bluriness / windowHeight;
-      //
-      // // Prepare the glow scene render pass
-      // var renderModelGlow = new RenderPass( glowScene, camera);
-      //
-      // // Create the glow composer
-      // glowcomposer = new EffectComposer( renderer, renderTargetGlow );
-      //
-      // // Add all the glow passes
-      // glowcomposer.addPass( renderModelGlow );
-      // glowcomposer.addPass( hblur );
-      // glowcomposer.addPass( vblur );
-
-
-      theta += 0.1;
-      earthMesh.rotation.y += 1 / 200;
-      // pizzaMoon.rotation.y += 1 / 400;
-      starfield.rotation.x += 1 / 8000;
-      starfield.rotation.y += 1 / 10000;
-
-      camera.lookAt(scene.position);
-      camera.updateMatrixWorld();
-
-      raycaster.setFromCamera( mouse, camera );
-      let intersects = raycaster.intersectObjects( earthMesh.children );
-
-      if (intersects.length > 0) {
-         if ( INTERSECTED != intersects[0].object ){
-           if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-            INTERSECTED = intersects[ 0 ].object;
-            INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-            INTERSECTED.material.color.setHex( 0x000000 );
-         }
-      } else {
-        if ( INTERSECTED ) INTERSECTED.material.color.setHex(INTERSECTED.currentHex);
-        INTERSECTED = null;
-      }
-      renderer.setSize( window.innerWidth, window.innerHeight );
-      renderer.render(scene, camera);
-    }
-  }
-
-  render() {
-
-    let { spacePizzaMode } = this.props;
-    let closeButton = ''
-    if (spacePizzaMode === true){
-        closeButton =
-            <span className={s.exitTheVoid} onClick={(e) => this.props.exitMode(e)}>
-              <FontAwesome name='times' size='3x'/>
-            </span>
-    }
-    else {
-      closeButton = ''
-    }
-
-    return (
-      <div className={s.space}>
-        <div id="theVoid" />
-        <div>
-            {closeButton}
-        </div>
-      </div>
-    )
-  }
-}
+};
 
 export default withStyles(s)(Space);

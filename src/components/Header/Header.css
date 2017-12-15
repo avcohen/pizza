@@ -19,53 +19,46 @@
 }
 
 .container {
-  margin: 0 auto;
-  max-width: var(--max-content-width);
+  /* margin: 0 auto; */
 }
 
 .brand {
   position: absolute;
-  z-index: 10;
   transform: rotate(-90deg);
-  color: white;
+  color: var(--color-4);
   text-decoration: none;
-  font-size: 1.75em;
-  top: 275px;
-  left: -225px;
+  top: 325px;
+  left: -200px;
+}
+
+.brand:hover{
+    color: var(--color-4);
+    text-decoration: none;
 }
 
 .brandTxt {
   font-size: 90px;
   font-weight: bold;
+
 }
 
-@media screen and (max-width: 480px) {
-  .brandTxt {
-    font-size: 60px;
-  }
-
-  .brand {
-    top: 205px;
-    left: -145px;
-  }
+@media screen and (max-width : 767px ) {
+    .brand {
+        top: 275px;
+        left: -205px;
+    }
+    .brandTxt {
+        font-size: 90px;
+    }
 }
 
-.banner {
-  /* text-align: center; */
-}
+@media screen and (max-width : 620px) {
+    .brandTxt {
+        font-size: 75px;
+    }
 
-.bannerTitle {
-  margin: 0;
-  padding: 10px;
-  font-weight: normal;
-  font-size: 4em;
-  line-height: 1em;
-}
-
-.bannerDesc {
-  padding: 0;
-
-  /* color: rgba(255, 255, 255, 0.5); */
-  font-size: 1.25em;
-  margin: 0;
+    .brand {
+        top: 235px;
+        left: -190px;
+    }
 }

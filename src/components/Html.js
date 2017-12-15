@@ -43,11 +43,12 @@ class Html extends React.Component {
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <title>{title}</title>
           <meta name="description" content={description} />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           {scripts.map(script => (
             <link key={script} rel="preload" href={script} as="script" />
           ))}
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+          {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css" /> */}
           <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -61,7 +62,7 @@ class Html extends React.Component {
           ))}
         </head>
         <body>
-          <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+          <div style={{overflowX : 'hidden'}} id="app" dangerouslySetInnerHTML={{ __html: children }} />
           <script
             dangerouslySetInnerHTML={{ __html: `window.App=${serialize(app)}` }}
           />

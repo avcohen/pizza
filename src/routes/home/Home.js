@@ -16,55 +16,25 @@ import Consulting from '../../components/Consulting';
 import Space from '../../components/Space';
 import Press from '../../components/Press';
 import Illustration from '../../components/Illustration';
+import Carousel from '../../components/Carousel';
 import About from '../../components/About';
 
 class Home extends React.Component {
   constructor(){
     super();
-    this.state = {
-      spacePizzaMode : false
-    }
-
-    this.enterSpacePizza = this.enterSpacePizza.bind(this);
-    this.exitSpacePizza = this.exitSpacePizza.bind(this);
-  }
-
-  enterSpacePizza(){
-    this.setState({
-      spacePizzaMode : true
-    })
-  }
-
-  exitSpacePizza(e){
-    e.stopPropagation()
-    this.setState({
-      spacePizzaMode : false
-    })
   }
 
   render() {
-    let html = ''
-    if (!this.state.spacePizzaMode === true) {
-    html =    <div>
-                <Consulting />
-                <Illustration />
-                <About />
-              </div>
-    }
-    else {
-      html = ''
-    }
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <div onClick={this.enterSpacePizza}>
-            <Space
-              spacePizzaMode={this.state.spacePizzaMode}
-              exitMode={this.exitSpacePizza}
-            />
-          </div>
-          {html}
+            <Consulting />
+            <Space />
+            <Carousel />
+            <Press />
+            <Illustration />
+            <About />
         </div>
       </div>
     );

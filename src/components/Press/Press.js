@@ -12,8 +12,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Press.css';
 import cx from 'classnames';
-
-
+import ReactPlayer from 'react-player'
 
 
 class Press extends React.Component {
@@ -26,27 +25,37 @@ class Press extends React.Component {
   }
   render() {
     const articles = [
-      {title : "bon appetit", url: "#"},
-      {title : "esquire", url: "#"},
-      {title : "evening standard", url: "#"},
-      {title : "eater", url: "#"},
-      {title : "la weekly", url: "#"},
-      {title : "new york times", url: "#"},
-      {title : "huffington post", url: "#"},
-      {title : "gq brazil", url: "#"},
+        {title : "toronto life", url: "https://torontolife.com/food/restaurants/whats-menu-general-assembly-new-pizza-place-tie-robertas-brooklyn/"},
+        {title : "bon appetit", url: "https://www.bonappetit.com/story/pizza-questions-joe-beddia"},
+        {title : "gq brazil", url: "http://gq.globo.com/Prazeres/Gastronomia/noticia/2017/07/quais-sao-cinco-melhores-pizzas-do-mundo.html"},
+        {title : "esquire", url: "http://www.esquire.com/food-drink/food/a35024/summer-pizza-recipes/"},
+        {title : "evening standard", url: "https://www.standard.co.uk/goingout/restaurants/all-about-that-base-how-pizza-became-a-cult-london-dish-a3580771.html"},
+        {title : "la weekly", url: "http://www.laweekly.com/restaurants/a-robertas-pizza-alum-is-hosting-a-pop-up-restaurant-at-prime-pizza-in-la-8328824"},
+        {title : "new york times", url: "https://www.nytimes.com/2017/01/12/magazine/why-clam-chowder-pizza-is-the-best-kind.html"},
+        {title : "huffington post", url: "https://www.huffingtonpost.com/2014/10/03/surprising-pizza-facts_n_5907308.html"},
+        {title : "eater", url: "https://www.eater.com/2014/3/17/6267123/the-speckenwolf-pizza-at-robertas-in-brooklyn"},
     ]
 
     const videos = [
-      {title: "new york times", url: "#", img: 'http://via.placeholder.com/750x350'},
-      {title: "bráz elettrica", url: "#", img: 'http://via.placeholder.com/750x350'},
-      {title: "café monstruo", url: "#", img: 'http://via.placeholder.com/750x350'},
-      {title: "insider", url: "#", img: 'http://via.placeholder.com/750x350'},
+        {title: "bráz elettrica", url: "https://vimeo.com/227790871"},
+        {title: "café monstruo", url: "https://youtu.be/Ew3d1oSFkI8"},
+        {title: "insider food", url: "https://youtu.be/boRWgOYmxYM"},
+        {title: "new york times", url: "https://youtu.be/u-KDRmOYSb0"},
     ]
+
+    const videoStyles = {
+        marginTop: 0,
+        marginBottom: '10px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }
 
     return (
       <div
+        id="press"
         className={cx(
           s.root,
+          s['edge--top'],
           s['edge--bottom--reverse'],
           s['-light'],
         )}
@@ -57,23 +66,36 @@ class Press extends React.Component {
             <div className={s.underLine}></div>
           </div>
 
-          <div className={s.videos}>
-            <h4 className={s.subsectionHeader}>videos</h4>
-            <div className={s.videoLinks}>{videos.map((v) => {
-              return (
-                <div className={s.video} key={v.title} >
-                    <a className={s.articleLink} href={v.url}>
-                      <img src={v.img} alt={v.title}/>
-                    </a>
-                </div>
-              )
-            })}</div>
+          <div className={cx(s.row, s.videos)}>
+            <h3 className={s.subsectionHeader}>videos</h3>
+            <div className={cx(s.videoLinks, s.clearfix)}>
+                {videos.map((v)=>{
+                    return(
+                        <div className={s.video}>
+                            <ReactPlayer
+                                url={v.url}
+                                // width='320px'
+                                // height='180px'
+                                style={videoStyles}
+                                controls='true'
+                            />
+                        </div>
+                    )
+                })}
+            </div>
           </div>
-          <div className={s.articles}>
-            <h4 className={s.subsectionHeader}>articles</h4>
-            <div className={s.articleLinks}>{articles.map((a) => {
-              return <li className={s.article}><a className={s.articleLink} href={a.url}>{a.title}</a></li>
-            })}</div>
+
+          <div className={cx(s.row, s.articles)}>
+            <h3 className={s.subsectionHeader}>articles</h3>
+            <ul className={s.articleLinks}>
+                {articles.map((a) => {
+                    return (
+                        <li className={s.article}>
+                            <a className={s.articleLink} href={a.url} alt={a.title} target='_blank'>{a.title}</a>
+                        </li>
+                    )
+                })}
+            </ul>
           </div>
         </div>
 

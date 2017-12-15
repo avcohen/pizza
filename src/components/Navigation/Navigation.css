@@ -9,15 +9,16 @@
 @import '../variables.css';
 
 .root {
-  z-index: 100;
-  flex: none;
-  position: fixed;
+    z-index: 100;
+    width: 100%;
+    flex: none;
+    position: fixed;
 }
 
 .navContainer {
-  width: 100%;
-  height: 50px;
-  position: fixed;
+    width: 100%;
+    height: 50px;
+    position: fixed;
 }
 
 .backgroundVisible {
@@ -32,12 +33,13 @@
 }
 
 .menuHeader {
-  font-size: 20px;
+  font-size: 18px;
   display: inline;
   position: fixed;
   top: -3px;
   left: 15px;
-  color: var(--color-2);
+  margin: 15px;
+  color: var(--color-1);
 }
 
 .link {
@@ -46,7 +48,15 @@
   position: relative;
   margin: 10px;
   display: inline-block;
-  color: var(--color-1);
+  color: var(--color-5);
+
+  span {
+      font-size: 1.25em;
+  }
+}
+
+.socialLink {
+    margin: 0 3px;
 }
 
 .link,
@@ -93,12 +103,6 @@
   transition: opacity 0.5s ease-in;
 }
 
-/* @media (min-width: 480px) {
-  .navContainer {
-    display: none;
-  }
-} */
-
 nav {
   text-align: left;
 }
@@ -133,4 +137,116 @@ img.sliceLayer {
 
 .spacer {
   color: rgba(255, 255, 255, 0.3);
+}
+
+.menu {
+    display: none;
+    background-color: var(--color-4);
+    width: 100%;
+    padding: 5px 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.title {
+    text-align: center;
+}
+
+.titleHeader {
+    /* margin: 0 0 10px 0; */
+    color: var(--color-1);
+    text-decoration: none;
+}
+
+.titleHeader > h1 {
+    margin: 0;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.titleHeader:hover {
+    color: var(--color-1);
+}
+
+.titleSubheader{
+    color: var(--color-1);
+    margin: 0;
+    line-height: normal;
+    font-size: .8em;
+    font-style: italic;
+}
+
+.menuList {
+    padding: 0px 20px;
+}
+
+.menuListItem {
+    margin: 0 10px;
+    list-style: none;
+    display: inline;
+}
+
+.menuLink {
+    position: relative;
+    color: var(--color-1);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.menuLink:hover {
+    color: var(--color-1);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menuLink:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-1);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.menuLink:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.socialLinksContainer {
+    display: none;
+    margin-left: 8px;
+}
+
+.socialLinkItem {
+    margin: 0 2px;
+}
+
+
+@media screen and (min-width: 768px) {
+    .mobileMenu {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .root {
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .titleHeader {
+        font-size: 70px;
+    }
 }

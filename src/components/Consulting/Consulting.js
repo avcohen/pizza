@@ -14,50 +14,37 @@ import cx from 'classnames';
 import s from './Consulting.css';
 import Link from '../Link';
 import consultingImg from './consultingImg.jpg';
-import cafe from './cafe.png'
 
 class Footer extends React.Component {
-  render() {
-    return (
-      <div className={s.root} >
-        <div className={s.container}>
 
-          <div className={s.row}>
-            <h2 className={s.sectionHeader}>consulting</h2>
-            <div className={s.underLine}></div>
-          </div>
+    componentDidMount(){
+        // const pizzaEmoji = document.getElementById('pizzaEmoji')
+        // pizzaEmoji.classList.add(s.spin)
+    }
 
-          <div className={cx(s.row, s.wrap)}>
-              <img className={s.consultingImg} src={consultingImg} />
-              <div className={s.textContainer}>
-                <p className={s.text}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ac viverra arcu. Quisque leo dolor.</p>
-                <p className={s.tick}></p>
-                <p className={cx(s.text,s.text2)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, similique.</p>
-                <p className={s.tick}></p>
-                <p className={s.text}>Donec eget lacinia tellus, in fermentum augue. Donec id dui at arcu tristique bibendum et quis magna.</p>
-                <p className={cx(s.text,s.link)}>Lorem ipsum dolor sit amet.</p>
-              </div>
-          </div>
-
-            <div className={s.consultingSlider}>
-              <div className={[s.row, s.sliderImg]}>
-                <span className={s.sliderImgArrowLeft}>x</span>
-                <img className={s.companyImg} src={cafe} alt=""/>
-                <span className={s.sliderImgArrowRight}>x</span>
-              </div>
-
-              <div className={s.row}>
-                <div className={s.sliderCopy}>
-                  <h3 className={s.companyText}>Cafe Monstruo</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores totam optio aspernatur sapiente. Doloribus, iste.</p>
+    render() {
+        return (
+            <div className={cx(s.root)}>
+                <div className={s.container}>
+                    <div className={s.row}>
+                        <div className={s.col}>
+                            <h2 className={s.sectionHeader}>🌎&nbsp;international pizza consultant</h2>
+                            <div className={s.textContainer}>
+                                <p className={s.text}>Hi, My name is Anthony Falco and I'm an international pizza consultant. I help people achieve their dreams of starting pizzerias and perfecting their craft. My services include kitchen design, equipment selection, natural fermentation techniques, staff training, menu development, food costing, social media strategies and more.</p>
+                                <p className={s.tick}></p>
+                                <p className={s.text}>I've helped people all over the world create stand out pizza programs and world class food brands.</p>
+                                <p className={s.tick}></p>
+                                <p className={s.text}><a className={s.link} href="mailto:tony@piz.za.com?Subject=Inquiry" alt="email">Email me</a> and let's make a pizza party happen.</p>
+                            </div>
+                        </div>
+                        <div className={s.imgCol}>
+                            <img className={s.consultingImg} src={consultingImg} />
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-        </div>
-
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default withStyles(s)(Footer);

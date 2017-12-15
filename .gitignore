@@ -8,6 +8,7 @@ design/
 
 # Images
 public/images/
+public/uploads/
 
 # Compiled output
 build

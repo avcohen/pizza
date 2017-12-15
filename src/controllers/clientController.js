@@ -20,7 +20,7 @@ const multerOptions = {
   },
 };
 
-exports.upload = multer(multerOptions).single('photo');
+exports.upload = multer(multerOptions).single('image');
 
 exports.resize = async (req, res, next) => {
   if (!req.file) {
@@ -36,12 +36,20 @@ exports.resize = async (req, res, next) => {
 };
 
 exports.createClient = async (req, res) => {
-    console.log('creating client');
-    const client = await new Client(req.body).save();
-    res.json(client);
+    // delete req.body._id;
+    const client = await new Client(req.body).save((err, newClient) => {
+        if (err){
+            res.status(500).send(err)
+        }
+        if (newClient){
+            res.status(200).json(newClient)
+        } else {
+            res.status(404).send('404 : Error Reaching DB')
+        }
+    });
 };
 
-exports.getClients = async (req, res) => {
+exports.getAllClients = async (req, res) => {
     const clients = await Client.find().sort({created : 'desc' });
     res.json(clients);
 }
@@ -60,6 +68,7 @@ exports.getClient = async (req, res) => {
 }
 
 exports.deleteClient = async (req, res) => {
+    console.log(req.params.id)
     await Client.findByIdAndRemove(req.params.id, (err, client) => {
         if (err){
             console.error(err)
@@ -74,5 +83,17 @@ exports.deleteClient = async (req, res) => {
 }
 
 exports.editClient = async (req, res) => {
-    const client = await Client.findByIdAndUpdate(req.params.id, req.body).exec();
+    await Client.findByIdAndUpdate(req.params.id, req.body).exec((err, client) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err)
+        }
+        if (client){
+            res.status(200).json(client)
+        }
+        else {
+            res.status(404).send('Client not found.')
+        }
+
+    });
 }

@@ -9,15 +9,51 @@
 
 @import '../variables.css';
 
+.hidden {
+    display: none;
+}
+
+.loadingStyle {
+    height: 300px;
+    margin: 0;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+
+    img {
+        width: 80px;
+        height: auto;
+        align-self: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+  .brandTxt {
+    font-size: 60px;
+  }
+
+  .brand {
+    top: 205px;
+    left: -145px;
+  }
+}
+
+
 .space{
   display: flex;
   flex-direction: column;
+  margin-bottom: -5px;
 }
 
 #theVoid {
-  z-index: 4;
   width: 100%;
-  max-width: var(--max-content-width);
   height: auto;
   margin: 0;
   padding: 0;
