@@ -142,7 +142,7 @@ class Space extends React.Component {
             camera = new THREE.PerspectiveCamera( 35, voidWidth / voidHeight , .01, 10000 );
             camera.position.x = distance * Math.sin(rotation.x) * Math.cos(rotation.y);
             camera.position.y = distance * Math.sin(rotation.y);
-            camera.position.z = (distance) * Math.cos(rotation.x) * Math.cos(rotation.y);
+            camera.position.z = (distance * 1.15) * Math.cos(rotation.x) * Math.cos(rotation.y);
 
             // scene
             scene = new THREE.Scene();
@@ -170,8 +170,8 @@ class Space extends React.Component {
             container.innerHTML = '';
             container.appendChild(renderer.domElement);
 
-            container.addEventListener('touchstart', onDocumentTouchStart, false);
-            container.addEventListener('mousedown', onDocumentMouseDown, false);
+            // container.addEventListener('touchstart', onDocumentTouchStart, false);
+            // container.addEventListener('mousedown', onDocumentMouseDown, false);
 
             window.addEventListener('resize', onWindowResize, false);
         }
