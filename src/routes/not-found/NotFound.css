@@ -10,11 +10,13 @@
 @import '../../components/variables.css';
 
 .root {
-  padding-left: 20px;
-  padding-right: 20px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .container {
-  margin: 0 auto;
-  padding: 0 0 40px;
+    font-family: 'Avenir', Arial, sans-serif;
+    text-align: center;
+    margin: 25% auto;
 }

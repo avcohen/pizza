@@ -23,10 +23,10 @@ const routes = {
     //   path: '/admin',
     //   load: () => import(/* webpackChunkName: 'admin' */ './admin'),
     // },
-    {
-      path: '/login',
-      load: () => import(/* webpackChunkName: 'login' */ './login'),
-    },
+    // {
+    //   path: '/login',
+    //   load: () => import(/* webpackChunkName: 'login' */ './login'),
+    // },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',
