@@ -4,17 +4,14 @@ const router = express.Router();
 const { catchErrors } = require('../handlers/errorHandlers');
 const clientController = require('../controllers/clientController');
 
-router.get('/', (req, res) => {
-  res.send(':)');
-});
-
 //
 //    CLIENT ENDPOINTS
 // ————————————————————————————————————————————————————————————————————————————————
 
 // get all clients
 router.get('/clients', catchErrors(clientController.getAllClients));
-// get single clients
+
+// get single client by id
 router.get('/clients/:id', catchErrors(clientController.getClient));
 
 // create new client
@@ -36,14 +33,6 @@ router.delete('/clients/:id',
     catchErrors(clientController.deleteClient)
 );
 
-//
-//    Illustration ENDPOINTS
-// ————————————————————————————————————————————————————————————————————————————————
-
-// get illustrations by category
-// router.get('/illustrations/:category',
-//     catchErrors(illustrationController.getAllByCategory)
-// );
 
 
 export default router;

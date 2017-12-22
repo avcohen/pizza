@@ -21,6 +21,7 @@ class ClientModalConfirmDelete extends React.Component{
     handleClose = e => this.setState({ modalOpen : false })
 
     handleSubmit(e){
+
         let clientId = e.target.getAttribute('data-clientid');
 
         axios({

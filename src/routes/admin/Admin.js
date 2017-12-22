@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+
 import { Container } from 'semantic-ui-react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
@@ -16,7 +17,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Link from '../../components/Link';
 import ClientPanel from '../../components/ClientPanel';
 import ClientModal from '../../components/ClientModal';
+
+import * as semanticStyles from 'semantic-ui-css/semantic.min.css';
 import s from './Admin.css';
+
 
 class Admin extends React.Component {
   constructor() {
@@ -105,19 +109,20 @@ class Admin extends React.Component {
           </div>
           <hr />
           <Container>
-          <ClientModal
-            headerTitle='Add Client'
-            buttonTriggerTitle='Add New'
-            buttonSubmitTitle='Add'
-            buttonColor='green'
-            onClientAdded={this.createItem}
-          />
+                <h1>Clients</h1>
+                <ClientModal
+                    headerTitle='Add Client'
+                    buttonTriggerTitle='Add New'
+                    buttonSubmitTitle='Add'
+                    buttonColor='green'
+                    onClientAdded={this.createItem}
+                />
 
-          <ClientPanel
-            onClientUpdated={this.editItem}
-            onClientDeleted={this.deleteItem}
-            clients={this.state.clientData}
-          />
+                <ClientPanel
+                    onClientUpdated={this.editItem}
+                    onClientDeleted={this.deleteItem}
+                    clients={this.state.clientData}
+                />
           </Container>
         </div>
       </div>
@@ -129,4 +134,4 @@ class Admin extends React.Component {
   };
 }
 
-export default withStyles(s)(Admin);
+export default withStyles(s,semanticStyles)(Admin);

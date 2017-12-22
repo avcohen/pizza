@@ -35,7 +35,7 @@ class ClientPanel extends React.Component {
                 <Table.Cell>{client.description}</Table.Cell>
                 <Table.Cell>{client.url}</Table.Cell>
                 <Table.Cell>
-                    <img className={s.clientImage} src={require('../../../public/uploads/' + client.image )} alt=""/>
+                    {/* <img className={s.clientImage} src={require(`./public/images/${client.image}` )} alt=""/> */}
                 </Table.Cell>
                 <Table.Cell>
                     <ClientModal

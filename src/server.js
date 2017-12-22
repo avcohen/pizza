@@ -1,12 +1,13 @@
 import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
-// require('./models/Client');
+require('./models/Client');
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
 import jwt from 'jsonwebtoken';
 import fetch from 'node-fetch';
+import morgan from 'morgan'
 
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -16,7 +17,7 @@ import App from './components/App';
 import Html from './components/Html';
 
 // api routes
-// import apiRoutes from './routes/apiRoutes';
+import apiRoutes from './routes/apiRoutes';
 
 import { ErrorPageWithoutStyle } from './routes/error/ErrorPage';
 import errorPageStyle from './routes/error/ErrorPage.css';
@@ -44,20 +45,20 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 //
 // Initialize DB Connection
 // -----------------------------------------------------------------------------
-// mongoose.connect(process.env.DATABASE_URL, {
-//   useMongoClient: true,
-// });
-// mongoose.Promise = global.Promise;
-// mongoose.connection.on('error', err => {
-//   console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
-// });
-// mongoose.connection.once('open', () => {
-//   console.log('DB Connection SUCCESS!'); //eslint-disable-line
-// });
+mongoose.connect(process.env.DATABASE_URL, {
+  useMongoClient: true,
+});
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', err => {
+  console.error(`DB Connection ERROR : ${err.message}`); //eslint-disable-line
+});
+mongoose.connection.once('open', () => {
+  console.log('DB Connection SUCCESS!'); //eslint-disable-line
+});
 
 //
 // Authentication
@@ -108,7 +109,7 @@ app.get(
 // Register API middleware
 // -----------------------------------------------------------------------------
 
-// app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
 //
 // Register server-side rendering middleware

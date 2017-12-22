@@ -27,17 +27,12 @@ class ClientForm extends React.Component {
   }
 
   handleInputChange(e) {
+    // dynamically pickup changes to all input fields
     this.setState({ [e.target.name]: e.target.value });
   }
 
   async handleSubmit(e) {
     e.preventDefault();
-    // const client = {
-    //     name: this.state.name,
-    //     description: this.state.description,
-    //     url: this.state.url,
-    //     image: this.state.image,
-    // }
 
     let client = new FormData();
         client.append('name', this.state.name);
@@ -45,6 +40,7 @@ class ClientForm extends React.Component {
         client.append('url', this.state.url);
         client.append('image', document.querySelector('input[type="file"]').files[0]);
 
+    // determine if method is put or post based on whether or not there is an exisiting entry with the id provided
     const method = this.props.clientId ? 'put' : 'post';
     const params = this.props.clientId ? this.props.clientId : '';
 
@@ -90,6 +86,7 @@ class ClientForm extends React.Component {
         }
     })
   }
+
 
   componentWillMount(){
       if (this.props.clientId){
@@ -159,14 +156,13 @@ class ClientForm extends React.Component {
                     content='formSuccessMessage'
                 />
                 <Message
-                    success
+                    error
                     color='yellow'
                     header='Error!'
                     content='formErrorMessage'
                 />
-                <Button color={this.props.buttonColor} floated='right'>
+                <Button color={this.props.buttonColor} >
                     {this.props.buttonSubmitTitle}
-                    <br/><br/>
                 </Button>
             </Form>
 
