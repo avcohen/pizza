@@ -94,7 +94,7 @@
     "chokidar": "^1.7.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.0.0",
-    "eslint": "^4.8.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-import-resolver-node": "^0.3.1",
