@@ -25,7 +25,7 @@ import run from './run';
 // Heroku
 const remote = {
   name: 'heroku',
-  url: 'https://git.heroku.com/falco-pizza.git',
+  url: 'https://git.heroku.com/falco-pizza-test.git',
   branch: 'master',
   website: 'https://<app>.herokuapp.com',
 };
