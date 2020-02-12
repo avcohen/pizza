@@ -71,6 +71,8 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.4",
     "babel-core": "^7.0.0-beta.2",

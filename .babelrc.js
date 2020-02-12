@@ -12,16 +12,15 @@
 module.exports = {
   presets: [
     [
-      'env',
+      "env",
       {
         targets: {
-          node: 'current',
-        },
-      },
+          node: "current"
+        }
+      }
     ],
-    'stage-2',
-    'flow',
-    'react',
+    "stage-2",
+    "react"
   ],
-  ignore: ['/node_modules', '/build'],
+  ignore: ["/node_modules", "/build"]
 };
